@@ -24,17 +24,6 @@ layout: base
             {{ content }}
             {% include _social.html %}
         </section>
-
-        <footer>
-            <address>
-               {% if site.author.image %}<img src="/images/{{ site.author.image }}">{% endif %}
-                <p>Written by <strong><a rel="author" href="https://twitter.com/{{ site.author.twitter }}" title="{{ site.author_name }}" target="_blank">{{ site.author.name }}</a></strong><br>
-                <span class="muted">{{ site.author.bio }}</span>
-                </p>
-            </address>
-
-        </footer>
-
         {% if site.inc.disqus.shortname %}
         <section>
             {% include _disqus.html %}

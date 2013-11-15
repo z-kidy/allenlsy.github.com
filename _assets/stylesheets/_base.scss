@@ -51,12 +51,12 @@ a {
     max-width: 100%;
     margin-top: 0;
     position: relative;
-    max-height:460px;
+    // max-height: 500px;
     overflow:hidden;
     background:#eee;
     
     > div {
-        max-height: 480px;
+        // max-height: 500px;
         line-height: 0;
     }
     
@@ -283,4 +283,38 @@ a {
         color:darken($accent, 10%);
         background:none;
     }
+}
+
+address {
+    margin:0 0 20px 0;
+    font-size:0.9em;
+    
+    p {
+        margin:0;
+        display:inline-block;
+    }
+
+    img.big-avatar {
+        -moz-border-radius: 60px;
+        -webkit-border-radius: 60px;
+        border-radius: 60px;
+        width: 120px;
+        height: 120px;
+        margin: 0 20px 0 0;
+        display: inline-block;
+    }       
+    
+    .follow {
+        margin:1em 0 0;
+    }
+
+}
+
+.simple-post {
+  border-bottom: 1px #ddd solid;
+}
+
+.narrow-heading {
+  margin-bottom: 0;
+
 }

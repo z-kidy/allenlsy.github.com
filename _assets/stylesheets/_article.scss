@@ -41,30 +41,6 @@ article {
     }
 
 
-    address {
-        margin:0;
-        font-size:0.9em;
-        max-height:48px;
-        
-        p {
-            margin:0;
-            display:inline-block;
-        }
-
-        img {
-            border-radius: 54px;
-            width: 64px;
-            height: 64px;
-            margin: 0 20px 0 0;
-            display: inline-block;
-            margin-top: -28px;
-        }       
-        
-        .follow {
-            margin:1em 0 0;
-        }
-
-    }
 
     p {
         font-size:1em;
@@ -125,7 +101,7 @@ article {
     }
 
     hr {
-        margin:3em 0;
+        margin:2em 0;
     }
 
     .meta {
