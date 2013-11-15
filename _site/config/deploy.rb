@@ -3,11 +3,12 @@ set :repo_url, 'git@github.com:allenlsy/allenlsy.github.com.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/home/allenlsy/allenlsy.github.com'
+set :deploy_to, '/home/allenlsy/#{application}'
 set :scm, :git
 
 role :blog, '162.217.248.104'
 set :user, 'allenlsy'
+set :password, 'ch,eLs4ea'
 
 set :default_run_options, {
   pty: true
@@ -54,6 +55,7 @@ namespace :deploy do
       run_locally 'git push -f'
       execute "cd #{deploy_to}"
       execute "git pull origin master"
+      execute "jekyll build"
     end
   end
 

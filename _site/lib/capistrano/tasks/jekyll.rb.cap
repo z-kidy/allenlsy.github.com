@@ -4,6 +4,7 @@ task :jekyll do
   on roles(:blog) do
     run "cd #{deploy_to}"
     run "git pull origin master"
+    run "jekyll build"
   end
 end
 

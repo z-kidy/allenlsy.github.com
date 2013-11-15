@@ -3,19 +3,19 @@ set :repo_url, 'git@github.com:allenlsy/allenlsy.github.com.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, '/home/allenlsy/allenlsy.github.com'
+set :deploy_to, "/home/allenlsy/allenlsy.github.com"
 set :scm, :git
 
-role :blog, '162.217.248.104'
+# role :blog, '162.217.248.104'
 set :user, 'allenlsy'
 
 set :default_run_options, {
   pty: true
 }
 
-set :ssh_options, {
-  forward_agent: true
-} 
+# set :ssh_options, {
+#   forward_agent: true
+# } 
 
 # set :format, :pretty
 # set :log_level, :debug
@@ -54,8 +54,14 @@ namespace :deploy do
       run_locally 'git push -f'
       execute "cd #{deploy_to}"
       execute "git pull origin master"
+      execute "jekyll build"
     end
   end
 
 end
 
+task :whoami do
+  on roles(:all) do
+    execute :whoami
+  end
+end
