@@ -6,8 +6,7 @@ excerpt: Notes of Effective Java 10, Serialization
 
 ---
 
-![enter image description here][1]
-[1]: http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg
+![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
 * [74. implement Serializable judiciously](#i74)

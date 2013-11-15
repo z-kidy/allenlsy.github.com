@@ -25,35 +25,37 @@ layout: base
   <section class="index">
     <address>
       {% if site.author.image %}<img src="/images/{{ site.author.image }}" class="big-avatar">{% endif %}
-      <p><strong><a rel="author" href="https://twitter.com/{{ site.author.twitter }}" title="{{ site.author_name }}" target="_blank">{{ site.author.name }}</a></strong><br>
+      <p><strong><a rel="author" href="https://twitter.com/{{ site.author.twitter }}" title="{{ site.author_name }}" target="_blank" style="font-size: 1.5em;">{{ site.author.name }}</a></strong><br />
       <span class="muted">{{ site.author.bio }}</span>
       </p>
     </address>
   </section>
-{% for post in site.posts %}
-  {% unless post.draft %}
-    <section class="index">
+  {% for post in paginator.posts %}
+    {% unless post.draft %}
+      <section class="index">
         <div>
             <h2 class="title"><a href="{{ post.url }}" rel="prefetch">{{ post.title }}</a></h2>
+            {% if post.excerpt %}
             <p>{{ post.excerpt }}</p>
+            {% endif %}
             <div class="meta">
                 <time pubdate datetime="{{ post.date | date: "%Y-%d-%B" }}" title="{{ post.date | date: "%B %d, %Y" }}">{{ post.date | date: "%B %d, %Y" }}</time>
             </div>
         </div>
         <hr>
-    </section>
+      </section>
     {% endunless %}
-    {% endfor %}
-    <section class="pagination" style="text-align:center">
-      {% if paginator.previous_page %}
-        {% if paginator.previous_page == 1 %}
-        <a href="/" class="btn btn-outline">&lt; Newer</a>
-        {% else %}
-        <a href="/page{{ paginator.previous_page }}" class="btn btn-outline">&lt; Newer</a>
-        {% endif %}
+  {% endfor %}
+  <section class="pagination" style="text-align:center">
+    {% if paginator.previous_page %}
+      {% if paginator.previous_page == 1 %}
+      <a href="/" class="btn btn-outline">&lt; Newer</a>
+      {% else %}
+      <a href="/page{{ paginator.previous_page }}" class="btn btn-outline">&lt; Newer</a>
       {% endif %}
-      {% if paginator.next_page %}
-        <a href="/page{{ paginator.next_page }}" class="btn btn-outline">Older &gt;</a>
-      {% endif %}
-    </section>
+    {% endif %}
+    {% if paginator.next_page %}
+      <a href="/page{{ paginator.next_page }}" class="btn btn-outline">Older &gt;</a>
+    {% endif %}
+  </section>
 </article>

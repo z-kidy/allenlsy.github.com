@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effective Java 7 - General Programming &mdash; Simple, Not Easy</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.jpg"/>
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
+    <meta name="title" content="Effective Java 7 - General Programming ">
+    <link rel="canonical" href="/NOTES-of-Effective-Java-7-General-Programming">
+     
+           
+    <meta property="og:title" content="Effective Java 7 - General Programming "/>
+    <meta property="og:url" content="/NOTES-of-Effective-Java-7-General-Programming"/>
+    
+    
+    <meta property="og:site_name" content="Simple, Not Easy">     
+</head>
+<body>
+    
+<section class="site-nav">
+    <header>
+        <nav id="navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+            <a class="brand" href="/">
+                <img src="/images/logo.jpg" alt="Inc">
+            </a>
+            <a href="/">Blog</a>
+            
+              <a href="/archives.html" >Archives</a>
+            
+              <a href="/about.html" >About</a>
+            
+            <i class="icon-feed"></i> <a href="/feed.xml" title="Atom/RSS feed">Feed</a>
+        </nav>
+
+    </header>
+</section>
+
+
+<article>
+
+    <div class="container">
+        <header>
+            <div class="meta">
+                By <address><a rel="author" href="" title="allenlsy" target="_blank">allenlsy</a> &mdash;
+                <time pubdate datetime="2013-16-May" title="May 16, 2013">May 16, 2013</time>
+            </div>
+            <h1 class="title">Effective Java 7 - General Programming</h1>
+            
+        </header>
+
+        <section>
+            <p><img src="http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg" alt="" />
+<br /></p>
+
+<ul>
+  <li><a href="#i45">45. Minimize the scope of local variables</a></li>
+  <li><a href="#i46">46. Prefer for-each loops to traditional <code>for</code> loops</a></li>
+  <li><a href="#i47">47. Know and use the libraries </a></li>
+  <li><a href="#i48">48. Avoid <code>float</code> and <code>double</code> of exact answers are required</a></li>
+  <li><a href="#i49">49. Prefer primitive types to boxed primitives</a></li>
+  <li><a href="#i50">50. Avoid strings where other types are more appropriate</a></li>
+  <li><a href="#i51">51. Beware the performance of string concatenation</a></li>
+  <li><a href="#i52">52. Refer to objects by their interfaces</a></li>
+  <li><a href="#i53">53. Prefer interfaces to reflection</a></li>
+  <li><a href="#i54">54. Use native methods judiciously</a></li>
+  <li><a href="#i55">55. Optimize judiciously</a></li>
+  <li><a href="#i56">56. Adhere to generally accepted naming conventins</a></li>
+</ul>
+
+<hr />
+
+<h2 id="i45">45. Minimize the scope of local variables</h2>
+
+<ul>
+  <li>Declare a variable when first using it.</li>
+  <li>Declare a local variable with a initial expression</li>
+  <li>Prefer for loop to while loop, since while loop may need a extra looping variable</li>
+</ul>
+
+<h2 id="i46">46. Prefer for-each loops to traditional <code>for</code> loops</h2>
+
+<h2 id="i47">47. Know and use the libraries</h2>
+
+<h4 id="example-random-number-generator">Example: random number generator</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Random</span> <span class="n">rnd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Random</span><span class="o">();</span>
+
+<span class="kd">static</span> <span class="kt">int</span> <span class="nf">random</span><span class="o">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">)</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="n">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">rnd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">())</span> <span class="o">%</span> <span class="n">n</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>There are three flaws.</p>
+
+<ol>
+  <li>If <code>n</code> is a small power of 2, the sequence of random numbers it generates will repeat itself after a fairly short period.</li>
+  <li>If <code>n</code> is not a power of 2, some numbers will be returned more frequently than others. If <code>n</code> is large, this effect can be quite pronouned.</li>
+  <li>It can fail catastrophically, returning a number outside the specified range.</li>
+</ol>
+
+<p>The easiest way to solve the problem is to use <code>Random.nextInt(int)</code>. </p>
+
+<p><strong>Use libraries, take advantage of other ones’ research, focus on your logic implementation, improve the readability of your code</strong></p>
+
+<p>Read <em>java5-feat</em>, <em>java6-feat</em> page on official website.</p>
+
+<h2 id="i48">48. Avoid <code>float</code> and <code>double</code> of exact answers are required</h2>
+
+<p><code>float</code> and <code>double</code> are not suitable for currency computation.</p>
+
+<p>Use <code>BigDecimal</code>, <code>int</code> or <code>long</code> instead. But <code>BigDecimal</code> is slow and not convenient. <code>int</code> and <code>long</code> is preferred.</p>
+
+<h2 id="i49">49. Prefer primitive types to boxed primitives</h2>
+
+<p>Java 1.5 added new feature of <strong>autoboxing</strong> and <strong>auto-unboxing</strong>.</p>
+
+<p><strong>Pay attention</strong>, use <code>==</code> on boxed primitive type always make wrong result.</p>
+
+<p>In some circumstances, you have to use boxed primitives:</p>
+
+<ol>
+  <li>Put element into <code>Collection</code>, since <code>Collection</code> only accept boxed primitives</li>
+  <li>Generic type doesn’t allow primitives either.</li>
+</ol>
+
+<h2 id="i50">50. Avoid strings where other types are more appropriate</h2>
+
+<ul>
+  <li>Strings are poor substitues for other value types</li>
+  <li>Strings are poor substitutes for enum types</li>
+  <li>Strings are poor substitues for aggregate types. eg. <code>String compoundKey = className + "#" + i.next();</code></li>
+  <li>Strings are poor substitues for <em>capabilities</em></li>
+</ul>
+
+<h2 id="i51">51. Beware the performance of string concatenation</h2>
+
+<p>String concatenation is not suitable for concatenate a lot of Strings. </p>
+
+<p><strong>Using the string concatenation operator repeatedly to concatenate</strong> <em>n</em> <strong>strings requires time quadratic in</strong> <em>n</em>.</p>
+
+<p>Use <code>StringBuilder</code>.</p>
+
+<h2 id="i52">52. Refer to objects by their interfaces</h2>
+
+<h2 id="i53">53. Prefer interfaces to reflection</h2>
+
+<p>The trade-off of reflection:</p>
+
+<ul>
+  <li>Losing all the benefits of compile-time type checking</li>
+  <li>The code required to perform reflective access is clumsy and verbose.</li>
+  <li>Performance loss</li>
+</ul>
+
+<p>The core reflection facility was originally designed for component-based application builder tools. It is a design time technique.</p>
+
+<h4 id="example-a-program-that-can-be-transformed-into-a-type-checking-program">Example: a program that can be transformed into a type checking program</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[])</span>
+<span class="o">{</span>
+	<span class="n">Class</span><span class="o">&lt;</span> <span class="o">?</span> <span class="o">&gt;</span> <span class="n">cl</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="n">cl</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="na">forName</span><span class="o">(</span><span class="n">args</span><span class="o">[</span><span class="mi">0</span><span class="o">]);</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Class not found.&quot;</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="n">Set</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="k">try</span> <span class="o">{</span>
+		<span class="n">s</span> <span class="o">=</span> <span class="o">(</span><span class="n">Set</span><span class="o">&lt;</span> <span class="n">String</span> <span class="o">&gt;)</span> <span class="n">cl</span><span class="o">.</span><span class="na">newInstance</span><span class="o">();</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Class not accessible.&quot;</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">err</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;Class not instantiable.&quot;</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">exit</span><span class="o">(</span><span class="mi">1</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="n">s</span><span class="o">.</span><span class="na">addAll</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">args</span><span class="o">).</span><span class="na">subList</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="n">args</span><span class="o">.</span><span class="na">length</span><span class="o">));</span>
+	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="i54">54. Use native methods judiciously</h2>
+
+<p><strong>JNI</strong> is used to call native method, such as C/C++ programs. It is mainly used to accessible platform specific stuff, such as registry and file lock.</p>
+
+<p>It is rarely advisable to use native methods for improved performance.</p>
+
+<h2 id="i55">55. Optimize judiciously</h2>
+
+<blockquote>
+  <p>We should forget about small efficiencies, say about 97% of the timeL premature optimization is the root of all evil.
+– Donald Knuth</p>
+</blockquote>
+
+<blockquote>
+  <p>Do not optimize until you have a perfectly clear and unoptimized solution.
+– M.A.Jackson</p>
+</blockquote>
+
+<h2 id="i56">56. Adhere to generally accepted naming conventins</h2>
+
+            
+<div class="social">
+    <div>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Effective Java 7 - General Programming" data-related="allenlsy">Tweet</a>
+    </div>
+    
+    
+    <div>
+        <div class="fb-like" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+    </div>
+    
+    
+    <div>
+        <div class="g-plusone" data-size="medium"></div>
+    </div>
+    
+    
+    
+    <div>
+        <a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+    </div>
+    
+</div>
+
+        </section>
+        
+        <section>
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'allenlsy'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+        </section>
+        
+    </div>
+</article>
+
+
+<footer class="site-footer">
+    <div class="container">
+      &copy; 2013 &nbsp;  
+        
+        <nav>
+            <a href="/">Blog</a> &middot;
+            
+            
+        </nav>
+        
+        <nav class="social">
+            
+            <a href="https://twitter.com/allenlsy" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+            
+            
+            <a href="http://facebook.com/allenlsy" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+                
+            <a href="/feed.xml" title="RSS Feed">
+                <i class="icon icon-rss black"></i>
+            </a>
+        </nav>
+    </div>
+</footer>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/assets/main.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253595308025739";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<script>
+    (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//hnbutton.appspot.com/static/hn.min.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
+
+</body>
+</html>

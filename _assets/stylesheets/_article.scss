@@ -65,16 +65,19 @@ article {
     }
     
     blockquote {
-        border:0;
-        font-size:24px;
-        margin:1.2em -4em 1.2em 0;
-        padding:0;
+        border-left: 4px solid #777;
+        padding: 0 15px;
+        font-size: 0.9em;
+        // margin:1.2em -4em 1.2em 0;
 
         p {
-            font-size:30px;
-            line-height:1.1;
-            color:$accent;
+            font-size:1em;
+            line-height:1.2em;
+            color:$textmuted;
             font-weight:600;
+            font-style: italic;
+            margin-bottom: 3px;
+
         }
     }
 

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effective Java 10 - Serialization &mdash; Simple, Not Easy</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.jpg"/>
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
+    <meta name="title" content="Effective Java 10 - Serialization ">
+    <link rel="canonical" href="/NOTES-of-Effective-Java-10">
+     
+           
+    <meta property="og:title" content="Effective Java 10 - Serialization "/>
+    <meta property="og:url" content="/NOTES-of-Effective-Java-10"/>
+    
+    
+    <META PROPERTY="OG:DESCRIPTION" CONTENT=""/>
+    <meta name="description" content="Notes of Effective Java 10, Serialization"/>
+    
+    <meta property="og:site_name" content="Simple, Not Easy">     
+</head>
+<body>
+    
+<section class="site-nav">
+    <header>
+        <nav id="navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+            <a class="brand" href="/">
+                <img src="/images/logo.jpg" alt="Inc">
+            </a>
+            <a href="/">Blog</a>
+            
+              <a href="/archives.html" >Archives</a>
+            
+              <a href="/about.html" >About</a>
+            
+            <i class="icon-feed"></i> <a href="/feed.xml" title="Atom/RSS feed">Feed</a>
+        </nav>
+
+    </header>
+</section>
+
+
+<article>
+
+    <div class="container">
+        <header>
+            <div class="meta">
+                By <address><a rel="author" href="" title="allenlsy" target="_blank">allenlsy</a> &mdash;
+                <time pubdate datetime="2013-29-May" title="May 29, 2013">May 29, 2013</time>
+            </div>
+            <h1 class="title">Effective Java 10 - Serialization</h1>
+            
+        </header>
+
+        <section>
+            <p><img src="http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg" alt="" />
+<br /></p>
+
+<ul>
+  <li><a href="#i74">74. implement Serializable judiciously</a></li>
+  <li><a href="#i75">75. Consider using a custom serialized form</a></li>
+  <li><a href="#i76">76. Write <code>readObject</code> methods defensively</a></li>
+  <li><a href="#i77">77. For instance control, prefer enum types to <code>readResolve</code></a></li>
+  <li><a href="#i78">78. Consider serialization proxies instead of serialized instances</a></li>
+</ul>
+
+<hr />
+
+<h2 id="i74">74. implement Serializable judiciously</h2>
+
+<p>Once a <code>Serializable</code> interface is published, it decreases the flexibility to change a class’s implementation. You have to support serialization forever.</p>
+
+<p>Serialization and deserialization are normally implemented by <code>ObjectOutputStream.putFields</code> and <code>ObjectInputStream.readFields</code>. </p>
+
+<p>You should design a high quality serialization method, that can be used for a long time.</p>
+
+<p>Every serializable class has a unique ID <code>private static final long serialVersionUID</code>. If you don’t have one, system will create a UID based on the structure of this class.</p>
+
+<p>Another cost of implementing <code>Serializable</code> is that <strong>it increases the likelihood of bugs and security holes.</strong> Usually we create an object using constructor. Serialization provides another extralinguistic mechanism to create an object. Deserialization is a hidden constructor. Deserialization constructor must follow all the constraints in the real constructor, otherwise it will be attacked. </p>
+
+<p>The third cost of serialization is, as new version releasing, it increases the testing burden. When new version released, we need to check whether can create an object using new version, and deserialize in the old version. </p>
+
+<h4 id="some-rules">Some rules</h4>
+
+<p>If a class is serializable, then all its component classes need to be serializable. </p>
+
+<p><strong>A class designed for inheritance should try best to avoid implementing serializable.</strong></p>
+
+<p>Examples of implementing <code>Serializable</code>: <code>Throwable</code> implements <code>Serializable</code>, therefore RMI exception can be sent from server to client.</p>
+
+<p>For a class that can be serialized and the initial values of instance field are special, then we need to add a <code>readObjectNoData</code> to the class. For more information, please check Java documentation about Serialization.</p>
+
+<p>Serialization requires the implementing class to have all the field serializable, which makes a class designed for inheritance difficult to be serializable. In Addition, if a parent class does not have a parameterless constructor, the subclass is surely not serializable. Therefore, <strong>to make a class designed for inheritance nonserializable, you should have a parameterless constructor.</strong></p>
+
+<p><strong>If you want to have a nonserializable parent class, and a serializable subclass</strong>, you need to make the parent class a <strong>protected parameterless constructor</strong>. </p>
+
+<p>Anyway, you have to cautiously make a decision whether subclass is serializable.</p>
+
+<h2 id="i75">75. Consider using a custom serialized form</h2>
+
+<p><strong>The default serialized form is likely to be appropriate if an object’s physical representation is identical to its logical content.</strong> For example, some classes that contain only property fields.</p>
+
+<p>Using the default serialized form when an object’s physical representation differs substantially from its logical data content has four disadvantages:</p>
+
+<ul>
+  <li><strong>It permanently ties the exported API to the current internal representation.</strong> Internal class, field becomes part of the public API. If the internal is changed in the future, the actual class still need to support the old version of internal.</li>
+  <li><strong>It can consume excessive space.</strong> Redundant information will also be serialized.</li>
+  <li><strong>It can consume excessive time.</strong> Serialization traverses the topology graph of class relationship.</li>
+  <li><strong>It can case stack overflows,</strong> due to the traversal of topology graph.</li>
+</ul>
+
+<h4 id="example-stringlist">Example: <code>StringList</code></h4>
+
+<p>Suppose <code>StringList</code> is a class store a list of <code>String</code>s. The logical representation should only contains all the elements, and maybe the number of elements. But the physical representation is the list itself, contains the linkage between elements. </p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">StringList</span> <span class="kd">implements</span> <span class="n">Serializable</span>
+<span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">transient</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">transient</span> <span class="n">Entry</span> <span class="n">head</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	
+	<span class="c1">// No longer serializable</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Entry</span> <span class="o">{</span>
+		<span class="n">String</span> <span class="n">data</span><span class="o">;</span>
+		<span class="n">Entry</span> <span class="n">next</span><span class="o">;</span>
+		<span class="n">Entry</span> <span class="n">previous</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">public</span> <span class="kd">final</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="n">String</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span> 
+		<span class="c1">// ...</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**</span>
+<span class="cm">	 * Serialize this {@code StringList} instance.</span>
+<span class="cm">	 * </span>
+<span class="cm">	 * @serialData The size of the list (the number of strings it contains) is emitted ({@code int}), followed</span>
+<span class="cm">	 * by all of its elements (each a {@code String}), in the proper sequence.</span>
+<span class="cm">	 * @params</span>
+<span class="cm">	 * @throws IOException</span>
+<span class="cm">	 */</span>
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">writeObject</span><span class="o">(</span><span class="n">ObjectOutputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">defaultWriteObject</span><span class="o">();</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">writeInt</span><span class="o">(</span><span class="n">size</span><span class="o">);</span>
+		
+		<span class="c1">// Write out all elements in the proper order.</span>
+		<span class="k">for</span> <span class="o">(</span><span class="n">Entry</span> <span class="n">e</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span> <span class="n">e</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span> <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="na">next</span><span class="o">)</span>
+			<span class="n">s</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">data</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+		<span class="n">s</span><span class="o">.</span><span class="na">defaultReadObject</span><span class="o">();</span>
+		<span class="kt">int</span> <span class="n">numElements</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">readInt</span><span class="o">();</span>
+		
+		<span class="c1">// Read in all elements and insert them in list</span>
+		<span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numElements</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span>
+			<span class="n">add</span><span class="o">((</span><span class="n">String</span><span class="o">)</span> <span class="n">s</span><span class="o">.</span><span class="na">readObject</span><span class="o">()</span> <span class="o">);</span>
+	<span class="o">}</span>
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p><code>transient</code> field means to omit it from the default serialization.</p>
+
+<p><code>defaultWriteObject</code> writes the non-static and non-transient fields of the current class to this stream. It may only be called from the <code>writeObject</code> method of the class being serialized.</p>
+
+<p>It is recommended to call <code>defaultWriteObject</code> and <code>defaultReadObject</code>, even when all the fields are transient. It improves the flexibility. In the future if we add non-transient field to the class, the serialization will still be successful.</p>
+
+<p><code>writeObject</code> has commented documentation, because it defines the serialization form. <code>@serialData</code> tells Javadoc to include this part as serialization information.</p>
+
+<h3 id="mark-fields-as-transient-when-needed">Mark fields as <code>transient</code> when needed.</h3>
+
+<p>If you are using the default serialization form, when deserializing, all the transient field will have be assigned the default value: <code>null</code> for objects, <code>0</code> for number, and <code>false</code> for boolean, etc..</p>
+
+<p><code>private static final long serialVersionUID</code> is to avoid the incompatibility of default UID between different versions.</p>
+
+<p>All of our effort here is to resolve the <strong>serialization compatibility</strong> problem.</p>
+
+<h2 id="i76">76. Write <code>readObject</code> methods defensively</h2>
+
+<p><code>readObject</code> method is another public constructor. It must validate the parameters before deserialization, and also do defensive copying. Otherwise, attacker will create an illegal object from it.</p>
+
+<p>Attacker can manually fake a serialized form, by modifying a normal one based on some documentation.</p>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// Example from #39</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Period</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">start</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">end</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Period</span><span class="o">(</span><span class="n">Date</span> <span class="n">start</span><span class="o">,</span> <span class="n">Date</span> <span class="n">end</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="k">this</span><span class="o">.</span><span class="na">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span> <span class="n">start</span> <span class="o">+</span> <span class="s">&quot; after &quot;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">Date</span> <span class="nf">start</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">Date</span> <span class="nf">end</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="s">&quot; - &quot;</span> <span class="o">+</span> <span class="n">end</span><span class="o">;</span> <span class="o">}</span>
+	<span class="c1">// ...</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">BogusPeriod</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">serializedForm</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[]</span> <span class="o">{</span> 
+		<span class="c1">// ...</span>
+	<span class="o">};</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="n">Period</span> <span class="n">p</span> <span class="o">=</span> <span class="o">(</span><span class="n">Period</span><span class="o">)</span> <span class="n">deserialize</span><span class="o">(</span><span class="n">serializedForm</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="n">Object</span> <span class="nf">deserialize</span><span class="o">(</span><span class="kt">byte</span><span class="o">[]</span> <span class="n">sf</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">try</span> <span class="o">{</span>
+			<span class="n">InputStream</span> <span class="n">is</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">sf</span><span class="o">);</span>
+			<span class="n">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="n">is</span><span class="o">);</span>
+			<span class="k">return</span> <span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+		<span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>To solve the problem, you can provide a <code>readObject</code> method for <code>Period</code>.</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+	<span class="n">s</span><span class="o">.</span><span class="na">defaultReadObject</span><span class="o">();</span>
+
+	<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&quot; after &quot;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>It still has a small but severe problem. Attacker can create a class to modify a valid <code>Period</code> object.</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">MutablePeriod</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">final</span> <span class="n">Period</span> <span class="n">period</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">start</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">end</span><span class="o">;</span>
+	
+	<span class="kd">public</span> <span class="nf">MutablePeriod</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">try</span>
+		<span class="o">{</span>
+			<span class="n">ByteArrayOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+			<span class="n">ObjectOutputStream</span> <span class="n">out</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">);</span>
+			
+			<span class="n">out</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="k">new</span> <span class="n">Period</span><span class="o">(</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(),</span> <span class="k">new</span> <span class="n">Date</span><span class="o">()));</span>
+			
+			<span class="kt">byte</span><span class="o">[]</span> <span class="n">ref</span> <span class="o">=</span> <span class="o">{</span> <span class="mh">0x71</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mh">0x7e</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">5</span> <span class="o">};</span>
+			<span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ref</span><span class="o">);</span>
+			<span class="n">ref</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="o">=</span> <span class="mi">4</span><span class="o">;</span>
+			<span class="n">bos</span><span class="o">.</span><span class="na">write</span><span class="o">(</span><span class="n">ref</span><span class="o">);</span>
+			
+			<span class="n">ObjectInputStream</span> <span class="n">in</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()));</span>
+			<span class="n">period</span> <span class="o">=</span> <span class="o">(</span><span class="n">Period</span><span class="o">)</span> <span class="n">in</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+			<span class="n">start</span> <span class="o">=</span> <span class="o">(</span><span class="n">Date</span><span class="o">)</span> <span class="n">in</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+			<span class="n">end</span> <span class="o">=</span> <span class="o">(</span><span class="n">Date</span><span class="o">)</span> <span class="n">in</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span>
+		<span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">AssertionError</span><span class="o">(</span><span class="n">e</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Main</span>
+<span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[]){</span>
+
+		<span class="n">MutablePeriod</span> <span class="n">mp</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MutablePeriod</span><span class="o">();</span>
+		<span class="n">Period</span> <span class="n">p</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="na">period</span><span class="o">;</span>
+		<span class="n">Date</span> <span class="n">pEnd</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="na">end</span><span class="o">;</span>
+		
+		<span class="n">pEnd</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="mi">78</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+		
+		<span class="n">pEnd</span><span class="o">.</span><span class="na">setYear</span><span class="o">(</span><span class="mi">69</span><span class="o">);</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">p</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This demo show that a <code>Period</code> object internal can be changed by <code>MutablePeriod</code> object. If attacker creates a <code>MutablePeriod</code> object, and pass the <code>mp.period</code> to your program, and the security of your program depends on the immutability of <code>Period</code>, then you will be hacked.</p>
+
+<p>The problem here is <code>readObject</code> of <code>Period</code> does not provide enough defensive copying. <code>in.readObject()</code> returns the reference of internal. </p>
+
+<p>Add the code to <code>Period</code> class</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">s</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">IOException</span><span class="o">,</span> <span class="n">ClassNotFoundException</span> <span class="o">{</span>
+	<span class="n">s</span><span class="o">.</span><span class="na">defaultReadObject</span><span class="o">();</span>
+
+	<span class="c1">// Defensively copy our mutable components</span>
+	<span class="n">start</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">()</span> <span class="o">);</span>
+	<span class="n">end</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span> <span class="n">getTime</span><span class="o">()</span> <span class="o">);</span>
+
+	<span class="c1">// Check that our invariants are satisfied</span>
+	<span class="k">if</span> <span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">end</span><span class="o">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+	<span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="n">start</span> <span class="o">+</span> <span class="s">&quot; after &quot;</span> <span class="o">+</span> <span class="n">end</span><span class="o">);</span>	
+<span class="o">}</span>
+</code></pre></div>
+
+<p>To provide defensive copying of final field, we have to remove <code>final</code> keyword.</p>
+
+<p><code>readObject</code> method must implement all the validation that constructor does.</p>
+
+<p>There are some rules for producing a more robust <code>readObject</code> method:</p>
+
+<ul>
+  <li>For classes with object reference fields that must remain private, defensively copy each object in such a field.</li>
+  <li>Check any invariants and throw an <code>InvalidObjectException</code> if a check fails. The checks should follow any defensive copying.</li>
+  <li>If an entire object graph must be validated after it is deserialized, use the <code>ObjectInputValidation</code> interface.</li>
+  <li>Do not invoke any overrideable methods in the class, directly or indirectly.</li>
+</ul>
+
+<h2 id="i77">77. For instance control, prefer enum types to <code>readResolve</code></h2>
+
+<p>If we deserialize a Singleton instance, it will no longer be a Singleton, since deserialization creates another one.</p>
+
+<p><code>readResolve</code> allows you using <code>readObject</code> to create an object to replace another one. </p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">Single</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Single</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Single</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Single</span><span class="o">(</span><span class="s">&quot;original&quot;</span><span class="o">);</span>
+	
+	<span class="kd">private</span> <span class="n">String</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nf">Single</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span> <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span> <span class="o">}</span>
+	<span class="kd">private</span> <span class="nf">Single</span><span class="o">()</span> <span class="o">{}</span>
+	
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="n">Object</span> <span class="nf">readResolve</span><span class="o">()</span> <span class="o">{</span>
+		<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">&quot;read resolve called&quot;</span><span class="o">);</span>
+		<span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SerialTest</span>
+<span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">main</span><span class="o">)</span>
+	<span class="o">{</span>
+		<span class="k">try</span>
+		<span class="o">{</span>
+			<span class="n">Single</span> <span class="n">s</span> <span class="o">=</span> <span class="n">Single</span><span class="o">.</span><span class="na">getInstance</span><span class="o">();</span>
+			
+			<span class="n">ByteArrayOutputStream</span> <span class="n">bos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ByteArrayOutputStream</span><span class="o">();</span>
+			<span class="n">ObjectOutputStream</span> <span class="n">oos</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectOutputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">);</span>
+			<span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+			
+			<span class="n">ObjectInputStream</span> <span class="n">ois</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ObjectInputStream</span><span class="o">(</span><span class="k">new</span> <span class="n">ByteArrayInputStream</span><span class="o">(</span><span class="n">bos</span><span class="o">.</span><span class="na">toByteArray</span><span class="o">()));</span>
+			<span class="n">Single</span> <span class="n">res</span> <span class="o">=</span> <span class="o">(</span><span class="n">Single</span><span class="o">)</span> <span class="o">(</span><span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">());</span>
+			
+			<span class="n">res</span><span class="o">.</span><span class="na">setName</span><span class="o">(</span><span class="s">&quot;changed&quot;</span><span class="o">);</span>
+			
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">res</span><span class="o">);</span>
+			
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">e</span><span class="o">)</span>
+		<span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>
+		<span class="k">catch</span> <span class="o">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="o">)</span>
+		<span class="o">{</span>
+			<span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+		<span class="o">}</span>		
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This program output:</p>
+
+<pre><code>read resolve called
+changed
+changed
+</code></pre>
+
+<p>Which means the deserialized object is actually the original one. Please compare the result after removing <code>readResolve()</code> method.</p>
+
+<p><code>readResolve</code> will return the original INSTANCE. If the object has reference field, they all should declared as <code>transient</code>. </p>
+
+<h2 id="i78">78. Consider serialization proxies instead of serialized instances</h2>
+
+<p><strong>Serialization Proxy Pattern</strong> means, provide a private nested static class for a serializable class. This class is <strong>serialization proxy</strong>, it has a single constructor, and parameter is its enclosing class object. </p>
+
+<h4 id="example-period-class">Example: Period class</h4>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// Period class is from #76</span>
+
+<span class="c1">// SerializationProxy is inside Period</span>
+<span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">SerializationProxy</span> <span class="kd">implements</span> <span class="n">Serializable</span><span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">start</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="n">Date</span> <span class="n">end</span><span class="o">;</span>
+
+	<span class="n">SerializationProxy</span><span class="o">(</span><span class="n">Period</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">start</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">start</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">end</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="na">end</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="n">Object</span> <span class="nf">readResolve</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Period</span><span class="o">(</span><span class="n">New</span> <span class="n">Date</span><span class="o">(</span><span class="n">start</span><span class="o">.</span><span class="na">getTime</span><span class="o">()),</span> <span class="k">new</span> <span class="n">Date</span><span class="o">(</span><span class="n">end</span><span class="o">.</span><span class="na">getTime</span><span class="o">()));</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">long</span> <span class="n">serialVersionUID</span> <span class="o">=</span> <span class="o">...;</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Then, add these two methods to <code>Period</code>:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">private</span> <span class="kt">void</span> <span class="nf">readObject</span><span class="o">(</span><span class="n">ObjectInputStream</span> <span class="n">stream</span><span class="o">)</span> <span class="k">throw</span> <span class="n">InvalidObjectException</span> <span class="o">{</span>
+	<span class="k">throw</span> <span class="k">new</span> <span class="nf">InvalidObjectException</span><span class="o">(</span><span class="s">&quot;Proxy required&quot;</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">private</span> <span class="n">Object</span> <span class="nf">writeReplace</span><span class="o">()</span> <span class="o">{</span>
+	<span class="k">return</span> <span class="k">new</span> <span class="nf">SerializationProxy</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>When client serialize a <code>Period</code> object:</p>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// oos is a ObjectOutputStream</span>
+<span class="n">oos</span><span class="o">.</span><span class="na">writeObject</span><span class="o">(</span><span class="n">period</span><span class="o">)</span>
+</code></pre></div>
+
+<p>Program goes into the <code>writeReplace()</code> of <code>Period</code>. It actually serializes a new <code>SerializationProxy</code> object. But the client doesn’t know this. This new <code>SerializationProxy</code> object contains all the information of the <code>Period</code> object.</p>
+
+<p>When client deserialize the <code>Period</code> object, which actually is <code>SerializationProxy</code> object:</p>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// ois is a ObjectInputStream</span>
+<span class="n">Period</span> <span class="n">newPeriod</span> <span class="o">=</span> <span class="o">(</span><span class="n">Period</span><span class="o">)</span><span class="n">ois</span><span class="o">.</span><span class="na">readObject</span><span class="o">();</span>
+</code></pre></div>
+
+<p><code>ois</code> contains the <code>SerializationProxy</code> object. Program goes into the <code>readResolve()</code> of <code>SerializationProxy</code> object, which returns a copy of original <code>Period</code> object.</p>
+
+<p>Now, client cannot call the <code>readObject</code> from <code>Period</code> directly.</p>
+
+<p><strong>Serialization Proxy Pattern</strong> ensures <code>Period</code> is really immutable, the fields are <code>final</code></p>
+
+            
+<div class="social">
+    <div>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Effective Java 10 - Serialization" data-related="allenlsy">Tweet</a>
+    </div>
+    
+    
+    <div>
+        <div class="fb-like" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+    </div>
+    
+    
+    <div>
+        <div class="g-plusone" data-size="medium"></div>
+    </div>
+    
+    
+    
+    <div>
+        <a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+    </div>
+    
+</div>
+
+        </section>
+        
+        <section>
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'allenlsy'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+        </section>
+        
+    </div>
+</article>
+
+
+<footer class="site-footer">
+    <div class="container">
+      &copy; 2013 &nbsp;  
+        
+        <nav>
+            <a href="/">Blog</a> &middot;
+            
+            
+        </nav>
+        
+        <nav class="social">
+            
+            <a href="https://twitter.com/allenlsy" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+            
+            
+            <a href="http://facebook.com/allenlsy" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+                
+            <a href="/feed.xml" title="RSS Feed">
+                <i class="icon icon-rss black"></i>
+            </a>
+        </nav>
+    </div>
+</footer>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/assets/main.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253595308025739";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<script>
+    (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//hnbutton.appspot.com/static/hn.min.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
+
+</body>
+</html>

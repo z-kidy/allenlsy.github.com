@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effective Java 3 - Classes and Interfaces &mdash; Simple, Not Easy</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.jpg"/>
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
+    <meta name="title" content="Effective Java 3 - Classes and Interfaces ">
+    <link rel="canonical" href="/NOTES-of-Effective-Java-3">
+     
+           
+    <meta property="og:title" content="Effective Java 3 - Classes and Interfaces "/>
+    <meta property="og:url" content="/NOTES-of-Effective-Java-3"/>
+    
+    
+    <meta property="og:site_name" content="Simple, Not Easy">     
+</head>
+<body>
+    
+<section class="site-nav">
+    <header>
+        <nav id="navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+            <a class="brand" href="/">
+                <img src="/images/logo.jpg" alt="Inc">
+            </a>
+            <a href="/">Blog</a>
+            
+              <a href="/archives.html" >Archives</a>
+            
+              <a href="/about.html" >About</a>
+            
+            <i class="icon-feed"></i> <a href="/feed.xml" title="Atom/RSS feed">Feed</a>
+        </nav>
+
+    </header>
+</section>
+
+
+<article>
+
+    <div class="container">
+        <header>
+            <div class="meta">
+                By <address><a rel="author" href="" title="allenlsy" target="_blank">allenlsy</a> &mdash;
+                <time pubdate datetime="2013-12-May" title="May 12, 2013">May 12, 2013</time>
+            </div>
+            <h1 class="title">Effective Java 3 - Classes and Interfaces</h1>
+            
+        </header>
+
+        <section>
+            <p><img src="http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg" alt="" />
+<br /></p>
+
+<ul>
+  <li><a href="#i13">13. Minimize the accessibility of classes and members</a></li>
+  <li><a href="#i14">14. In public classes, use accessor methods, not public fields</a></li>
+  <li><a href="#i15">15. Minimize mutability</a></li>
+  <li><a href="#i16">16. Favor composition over inheritance</a></li>
+  <li><a href="#i17">17. Design and document for inheritance or else prohibit it</a></li>
+  <li><a href="#i18">18. Interface is better than Abstract class</a></li>
+  <li><a href="#i19">19. Interface for defining type only</a></li>
+  <li><a href="#i20">20. Prefer class hierarchies to tagged classes</a></li>
+  <li><a href="#i21">21. Function object as strategies</a></li>
+  <li><a href="#i22">22. Favor static member classes over nonstatic</a></li>
+</ul>
+
+<hr />
+
+<h2 id="i13">13. Minimize the accessibility of classes and members</h2>
+
+<p>Four accessibilities in Java:</p>
+
+<ul>
+  <li><strong>private</strong>: only accessible inside the class itself</li>
+  <li><strong>package-private(default)</strong>: accessible inside the package</li>
+  <li><strong>protected</strong>: accessible from subclasses of the class where it is declared, and from any class inside the package</li>
+  <li><strong>public</strong>: accessible from anywhere</li>
+</ul>
+
+<p>It is not acceptable to make a class, interface or member a part of a package’s exported API to facilitate testing. </p>
+
+<p><strong>Instance fields should never be public.</strong> if the field is not <code>final</code>, and it is public, that means you give up the control to limit the ability to store in this field. Also, <strong>classes with public mutable fields are not thread-safe</strong>.</p>
+
+<p>For static field, it is ok if it declares to be <code>final</code>. The naming convention for these field is upper case.</p>
+
+<p>A nonzero-length array is always mutable, so <strong>it is wrong for a class to have a public static final array field, or an accessor that returns such a field.</strong> The elements inside the array can be modified. You can make a the public array private and add a public immutable list. Or return a clone of that private array</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">Thing</span><span class="o">[]</span> <span class="n">PRIVATE_VALUES</span> <span class="o">=</span> <span class="o">{</span> <span class="o">..</span> <span class="o">};</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span> <span class="n">Thing</span> <span class="o">&gt;</span> <span class="n">VALUES</span> <span class="o">=</span> <span class="n">Collections</span><span class="o">.</span><span class="na">unmodifiableList</span><span class="o">(</span><span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">PRIVATE_VALUES</span><span class="o">));</span>
+</code></pre></div>
+
+<h2 id="i14">14. In public classes, use accessor methods, not public fields</h2>
+
+<p>The reason to do it is <strong>flexibility</strong>: easy to change to way to get and set the value, without affecting other parts of the code</p>
+
+<p>However, if a class is package-private or is a private nested class, there is nothing inherently wrong with exposing its data fields.</p>
+
+<h2 id="i15">15. Minimize mutability</h2>
+
+<p>Some advices to make things immutable:</p>
+
+<ol>
+  <li>Don’t provide any methods that modify the object’s state(aka. <em>mutators</em>)</li>
+  <li>Ensure that the class can’t be extended</li>
+  <li>Make all fields final</li>
+  <li>Make all fields private</li>
+  <li>Ensure exclusive access to any mutable components. If your class has any fields that refer to mutable objects, ensure that clients of the class cannot obtain references to these objects.</li>
+</ol>
+
+<p>Immutable objects can be shared freely, they require no synchronization.</p>
+
+<p>The only disadvantage of immutable classes is that they require a seperate object for each distinct value. Use lazy initialization.</p>
+
+<p>To ensure the immutability, a class must not permit itself to be suclassed. <strong>Static factory</strong> is a good way to implement it instead of constructor.</p>
+
+<p>No methods may produce an externally visible change in the object’s state.</p>
+
+<h4 id="example-complex-number">Example: Complex number</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Complex</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">re</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">im</span><span class="o">;</span>
+
+	<span class="kd">private</span> <span class="nf">Complex</span><span class="o">(</span><span class="kt">double</span> <span class="n">re</span><span class="o">,</span> <span class="kt">double</span> <span class="n">im</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">re</span> <span class="o">=</span> <span class="n">re</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Complex</span> <span class="nf">valueOf</span><span class="o">(</span><span class="kt">double</span> <span class="n">re</span><span class="o">,</span> <span class="kt">double</span> <span class="n">im</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">(</span><span class="n">re</span><span class="o">,</span> <span class="n">im</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">Complex</span> <span class="nf">valueOfPolar</span><span class="o">(</span><span class="kt">double</span> <span class="n">rm</span><span class="o">,</span> <span class="kt">double</span> <span class="n">theta</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">Complex</span><span class="o">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">cos</span><span class="o">(</span><span class="n">theta</span><span class="o">),</span> <span class="n">r</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">sin</span><span class="o">(</span><span class="n">theta</span><span class="o">)</span> <span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="i16">16. Favor composition over inheritance</h2>
+
+<p><strong>Unlike method invocation, inheritance violates encapsulation.</strong> If superclass changes implementation, subclass will be affected.</p>
+
+<p>If every A object has a B object inside, the class A is called <strong>wrapper class</strong>. This is the <strong>Decorator design pattern</strong>. This is not <strong>delegation</strong>, unless wrapper passes itself to the wrapped object.</p>
+
+<h2 id="i17">17. Design and document for inheritance or else prohibit it</h2>
+
+<p>If design for inheritance, the class must document its <em>self-use</em> of overridable methods. For every public or protected methods, the documentation must indicate which overridable methods the method or constructor invokes</p>
+
+<h2 id="i18">18. Interface is better than Abstract class</h2>
+
+<p>Abstract class limits a class more than interface.</p>
+
+<p>Interface is an ideal option for mixin definition of class.</p>
+
+<p><strong>Skeleton Implementation(Abstract interface)</strong>, makes it easy to provide implementation for interface. It combines the advantage of both interface and abstract class.</p>
+
+<p><strong>Simulated Multiple Inheritance</strong>: makes a private internal class implements an interface, so that the public class can implements multiple abstract class if needed.</p>
+
+<h4 id="example-skeleton-implementation">Example: Skeleton Implementation</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">AbstractMapEntry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span><span class="n">V</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;</span><span class="n">K</span><span class="o">,</span> <span class="n">V</span><span class="o">&gt;</span>
+<span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">K</span> <span class="nf">getKey</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">V</span> <span class="nf">getValue</span><span class="o">();</span>
+
+	<span class="c1">// Simple Implementation</span>
+	<span class="kd">public</span> <span class="n">V</span> <span class="nf">setValue</span><span class="o">(</span><span class="n">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span> 
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">o</span> <span class="o">==</span> <span class="k">this</span><span class="o">)</span>
+			<span class="n">returh</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span> <span class="o">!</span> <span class="o">(</span><span class="n">o</span> <span class="k">instanceof</span> <span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">))</span>
+			<span class="n">returh</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">&lt;?,?&gt;</span> <span class="n">arg</span> <span class="o">=</span> <span class="o">(</span><span class="n">Map</span><span class="o">.</span><span class="na">Entry</span><span class="o">)</span> <span class="n">o</span><span class="o">;</span>
+		<span class="k">return</span> 	<span class="nf">equals</span><span class="o">(</span><span class="n">getKey</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getKey</span><span class="o">())</span> <span class="o">&amp;&amp;</span>
+				<span class="n">equals</span><span class="o">(</span><span class="n">getValue</span><span class="o">(),</span> <span class="n">arg</span><span class="o">.</span><span class="na">getValue</span><span class="o">());</span>
+	<span class="o">}</span>
+	
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="n">Object</span> <span class="n">o1</span><span class="o">,</span> <span class="n">Object</span> <span class="n">o2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">o1</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="n">o2</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">:</span> <span class="n">o1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">o2</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">// Implements the general contract of Map.Entry.hashCode</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(){</span>
+		<span class="k">return</span> <span class="nf">hashCode</span><span class="o">(</span><span class="n">getKey</span><span class="o">())</span> <span class="o">^</span> <span class="n">hashCode</span><span class="o">(</span><span class="n">getValue</span><span class="o">());</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">(</span><span class="n">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">obj</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Skeleton implementation is designed for inheritance. The methods that don’t have a concrete implementation can have a simple implementation, like <code>setValue()</code> in the example.</p>
+
+<p>Once a interface is published and widely adopted, it is almost impossible to change it.</p>
+
+<h2 id="i19">19. Interface for defining type only</h2>
+
+<p><strong>Constant interface</strong>: contains no methods, only static final fields. It is for defining constants. IT IS NOT A GOOD WAY TO USE INTERFACE. An example is <code>java.io.ObjectStreamConstants</code>. It is a bad example from Java API.</p>
+
+<p>Better implementation is <strong>Utility class</strong>.  </p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">PhysicalConstants</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nf">PhysicalConstants</span><span class="o">()</span> <span class="o">{}</span> <span class="c1">//Prevents instantiation</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">AVOGADROS_NUMBER</span> <span class="o">=</span> <span class="mf">6.02214199e23</span><span class="o">;</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="kt">double</span> <span class="n">BOLTZMANN_CONSTANT</span> <span class="o">=</span> <span class="mf">1.3806503</span><span class="n">e</span><span class="o">-</span><span class="mi">23</span><span class="o">;</span>
+
+<span class="o">}</span>
+</code></pre></div>
+
+<h2 id="i20">20. Prefer class hierarchies to tagged classes</h2>
+
+<p><strong>Tagged class</strong>: many seperated implementation dumped into one class. Tagged class is always too long, low performance.</p>
+
+<p>Subclass is better than tagged class. Tagged class is a simulation of class hierarchies.</p>
+
+<h2 id="i21">21. Function object as strategies</h2>
+
+<p>This is <strong>Strategy design pattern</strong>.</p>
+
+<h4 id="example-comparator">Example: comparator</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">class</span> <span class="nc">StringLengthComparator</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nf">StringLengthComparator</span><span class="o">()</span> <span class="o">{}</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kd">final</span> <span class="n">StringLengthComparator</span> <span class="n">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringLengthComparator</span><span class="o">();</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">String</span> <span class="n">s1</span><span class="o">,</span> <span class="n">String</span> <span class="n">s2</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">s1</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">-</span> <span class="n">s2</span><span class="o">.</span><span class="na">length</span><span class="o">();</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Since <code>StringLengthComparator</code> is stateless, no fields, therefore it is better to be implemented as a singleton.</p>
+
+<p>If we have many comparators, we’d better define a comparator interface. (Actually it is inside <code>java.util</code>)</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Comparator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">compare</span><span class="o">(</span><span class="n">T</span> <span class="n">t1</span><span class="o">,</span> <span class="n">T</span> <span class="n">t2</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>It is also recommended to have a static strategy factory class, the concrete strategy implementation classes are inside the factory class, and they all implement the strategy interface.</p>
+
+<h2 id="i22">22. Favor static member classes over nonstatic</h2>
+
+<p><strong>Nested class</strong> is internal class, for serving the enclosing class. There are four types of nested class: <strong>static member class</strong>, <strong>nonstatic member class</strong>, <strong>anonymouse class</strong> and <strong>local class</strong>.</p>
+
+<p><strong>Static member class</strong> is just normal class that defined inside a class, no special purpose. It is an accesory of enclosing class.</p>
+
+<p><strong>Nonstatic member class</strong> is much different than static member class. The instance of nonstatic member class may related to an enclosing instance. They may call the method of enclosing class. </p>
+
+<h4 id="example-nonstatic-member-class">Example: nonstatic member class</h4>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MySet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="kd">extends</span> <span class="n">AbstractSet</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+	<span class="c1">//...</span>
+
+	<span class="kd">public</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="k">new</span> <span class="nf">MyIterator</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="kd">class</span> <span class="nc">MyIterator</span> <span class="kd">implements</span> <span class="n">Iterator</span><span class="o">&lt;</span><span class="n">E</span><span class="o">&gt;</span> <span class="o">{</span>
+		<span class="c1">// ...</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>For this <code>MyIterator</code> class, if it is not required to visit enclosing class, then it may be declared as <code>static</code>.</p>
+
+<p><strong>Anonymous class</strong> has no class name, cannot execute <code>instanceof</code> test. It is suitable for dynamicly create <strong>function object</strong>. or create <strong>process object</strong> like <code>Runnable</code>, <code>Thread</code>. </p>
+
+<p><strong>Local class</strong> is just other local class.</p>
+
+            
+<div class="social">
+    <div>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Effective Java 3 - Classes and Interfaces" data-related="allenlsy">Tweet</a>
+    </div>
+    
+    
+    <div>
+        <div class="fb-like" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+    </div>
+    
+    
+    <div>
+        <div class="g-plusone" data-size="medium"></div>
+    </div>
+    
+    
+    
+    <div>
+        <a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+    </div>
+    
+</div>
+
+        </section>
+        
+        <section>
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'allenlsy'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+        </section>
+        
+    </div>
+</article>
+
+
+<footer class="site-footer">
+    <div class="container">
+      &copy; 2013 &nbsp;  
+        
+        <nav>
+            <a href="/">Blog</a> &middot;
+            
+            
+        </nav>
+        
+        <nav class="social">
+            
+            <a href="https://twitter.com/allenlsy" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+            
+            
+            <a href="http://facebook.com/allenlsy" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+                
+            <a href="/feed.xml" title="RSS Feed">
+                <i class="icon icon-rss black"></i>
+            </a>
+        </nav>
+    </div>
+</footer>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/assets/main.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253595308025739";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<script>
+    (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//hnbutton.appspot.com/static/hn.min.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+
+
+</body>
+</html>
