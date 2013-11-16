@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDD in Rails With RSpec &mdash; Simple, Not Easy</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/images/logo.jpg"/>
+    <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
+    <meta name="title" content="TDD in Rails With RSpec ">
+    <link rel="canonical" href="/TDD-in%E2%80%93Rails%E2%80%93with-RSpec">
+     
+    <link rel="author" href="https://plus.google.com/118230970865161551961">       
+    <meta property="og:title" content="TDD in Rails With RSpec "/>
+    <meta property="og:url" content="/TDD-in%E2%80%93Rails%E2%80%93with-RSpec"/>
+    
+    
+    <META PROPERTY="OG:DESCRIPTION" CONTENT=""/>
+    <meta name="description" content="I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. "/>
+    
+    <meta property="og:site_name" content="Simple, Not Easy">     
+</head>
+<body>
+    
+<section class="site-nav">
+    <header>
+        <nav id="navigation" role="navigation" itemscope itemtype="http://schema.org/SiteNavigationElement">
+            <a class="brand" href="/">
+                <img src="/images/logo.jpg" alt="Inc">
+            </a>
+            <a href="/">Blog</a>
+            
+              <a href="/archives.html" >Archives</a>
+            
+              <a href="/about.html" >About</a>
+            
+            <i class="icon-feed"></i> <a href="/feed.xml" title="Atom/RSS feed">Feed</a>
+        </nav>
+
+    </header>
+</section>
+
+
+<article>
+
+    <div class="container">
+        <header>
+            <h1 class="title">TDD in Rails With RSpec</h1>
+            
+            <div class="meta">
+                <time pubdate datetime="2013-03-May" title="May 03, 2013">May 03, 2013</time>
+            </div>
+        </header>
+
+        <section>
+            <p><img src="http://jeffkreeftmeijer.com/images/fuubar.png" alt="" /></p>
+
+<blockquote>
+  <p>This article requires basic experience of TDD using UnitTest in Rails.</p>
+</blockquote>
+
+<p>I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. </p>
+
+<p>Test suite is built while developing, not after developing. Although a test suite is not a silver bullet to 100% ensure the quality of your app, it does increase your confidence.</p>
+
+<p><em>There is a voice saying writing test suite sometimes makes development less effective. In practical yes, I have the same feeling sometimes. But it is not the test suite to be blamed, but the way to write it. Don’t write the test cases for something you are already very confident with. More test cases you write will not prove you are a good TDD practitioner.</em></p>
+
+<p>I meanly use RSpec + FactoryGirl. There are bunchs of good testing frameworks out there, such as Cucumber, for Acceptance test. I only develop small or medium sized app, and I feel Cucumber will make my development less effective. Even if I want to write Acceptance test cases, RSpec + Capybara will do.</p>
+
+<p><strong>I will illustrate how to do testing in Rails using RSpec in this article, with some of my experience of developing.</strong> Let’s start.</p>
+
+<h2 id="get-to-know-some-basic-concepts-in-testing-using-rspec">1. Get to know some basic concepts in testing using RSpec</h2>
+
+<h3 id="why-use-factorygirl">1.1 Why use FactoryGirl?</h3>
+
+<p>Fixture inside the Rails framework has some cons. Mainly they are:</p>
+
+<ul>
+  <li>Only one set of fixtures in a default Rails application.</li>
+  <li>Each model has its own fixture file, and not easy to do data association.</li>
+  <li>Not flexible. Static data</li>
+</ul>
+
+<p>So we should use factories to replace fixtures. <strong>FactoryGirl</strong> is the gem we are looking for. And it is from thoughtbot.</p>
+
+<p>I will not talk about how to use FactoryGirl here. You just need to know that it can create object, with association. For example, if you are developing a blo	g system, a <em>User</em> object has many <em>Blogs</em>, if you are still using fixture, then <code>user.blogs</code> may return nothing. </p>
+
+<h3 id="what-is-mock-and-stub">1.2 What is mock and stub?</h3>
+
+<p><strong>Stub</strong> is a fake object that returns a predetermined value for a method call without calling the actual object. To define a stub, the code may look like this:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">thing</span><span class="o">.</span><span class="n">stubs</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">returns</span><span class="p">(</span><span class="s2">&quot;Fred&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>Mock</strong> is similar to a stub, but in addition to returning the fake value, a mock object also sets a testable expectation that the method being replaced will actually be called in the test. If the method is not called, the mock obkect triggers a test failure. The code may look like this:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">thing</span><span class="o">.</span><span class="n">expects</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span><span class="o">.</span><span class="n">returns</span><span class="p">(</span><span class="s2">&quot;Fred&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Difference here is that in mock, the <code>:name</code> must be called to pass the test.</p>
+
+<h4 id="mock-and-stub-in-rspec">Mock and Stub in RSpec</h4>
+
+<p>Mock and stub have some different meaning in RSpec. Let’s see the official definition</p>
+
+<blockquote>
+  <p>The <code>mock_model</code> method generates a test double that acts like an instance of <code>ActiveModel</code>. The <code>stub_model</code>  generates an instance of a real object of <code>ActiveModel</code>. The benefit of <code>mock_model</code> is that it can mock some object that may not exist<code>. If you're working on a controller spec and you need a model that doesn't exist, you can pass</code>mock_model` a string and the generated obkect will act as though its an instance of the class named by that string.</p>
+</blockquote>
+
+<blockquote>
+  <p>– RSpec doc</p>
+</blockquote>
+
+<p>To illustrate <code>mock_model</code>, there is a piece of sample code</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">it</span> <span class="s2">&quot;returns the correct name&quot;</span> <span class="k">do</span>
+	<span class="n">car</span> <span class="o">=</span> <span class="n">mock_model</span> <span class="s2">&quot;Car&quot;</span>
+	<span class="n">expect</span> <span class="p">(</span><span class="n">car</span><span class="o">.</span><span class="n">class</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span> <span class="s2">&quot;Car&quot;</span>
+</code></pre></div>
+
+<p>Various of specs will be discussed from highest level to the lower.</p>
+
+<h2 id="feature-test">2. Feature Test</h2>
+
+<h4 id="what-does-it-test"><em>What does it test?</em></h4>
+
+<blockquote>
+  <p>Feature specs are high-level tests meant to <strong>exercise slices of functionality
+through an application.</strong> They should drive the application only via its
+<strong>external interface</strong>, usually web pages.</p>
+</blockquote>
+
+<blockquote>
+  <p>— RSpec doc</p>
+</blockquote>
+
+<p>From RSpec 2.0, capybara can only be used inside feature test. DSL <code>feature</code> and <code>scenario</code> will be used here. So at the time of writing, feature test is the only place you can simulate user interactions with the browser.</p>
+
+<h4 id="sample">Sample</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">feature</span> <span class="s2">&quot;logged in user&quot;</span> <span class="k">do</span>
+	<span class="n">background</span> <span class="k">do</span>
+		<span class="vi">@user</span> <span class="o">=</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span>
+		
+		<span class="n">visit</span> <span class="n">login_page_path</span>
+		
+		<span class="n">fill_in</span> <span class="s2">&quot;user_email&quot;</span><span class="p">,</span> <span class="ss">with</span><span class="p">:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span>
+		<span class="n">fill_in</span> <span class="s2">&quot;user_password&quot;</span><span class="p">,</span> <span class="ss">with</span><span class="p">:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">password</span>
+		<span class="n">click_button</span> <span class="s2">&quot;Log in&quot;</span>
+	<span class="k">end</span>
+	
+	<span class="n">scenario</span> <span class="s2">&quot;change password&quot;</span> <span class="k">do</span>
+		<span class="n">visit</span> <span class="s2">&quot;/password&quot;</span>
+		
+		<span class="n">fill_in</span> <span class="s2">&quot;password, with: &quot;</span><span class="no">N3w_pass</span><span class="p">,</span><span class="n">d</span><span class="s2">&quot;</span>
+<span class="s2">		fill_in &quot;</span><span class="n">password_confirmation</span><span class="s2">&quot;, with: &quot;</span><span class="no">N3w_pass</span><span class="p">,</span><span class="n">d</span><span class="s2">&quot;</span>
+<span class="s2">		click_button &quot;</span><span class="no">Update</span><span class="s2">&quot;</span>
+<span class="s2">		</span>
+<span class="s2">		page.should have_content &quot;</span><span class="n">success</span><span class="s2">&quot;</span>
+<span class="s2">	end	</span>
+<span class="s2">end</span>
+</code></pre></div>
+
+<p>The logic here is simple. You can start to feel the style RSpec doing test, and ignore the syntax details for now.</p>
+
+<p><code>background</code> is equavalent to the setup in other testing frameworks. Here I used FactoryGirl to create a sample user object. <code>fill_in</code>, <code>visit</code>, <code>click_button</code> are all from capybara DSL. Since the scenarios we will test below are all require user to log in, we do the login process inside the background code block.</p>
+
+<p>The scenario here is for a logged in user to change password. It visit the change password url, and fill in the form, then click “Update” button. The website will redirect user to another page. But this page should display something like “success”, such as “You have successfully changed your password”.</p>
+
+<h2 id="request-test">3. Request Test</h2>
+
+<h4 id="what-does-it-test-1"><em>What does it test?</em></h4>
+
+<p>To be simple, if you want to test a function(I mean the function of your product, not function in programming) that needs the collaboration of multiple controllers, or in another word, sends multiple request, you should use request test.</p>
+
+<p>Unlike feature test, you cannot check whether the webpage contains certain piece of string. But you should check whether the action redirects to certain path, or renders certain template.</p>
+
+<h2 id="controller-test">4. Controller Test</h2>
+
+<h4 id="what-does-it-test-2"><em>What does it test?</em></h4>
+
+<p>Controller test allows only one request to the controller. So in most situation, it refers to call only one action in the controller.  And like request test, you can test the rendering, redirecting, variable values when being rendered, and http response code.</p>
+
+<h4 id="sample-1">Sample</h4>
+
+<p>Let’s test visiting a blog page. This page will show the content of the blog.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">describe</span> <span class="no">BlogsController</span> <span class="k">do</span>
+	<span class="n">let</span><span class="p">(</span><span class="ss">:mock_blog</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:blog</span><span class="p">)</span> <span class="p">}</span>
+	
+	<span class="n">before</span> <span class="p">{</span> <span class="no">Blog</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="ss">:find</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span> <span class="n">mock_blog</span> <span class="p">)</span> <span class="p">}</span>
+	
+	<span class="n">describe</span> <span class="s2">&quot;GET show&quot;</span> <span class="k">do</span>
+		<span class="n">it</span> <span class="s2">&quot;should display the post&quot;</span> <span class="k">do</span>
+			<span class="n">get</span> <span class="ss">:show</span>
+			<span class="n">assigns</span><span class="p">(</span><span class="ss">:blog</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">mock_blog</span>
+		<span class="k">end</span>
+	<span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>I first defines the <code>mock_blog</code> object using FactoryGirl. Then in the <code>before</code> block, I state no matter what parameter is, the <code>Blog.find()</code> will always return <code>mock_blog</code> during the testing. See how stub works? Then comes the real testing. The test sends a get request to the show page of <code>BlogsController</code>. <code>assigns(:blog)</code> will get the <code>@blog</code> in the template being rendered. I assert that this <code>@blog</code> should be <code>mock_blog</code>, because <code>Blog.find</code> will return <code>mock_blog</code>.</p>
+
+<h2 id="model-test">5. Model Test</h2>
+
+<h4 id="what-does-it-test-3"><em>What does it test?</em></h4>
+
+<p>Model test is what we called “Unit test”. It is the simplest type of testing. In Rails, it will test the ActiveModel classes.</p>
+
+<h4 id="sample-2">Sample</h4>
+
+<p>Check out the example from RSpec official:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s2">&quot;spec_helper&quot;</span>
+
+<span class="n">describe</span> <span class="no">Post</span> <span class="k">do</span>
+  <span class="n">context</span> <span class="s2">&quot;with 2 or more comments&quot;</span> <span class="k">do</span>
+    <span class="n">it</span> <span class="s2">&quot;orders them in reverse chronologically&quot;</span> <span class="k">do</span>
+      <span class="n">post</span> <span class="o">=</span> <span class="no">Post</span><span class="o">.</span><span class="n">create!</span>
+      <span class="n">comment1</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:body</span> <span class="o">=&gt;</span> <span class="s2">&quot;first comment&quot;</span><span class="p">)</span>
+      <span class="n">comment2</span> <span class="o">=</span> <span class="n">post</span><span class="o">.</span><span class="n">comments</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">:body</span> <span class="o">=&gt;</span> <span class="s2">&quot;second comment&quot;</span><span class="p">)</span>
+      <span class="n">expect</span><span class="p">(</span><span class="n">post</span><span class="o">.</span><span class="n">reload</span><span class="o">.</span><span class="n">comments</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">eq</span><span class="p">(</span><span class="o">[</span><span class="n">comment2</span><span class="p">,</span> <span class="n">comment1</span><span class="o">]</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Make sense?</p>
+
+<h2 id="other-tests">6. Other tests</h2>
+
+<p>Other tests are almost the same as Model test, and easy to understand, so I won’t talk about it here. They are:</p>
+
+<ul>
+  <li>View test: test content of rendered template when given the model</li>
+  <li>Helper test: test helpers methods. Very much like Model test</li>
+  <li>Mailer test: test the mail sent</li>
+  <li>Routing test: test whether a route is reachable</li>
+</ul>
+
+<p>There is one more test exists but has nothing to do with RSpec. It is the performance test.</p>
+
+            
+<div class="social">
+    <div>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="TDD in Rails With RSpec" data-related="allenlsy">Tweet</a>
+    </div>
+    
+    
+    <div>
+        <div class="fb-like" data-width="150" data-layout="button_count" data-action="like" data-show-faces="true" data-send="false"></div>
+    </div>
+    
+    
+    <div>
+        <div class="g-plusone" data-size="medium"></div>
+    </div>
+    
+    
+    
+    <div>
+        <a href="http://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+    </div>
+    
+</div>
+
+        </section>
+        
+        <section>
+            <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'allenlsy'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+        </section>
+        
+    </div>
+</article>
+
+
+<footer class="site-footer">
+    <div class="container">
+      &copy; 2013 &nbsp;  
+        
+        <nav>
+            <a href="/">Blog</a> &middot;
+            
+            
+        </nav>
+        
+        <nav class="social">
+            
+            <a href="https://twitter.com/allenlsy" title="Follow on Twitter" target="_blank"><i class="icon icon-twitter black"></i></a>
+            
+            
+            <a href="http://facebook.com/allenlsy" title="Follow on Facebook" target="_blank"><i class="icon icon-facebook black"></i></a>
+                
+            <a href="/feed.xml" title="RSS Feed">
+                <i class="icon icon-rss black"></i>
+            </a>
+        </nav>
+    </div>
+</footer>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/assets/main.js"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=253595308025739";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<script>
+    (function(d, t) {
+        var g = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        g.src = '//hnbutton.appspot.com/static/hn.min.js';
+        s.parentNode.insertBefore(g, s);
+    }(document, 'script'));
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-24647338-1', '');
+  ga('send', 'pageview');
+</script>
+
+</body>
+</html>

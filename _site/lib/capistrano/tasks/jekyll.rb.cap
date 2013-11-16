@@ -1,10 +1,10 @@
 desc 'Push to github -> Deploy on server'
 task :jekyll do
-  run_locally 'git push -f'
   on roles(:blog) do
-    run "cd #{deploy_to}"
-    run "git pull origin master"
-    run "jekyll build"
+    run_locally do "git push -f" end
+    execute "cd #{deploy_to} && git pull origin master"
+    # execute "git pull origin master"
+    # execute "jekyll build"
   end
 end
 

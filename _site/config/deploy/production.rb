@@ -8,6 +8,7 @@ set :stage, :production
 # role :app, %w{deploy@example.com}
 # role :web, %w{deploy@example.com}
 # role :db,  %w{deploy@example.com}
+role :blog, 'allenlsy@allenlsy.com'
 
 # Extended Server Syntax
 # ======================
@@ -22,8 +23,9 @@ set :stage, :production
 # you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
 # set it globally
  set :ssh_options, {
-   # keys: %w(/Users/allenlsy/.ssh/id_rsa),
+   keys: %w(/Users/allenlsy/.ssh/id_rsa),
    forward_agent: true
+   # verbose: :debug,
    # auth_methods: %w(password)
  }
 # and/or per server
@@ -39,18 +41,8 @@ set :stage, :production
 #   }
 # setting per server overrides global ssh_options
 
-# fetch(:default_env).merge!(rails_env: :production)
+fetch(:default_env).merge!(rails_env: :production)
 
-desc 'Push to github -> Deploy on server'
-task :jekyll do
-  run_locally 'git push -f'
-  on roles(:blog) do
-    run "cd #{deploy_to}"
-    run "git pull origin master"
-  end
-end
-
-# 
 # namespace :jekyll do
 #   desc 'Push to github -> Deploy on server'
 #   task :deploy do

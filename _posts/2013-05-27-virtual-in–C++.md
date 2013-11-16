@@ -1,6 +1,14 @@
+---
+layout: post
+title: Virtual in C++
+excerpt:
+cover_image: cppcafe.jpg
+
+---
+
 I have a program to explain the __static typing__ and __dynamic typing__ in C++.
 
-<pre lang="cpp">
+{% highlight cpp %}
 #include <iostream>
 using namespace std;
 
@@ -31,7 +39,7 @@ int main(void)
     
     return 0;
 }
-</pre>
+{% endhighlight %}
 
 This program outputs `this is A`. If you are a Java programmer, you might thihk this should be `this is B`. But it is not.
 

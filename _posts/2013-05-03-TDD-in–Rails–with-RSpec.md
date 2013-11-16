@@ -1,3 +1,14 @@
+---
+layout: post
+title: TDD in Rails With RSpec
+subtitle:
+cover_image: 
+excerpt: "I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. "
+
+---
+
+![](http://jeffkreeftmeijer.com/images/fuubar.png)
+
 > This article requires basic experience of TDD using UnitTest in Rails.
 
 I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. 
@@ -28,15 +39,15 @@ I will not talk about how to use FactoryGirl here. You just need to know that it
 
 __Stub__ is a fake object that returns a predetermined value for a method call without calling the actual object. To define a stub, the code may look like this:
 
-<pre lang="ruby">
+{% highlight ruby %}
 thing.stubs(:name).returns("Fred")
-</pre>	
+{% endhighlight %}	
 
 __Mock__ is similar to a stub, but in addition to returning the fake value, a mock object also sets a testable expectation that the method being replaced will actually be called in the test. If the method is not called, the mock obkect triggers a test failure. The code may look like this:
 
-<pre lang="ruby">
+{% highlight ruby %}
 thing.expects(:name).returns("Fred")
-</pre>	
+{% endhighlight %}	
 
 Difference here is that in mock, the `:name` must be called to pass the test.
 
@@ -50,11 +61,11 @@ Mock and stub have some different meaning in RSpec. Let's see the official defin
 
 To illustrate `mock_model`, there is a piece of sample code
 
-<pre lang="ruby">
+{% highlight ruby %}
 it "returns the correct name" do
 	car = mock_model "Car"
 	expect (car.class.name).to eq "Car"
-</pre>	
+{% endhighlight %}	
 
 Various of specs will be discussed from highest level to the lower.
 
@@ -72,7 +83,7 @@ From RSpec 2.0, capybara can only be used inside feature test. DSL `feature` and
 
 #### Sample
 
-<pre lang="ruby">
+{% highlight ruby %}
 feature "logged in user" do
 	background do
 		@user = FactoryGirl.create(:user)
@@ -94,7 +105,7 @@ feature "logged in user" do
 		page.should have_content "success"
 	end	
 end
-</pre>	
+{% endhighlight %}	
 	
 The logic here is simple. You can start to feel the style RSpec doing test, and ignore the syntax details for now.
 	
@@ -120,7 +131,7 @@ Controller test allows only one request to the controller. So in most situation,
 
 Let's test visiting a blog page. This page will show the content of the blog.
 
-<pre lang="ruby">
+{% highlight ruby %}
 describe BlogsController do
 	let(:mock_blog) { FactoryGirl.create(:blog) }
 	
@@ -133,7 +144,7 @@ describe BlogsController do
 		end
 	end
 end
-</pre>	
+{% endhighlight %}	
 	
 I first defines the `mock_blog` object using FactoryGirl. Then in the `before` block, I state no matter what parameter is, the `Blog.find()` will always return `mock_blog` during the testing. See how stub works? Then comes the real testing. The test sends a get request to the show page of `BlogsController`. `assigns(:blog)` will get the `@blog` in the template being rendered. I assert that this `@blog` should be `mock_blog`, because `Blog.find` will return `mock_blog`.
 
@@ -147,7 +158,7 @@ Model test is what we called "Unit test". It is the simplest type of testing. In
 
 Check out the example from RSpec official:
 
-<pre lang="ruby">
+{% highlight ruby %}
 require "spec_helper"
 
 describe Post do
@@ -160,7 +171,7 @@ describe Post do
     end
   end
 end
-</pre>	
+{% endhighlight %}	
 	
 Make sense?
 

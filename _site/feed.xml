@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Sat, 16 Nov 2013 07:22:20 +0800</pubDate>
-    <lastBuildDate>Sat, 16 Nov 2013 07:22:20 +0800</lastBuildDate>
+    <pubDate>Sat, 16 Nov 2013 09:50:37 +0800</pubDate>
+    <lastBuildDate>Sat, 16 Nov 2013 09:50:37 +0800</lastBuildDate>
 
     
     
@@ -944,6 +944,58 @@ changed
 &lt;p&gt;The &lt;strong&gt;thread group&lt;/strong&gt; that Java provided is very insecure.&lt;/p&gt;
 
 &lt;p&gt;Try to use thread pool executor instead.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>Virtual in C++</title>
+      <link>/virtual-in%E2%80%93C%2B%2B</link>
+      <pubDate>Mon, 27 May 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/virtual-in–C++</guid>
+      <description>&lt;p&gt;I have a program to explain the &lt;strong&gt;static typing&lt;/strong&gt; and &lt;strong&gt;dynamic typing&lt;/strong&gt; in C++.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cpp&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;this is A&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;B&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;nl&quot;&gt;public:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;cout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;this is B&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;endl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This program outputs &lt;code&gt;this is A&lt;/code&gt;. If you are a Java programmer, you might thihk this should be &lt;code&gt;this is B&lt;/code&gt;. But it is not.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;bark()&lt;/code&gt; in &lt;code&gt;A&lt;/code&gt; is static typing now, which means &lt;code&gt;a&lt;/code&gt;’s type is always &lt;code&gt;A&lt;/code&gt;. &lt;code&gt;a&lt;/code&gt; does not know &lt;code&gt;B&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To make it barking &lt;code&gt;this is B&lt;/code&gt;, it’s easy. Add &lt;code&gt;virtual&lt;/code&gt; before the &lt;code&gt;void bark()&lt;/code&gt; in &lt;code&gt;A&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;virtual&lt;/code&gt; makes &lt;code&gt;bark()&lt;/code&gt; be called based on the real type, which might be the subclass of &lt;code&gt;A&lt;/code&gt;, which is &lt;code&gt;B&lt;/code&gt; here.&lt;/p&gt;
 </description>
     </item>
     
@@ -4716,6 +4768,203 @@ Disassembly of section .text:
 &lt;p&gt;The finalizer should log a warning if it finds that the resource has not been terminated&lt;/p&gt;
 
 &lt;p&gt;The four classes cited as examples of the explicit termination method pattern (&lt;strong&gt;FileInputStream, FileOutputStream, Timer and Connection&lt;/strong&gt;) have finalizers that serve as swafy nets in case their termination methods aren’t called.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>TDD in Rails With RSpec</title>
+      <link>/TDD-in%E2%80%93Rails%E2%80%93with-RSpec</link>
+      <pubDate>Fri, 03 May 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/TDD-in–Rails–with-RSpec</guid>
+      <description>&lt;p&gt;&lt;img src=&quot;http://jeffkreeftmeijer.com/images/fuubar.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This article requires basic experience of TDD using UnitTest in Rails.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. &lt;/p&gt;
+
+&lt;p&gt;Test suite is built while developing, not after developing. Although a test suite is not a silver bullet to 100% ensure the quality of your app, it does increase your confidence.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;There is a voice saying writing test suite sometimes makes development less effective. In practical yes, I have the same feeling sometimes. But it is not the test suite to be blamed, but the way to write it. Don’t write the test cases for something you are already very confident with. More test cases you write will not prove you are a good TDD practitioner.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;I meanly use RSpec + FactoryGirl. There are bunchs of good testing frameworks out there, such as Cucumber, for Acceptance test. I only develop small or medium sized app, and I feel Cucumber will make my development less effective. Even if I want to write Acceptance test cases, RSpec + Capybara will do.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;I will illustrate how to do testing in Rails using RSpec in this article, with some of my experience of developing.&lt;/strong&gt; Let’s start.&lt;/p&gt;
+
+&lt;h2 id=&quot;get-to-know-some-basic-concepts-in-testing-using-rspec&quot;&gt;1. Get to know some basic concepts in testing using RSpec&lt;/h2&gt;
+
+&lt;h3 id=&quot;why-use-factorygirl&quot;&gt;1.1 Why use FactoryGirl?&lt;/h3&gt;
+
+&lt;p&gt;Fixture inside the Rails framework has some cons. Mainly they are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Only one set of fixtures in a default Rails application.&lt;/li&gt;
+  &lt;li&gt;Each model has its own fixture file, and not easy to do data association.&lt;/li&gt;
+  &lt;li&gt;Not flexible. Static data&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So we should use factories to replace fixtures. &lt;strong&gt;FactoryGirl&lt;/strong&gt; is the gem we are looking for. And it is from thoughtbot.&lt;/p&gt;
+
+&lt;p&gt;I will not talk about how to use FactoryGirl here. You just need to know that it can create object, with association. For example, if you are developing a blo	g system, a &lt;em&gt;User&lt;/em&gt; object has many &lt;em&gt;Blogs&lt;/em&gt;, if you are still using fixture, then &lt;code&gt;user.blogs&lt;/code&gt; may return nothing. &lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-mock-and-stub&quot;&gt;1.2 What is mock and stub?&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Stub&lt;/strong&gt; is a fake object that returns a predetermined value for a method call without calling the actual object. To define a stub, the code may look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;thing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stubs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;returns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Mock&lt;/strong&gt; is similar to a stub, but in addition to returning the fake value, a mock object also sets a testable expectation that the method being replaced will actually be called in the test. If the method is not called, the mock obkect triggers a test failure. The code may look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;thing&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expects&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;returns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Fred&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Difference here is that in mock, the &lt;code&gt;:name&lt;/code&gt; must be called to pass the test.&lt;/p&gt;
+
+&lt;h4 id=&quot;mock-and-stub-in-rspec&quot;&gt;Mock and Stub in RSpec&lt;/h4&gt;
+
+&lt;p&gt;Mock and stub have some different meaning in RSpec. Let’s see the official definition&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The &lt;code&gt;mock_model&lt;/code&gt; method generates a test double that acts like an instance of &lt;code&gt;ActiveModel&lt;/code&gt;. The &lt;code&gt;stub_model&lt;/code&gt;  generates an instance of a real object of &lt;code&gt;ActiveModel&lt;/code&gt;. The benefit of &lt;code&gt;mock_model&lt;/code&gt; is that it can mock some object that may not exist&lt;code&gt;. If you're working on a controller spec and you need a model that doesn't exist, you can pass&lt;/code&gt;mock_model` a string and the generated obkect will act as though its an instance of the class named by that string.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;– RSpec doc&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To illustrate &lt;code&gt;mock_model&lt;/code&gt;, there is a piece of sample code&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;returns the correct name&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mock_model&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Car&amp;quot;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;car&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Car&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Various of specs will be discussed from highest level to the lower.&lt;/p&gt;
+
+&lt;h2 id=&quot;feature-test&quot;&gt;2. Feature Test&lt;/h2&gt;
+
+&lt;h4 id=&quot;what-does-it-test&quot;&gt;&lt;em&gt;What does it test?&lt;/em&gt;&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Feature specs are high-level tests meant to &lt;strong&gt;exercise slices of functionality
+through an application.&lt;/strong&gt; They should drive the application only via its
+&lt;strong&gt;external interface&lt;/strong&gt;, usually web pages.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;— RSpec doc&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;From RSpec 2.0, capybara can only be used inside feature test. DSL &lt;code&gt;feature&lt;/code&gt; and &lt;code&gt;scenario&lt;/code&gt; will be used here. So at the time of writing, feature test is the only place you can simulate user interactions with the browser.&lt;/p&gt;
+
+&lt;h4 id=&quot;sample&quot;&gt;Sample&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;feature&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;logged in user&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+		&lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;FactoryGirl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;login_page_path&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;user_email&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;email&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;user_password&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Log in&amp;quot;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+	
+	&lt;span class=&quot;n&quot;&gt;scenario&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;change password&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/password&amp;quot;&lt;/span&gt;
+		
+		&lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;password, with: &amp;quot;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N3w_pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;		fill_in &amp;quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;password_confirmation&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;, with: &amp;quot;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;N3w_pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;		click_button &amp;quot;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Update&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;		&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;		page.should have_content &amp;quot;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;	end	&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The logic here is simple. You can start to feel the style RSpec doing test, and ignore the syntax details for now.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;background&lt;/code&gt; is equavalent to the setup in other testing frameworks. Here I used FactoryGirl to create a sample user object. &lt;code&gt;fill_in&lt;/code&gt;, &lt;code&gt;visit&lt;/code&gt;, &lt;code&gt;click_button&lt;/code&gt; are all from capybara DSL. Since the scenarios we will test below are all require user to log in, we do the login process inside the background code block.&lt;/p&gt;
+
+&lt;p&gt;The scenario here is for a logged in user to change password. It visit the change password url, and fill in the form, then click “Update” button. The website will redirect user to another page. But this page should display something like “success”, such as “You have successfully changed your password”.&lt;/p&gt;
+
+&lt;h2 id=&quot;request-test&quot;&gt;3. Request Test&lt;/h2&gt;
+
+&lt;h4 id=&quot;what-does-it-test-1&quot;&gt;&lt;em&gt;What does it test?&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;To be simple, if you want to test a function(I mean the function of your product, not function in programming) that needs the collaboration of multiple controllers, or in another word, sends multiple request, you should use request test.&lt;/p&gt;
+
+&lt;p&gt;Unlike feature test, you cannot check whether the webpage contains certain piece of string. But you should check whether the action redirects to certain path, or renders certain template.&lt;/p&gt;
+
+&lt;h2 id=&quot;controller-test&quot;&gt;4. Controller Test&lt;/h2&gt;
+
+&lt;h4 id=&quot;what-does-it-test-2&quot;&gt;&lt;em&gt;What does it test?&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Controller test allows only one request to the controller. So in most situation, it refers to call only one action in the controller.  And like request test, you can test the rendering, redirecting, variable values when being rendered, and http response code.&lt;/p&gt;
+
+&lt;h4 id=&quot;sample-1&quot;&gt;Sample&lt;/h4&gt;
+
+&lt;p&gt;Let’s test visiting a blog page. This page will show the content of the blog.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;BlogsController&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;let&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:mock_blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;FactoryGirl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;and_return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mock_blog&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;GET show&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;should display the post&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:show&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;assigns&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:blog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;should&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mock_blog&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I first defines the &lt;code&gt;mock_blog&lt;/code&gt; object using FactoryGirl. Then in the &lt;code&gt;before&lt;/code&gt; block, I state no matter what parameter is, the &lt;code&gt;Blog.find()&lt;/code&gt; will always return &lt;code&gt;mock_blog&lt;/code&gt; during the testing. See how stub works? Then comes the real testing. The test sends a get request to the show page of &lt;code&gt;BlogsController&lt;/code&gt;. &lt;code&gt;assigns(:blog)&lt;/code&gt; will get the &lt;code&gt;@blog&lt;/code&gt; in the template being rendered. I assert that this &lt;code&gt;@blog&lt;/code&gt; should be &lt;code&gt;mock_blog&lt;/code&gt;, because &lt;code&gt;Blog.find&lt;/code&gt; will return &lt;code&gt;mock_blog&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;model-test&quot;&gt;5. Model Test&lt;/h2&gt;
+
+&lt;h4 id=&quot;what-does-it-test-3&quot;&gt;&lt;em&gt;What does it test?&lt;/em&gt;&lt;/h4&gt;
+
+&lt;p&gt;Model test is what we called “Unit test”. It is the simplest type of testing. In Rails, it will test the ActiveModel classes.&lt;/p&gt;
+
+&lt;h4 id=&quot;sample-2&quot;&gt;Sample&lt;/h4&gt;
+
+&lt;p&gt;Check out the example from RSpec official:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;spec_helper&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;describe&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Post&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;with 2 or more comments&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;orders them in reverse chronologically&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create!&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;comment1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;first comment&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;comment2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comments&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;second comment&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;reload&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;comment2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;comment1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Make sense?&lt;/p&gt;
+
+&lt;h2 id=&quot;other-tests&quot;&gt;6. Other tests&lt;/h2&gt;
+
+&lt;p&gt;Other tests are almost the same as Model test, and easy to understand, so I won’t talk about it here. They are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;View test: test content of rendered template when given the model&lt;/li&gt;
+  &lt;li&gt;Helper test: test helpers methods. Very much like Model test&lt;/li&gt;
+  &lt;li&gt;Mailer test: test the mail sent&lt;/li&gt;
+  &lt;li&gt;Routing test: test whether a route is reachable&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There is one more test exists but has nothing to do with RSpec. It is the performance test.&lt;/p&gt;
 </description>
     </item>
     

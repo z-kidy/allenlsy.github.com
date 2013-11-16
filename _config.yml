@@ -34,7 +34,7 @@ inc:
   analytics:
     google: 
       # eg. 'UA-123-12'
-      id:       false
+      id: 'UA-24647338-1'
       
       
   # Google Fonts
@@ -48,7 +48,8 @@ author:
   name: allenlsy
   twitter: allenlsy
   gplus: 118230970865161551961 
-  image: logo.jpg
+  image: avatar.jpg
+  logo: logo.jpg
   bio: Ruby on Rails Developer, Web developer in Singapore
 
 # url:         http://incorporated.sendtoinc.com
