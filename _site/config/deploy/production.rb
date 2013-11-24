@@ -42,15 +42,3 @@ role :blog, 'allenlsy@allenlsy.com'
 # setting per server overrides global ssh_options
 
 fetch(:default_env).merge!(rails_env: :production)
-
-# namespace :jekyll do
-#   desc 'Push to github -> Deploy on server'
-#   task :deploy do
-#     run_locally 'git push -f'
-#     on roles(:blog) do
-#       run "cd #{deploy_to}"
-#       run "git pull origin master"
-#     end
-#   end
-# end
-

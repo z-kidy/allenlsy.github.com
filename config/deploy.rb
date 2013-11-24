@@ -45,23 +45,4 @@ namespace :deploy do
     end
   end
 
-  after :finishing, 'deploy:cleanup'
-  
-
-  desc 'Push to github -> Deploy on server'
-  task :jekyll do
-    on roles(:blog) do
-      run_locally 'git push -f'
-      execute "cd #{deploy_to}"
-      execute "git pull origin master"
-      execute "jekyll build"
-    end
-  end
-
-end
-
-task :whoami do
-  on roles(:all) do
-    execute :whoami
-  end
 end
