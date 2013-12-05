@@ -196,7 +196,7 @@ guard init rspec
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{features/support/}</span><span class="p">)</span> <span class="p">{</span> <span class="ss">:cucumber</span> <span class="p">}</span>
 <span class="k">end</span>
 
-<span class="n">guard</span> <span class="ss">:rspec</span><span class="p">,</span> <span class="n">after_all_pass</span><span class="p">:</span> <span class="kp">false</span><span class="p">,</span> <span class="ss">cli</span><span class="p">:</span> <span class="s1">&#39;--drb&#39;</span> <span class="k">do</span>
+<span class="n">guard</span> <span class="ss">:rspec</span><span class="p">,</span> <span class="ss">cmd</span><span class="p">:</span> <span class="s2">&quot;rspec --color --format documentation --fail-fast&quot;</span> <span class="k">do</span>
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{^spec/.+_spec\.rb$}</span><span class="p">)</span>
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{^lib/(.+)\.rb$}</span><span class="p">)</span>     <span class="p">{</span> <span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="s2">&quot;spec/lib/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">}</span>
   <span class="n">watch</span><span class="p">(</span><span class="s1">&#39;spec/spec_helper.rb&#39;</span><span class="p">)</span>  <span class="p">{</span> <span class="s2">&quot;spec&quot;</span> <span class="p">}</span>
@@ -220,9 +220,26 @@ guard init rspec
 
 <p>Pay attention to the second secion, I added the <code>after_all_pass: false, cli: '--drb'</code> to the original code.</p>
 
-<h2 id="the-end">The END</h2>
-
 <p>Finally, let’s test. Run <code>guard</code> to see the result.</p>
+
+<h3 id="even-faster-testing-environment-updated-at-dec-5th-2013">Even faster testing environment (updated at Dec 5th, 2013)</h3>
+
+<p>A super-fast way is to add <a href="https://github.com/burke/zeus">zeus</a> to our current environment. </p>
+
+<blockquote>
+  <p>There are a lot of usage of <code>zeus</code>. Some of my favorites are <code>zeus s</code>, <code>zeus c</code>, <code>zeus rake ...</code>. It really improves the developing speed.</p>
+</blockquote>
+
+<p>To integrate with <code>zeus</code>, let’s edit several files. </p>
+
+<ol>
+  <li>Add <code>gem 'guard-zeus'</code> in to your <code>Gemfile</code>.</li>
+  <li>Comment out <code>require 'rspec/autorun'</code> in <code>spec/spec_helper</code>. It does not work well with <code>factory_girl</code></li>
+  <li>Change the line in <code>Guardfile</code>, <code>guard :rspec, cmd: "zeus rspec --color --format documentation --fail-fast" do</code></li>
+</ol>
+
+<p>Now, when you test using <code>guard</code>, the re-run speed is largely improved.</p>
+
 
             
 <div class="social">

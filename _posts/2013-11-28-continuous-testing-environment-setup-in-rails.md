@@ -148,7 +148,7 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard :rspec, after_all_pass: false, cli: '--drb' do
+guard :rspec, cmd: "rspec --color --format documentation --fail-fast" do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -172,6 +172,20 @@ end
 
 Pay attention to the second secion, I added the `after_all_pass: false, cli: '--drb'` to the original code.
 
-## The END
-
 Finally, let's test. Run `guard` to see the result.
+
+### Even faster testing environment (updated at Dec 5th, 2013)
+
+A super-fast way is to add [zeus](https://github.com/burke/zeus) to our current environment. 
+
+> There are a lot of usage of `zeus`. Some of my favorites are `zeus s`, `zeus c`, `zeus rake ...`. It really improves the developing speed.
+
+To integrate with `zeus`, let's edit several files. 
+
+1. Add `gem 'guard-zeus'` in to your `Gemfile`.
+2. Comment out `require 'rspec/autorun'` in `spec/spec_helper`. It does not work well with `factory_girl`
+3. Change the line in `Guardfile`, `guard :rspec, cmd: "zeus rspec --color --format documentation --fail-fast" do`
+
+Now, when you test using `guard`, the re-run speed is largely improved.
+
+

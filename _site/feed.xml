@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Fri, 29 Nov 2013 13:43:27 +0800</pubDate>
-    <lastBuildDate>Fri, 29 Nov 2013 13:43:27 +0800</lastBuildDate>
+    <pubDate>Thu, 05 Dec 2013 22:49:28 +0800</pubDate>
+    <lastBuildDate>Thu, 05 Dec 2013 22:49:28 +0800</lastBuildDate>
 
     
     
@@ -158,7 +158,7 @@ guard init rspec
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{features/support/}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:cucumber&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;after_all_pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;cli&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;--drb&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;rspec --color --format documentation --fail-fast&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{^spec/.+_spec\.rb$}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{^lib/(.+)\.rb$}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;spec/lib/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_spec.rb&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;spec/spec_helper.rb&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;spec&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -182,9 +182,26 @@ guard init rspec
 
 &lt;p&gt;Pay attention to the second secion, I added the &lt;code&gt;after_all_pass: false, cli: '--drb'&lt;/code&gt; to the original code.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-end&quot;&gt;The END&lt;/h2&gt;
-
 &lt;p&gt;Finally, let’s test. Run &lt;code&gt;guard&lt;/code&gt; to see the result.&lt;/p&gt;
+
+&lt;h3 id=&quot;even-faster-testing-environment-updated-at-dec-5th-2013&quot;&gt;Even faster testing environment (updated at Dec 5th, 2013)&lt;/h3&gt;
+
+&lt;p&gt;A super-fast way is to add &lt;a href=&quot;https://github.com/burke/zeus&quot;&gt;zeus&lt;/a&gt; to our current environment. &lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;There are a lot of usage of &lt;code&gt;zeus&lt;/code&gt;. Some of my favorites are &lt;code&gt;zeus s&lt;/code&gt;, &lt;code&gt;zeus c&lt;/code&gt;, &lt;code&gt;zeus rake ...&lt;/code&gt;. It really improves the developing speed.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To integrate with &lt;code&gt;zeus&lt;/code&gt;, let’s edit several files. &lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Add &lt;code&gt;gem 'guard-zeus'&lt;/code&gt; in to your &lt;code&gt;Gemfile&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Comment out &lt;code&gt;require 'rspec/autorun'&lt;/code&gt; in &lt;code&gt;spec/spec_helper&lt;/code&gt;. It does not work well with &lt;code&gt;factory_girl&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Change the line in &lt;code&gt;Guardfile&lt;/code&gt;, &lt;code&gt;guard :rspec, cmd: &quot;zeus rspec --color --format documentation --fail-fast&quot; do&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Now, when you test using &lt;code&gt;guard&lt;/code&gt;, the re-run speed is largely improved.&lt;/p&gt;
+
 </description>
     </item>
     
