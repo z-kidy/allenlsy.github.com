@@ -3,8 +3,8 @@ layout: post
 
 title: More on Generics in Java
 cover_image: blog-cover.jpg
-
 excerpt: 
+tags: [java]
 
 ---
 

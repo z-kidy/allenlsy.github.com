@@ -2,7 +2,7 @@
 layout: post
 title: Effective Java 5 - Enums and Annotations
 excerpt:
-
+tags: [java]
 ---
 
 ![1](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)

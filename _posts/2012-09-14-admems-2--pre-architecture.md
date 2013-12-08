@@ -5,7 +5,7 @@ subtitle:
 cover_image: 
 excerpt: ""
 category: ""
-tags: []
+tags: [architecture, software]
 ---
 
 我们需要知道，哪些因素构成了架构设计的约束性需求？或者说，哪些因素约束着架构设计？

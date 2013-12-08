@@ -30,7 +30,7 @@ inc:
     hn:         true
     
   
- # Analytics     
+  # Analytics     
   analytics:
     google: 
       # eg. 'UA-123-12'
@@ -39,7 +39,7 @@ inc:
       
   # Google Fonts
   # eg. 'Droid+Sans:400,700|Droid+Serif:400,700'
-  google_font: 'Open+Sans:400,700'
+  google_font: 'Open+Sans:400,700|Oswald'
   
   # Setup your fonts, colors etc at _assets/stylesheets/main.scss
 
@@ -50,7 +50,7 @@ author:
   gplus: 118230970865161551961 
   image: avatar.jpg
   logo: logo.jpg
-  bio: Ruby on Rails Developer, Web developer in Singapore
+  bio: Ruby on Rails Developer, Web developer in Wego.com, Singapore
 
 # url:         http://incorporated.sendtoinc.com
 source:      .
@@ -145,4 +145,8 @@ links:
     url: /archives.html
   - title: About
     url: /about.html
+  - title: Tags
+    url: /tags.html
 
+tag_page_layout: tag_page
+tag_page_dir: tags

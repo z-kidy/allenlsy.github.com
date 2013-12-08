@@ -3,6 +3,7 @@ layout: post
 
 title: Effective Java 10 - Serialization
 excerpt: Notes of Effective Java 10, Serialization
+tags: [java]
 
 ---
 

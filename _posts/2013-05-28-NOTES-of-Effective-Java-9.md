@@ -2,6 +2,7 @@
 layout: post
 title: Effective Java 9 - Concurrency
 excerpt: 
+tags: [java]
 
 ---
 

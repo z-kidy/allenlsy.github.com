@@ -2,6 +2,8 @@
 layout: post
 title: Effective Java 8 - Exception
 excerpt: 
+tags: [java]
+
 ---
 
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)

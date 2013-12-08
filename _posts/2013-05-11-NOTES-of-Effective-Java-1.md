@@ -2,7 +2,7 @@
 layout: post
 title: Effective Java 1 - Creating and Destroying Object
 excerpt:
-
+tags: [java]
 ---
 
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)

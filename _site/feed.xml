@@ -6,30 +6,37 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Fri, 29 Nov 2013 13:43:27 +0800</pubDate>
-    <lastBuildDate>Fri, 29 Nov 2013 13:43:27 +0800</lastBuildDate>
+    <pubDate>Sun, 08 Dec 2013 19:58:30 +0800</pubDate>
+    <lastBuildDate>Sun, 08 Dec 2013 19:58:30 +0800</lastBuildDate>
 
     
     
     <item>
-      <title>Continuous Testing environment setup in Rails</title>
+      <title> Super Fast Continuous Testing in Rails</title>
       <link>/continuous-testing-environment-setup-in-rails</link>
       <pubDate>Thu, 28 Nov 2013 00:00:00 +0800</pubDate>
       <author></author>
       <guid>/continuous-testing-environment-setup-in-rails</guid>
       <description>&lt;p&gt;&lt;img src=&quot;http://www.continuoustests.com/images/logo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;Before reading the article, you need to have a understanding of &lt;code&gt;RSpec&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;p&gt;My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using &lt;code&gt;RSpec&lt;/code&gt;, &lt;code&gt;Spork&lt;/code&gt; and &lt;code&gt;Guard&lt;/code&gt;. The setup process may easily go wrong. Thus I made a note of the process.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-tools-we-use&quot;&gt;The tools we use&lt;/h2&gt;
 
+&lt;p&gt;There are some tools we need to make testing &lt;strong&gt;super fast&lt;/strong&gt;.&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;&lt;code&gt;RSpec&lt;/code&gt;: famous testing framework, complies to BDD concept.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Spork&lt;/code&gt;: When use &lt;code&gt;spec&lt;/code&gt; command to run &lt;code&gt;RSpec&lt;/code&gt;, it will load the whole Rails environment every time. &lt;code&gt;Spork&lt;/code&gt; keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with &lt;code&gt;RSpec&lt;/code&gt; faster. &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Spork&lt;/code&gt;: When use &lt;code&gt;rspec&lt;/code&gt; command to run &lt;code&gt;RSpec&lt;/code&gt;, it will load the whole Rails environment every time. &lt;code&gt;Spork&lt;/code&gt; keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with &lt;code&gt;RSpec&lt;/code&gt; faster. &lt;/li&gt;
   &lt;li&gt;&lt;code&gt;Guard&lt;/code&gt;: to guard the file change in Rails project.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Zeus&lt;/code&gt;: a tool to re-use the Rails environment in development environment, but also can be used in testing.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;To achieve continuous testing, &lt;code&gt;Guard&lt;/code&gt; will watch the changes in the project, and re-run the related test cases the there is a change.&lt;/p&gt;
+&lt;p&gt;To achieve continuous testing, &lt;code&gt;Guard&lt;/code&gt; will watch the changes in the project, and re-run the updated test cases or all the related.&lt;/p&gt;
 
 &lt;p&gt;Some of the gems I also use in testing:&lt;/p&gt;
 
@@ -44,6 +51,7 @@
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:development&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rspec-rails&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-zeus&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-spork&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-rspec&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-cucumber&amp;#39;&lt;/span&gt;
@@ -55,6 +63,7 @@
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
 &lt;span class=&quot;n&quot;&gt;group&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:test&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# if you need cucumber, uncomment these two lines&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# gem &amp;#39;cucumber-rails&amp;#39;, require: false&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# gem &amp;#39;cucumber&amp;#39;, &amp;#39;1.2.5&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;database_cleaner&amp;#39;&lt;/span&gt;
@@ -89,7 +98,7 @@ guard init rspec
   &lt;span class=&quot;no&quot;&gt;ENV&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;RAILS_ENV&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;
   &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;expand_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;../../config/environment&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;__FILE__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rspec/rails&amp;#39;&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rspec/autorun&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# require &amp;#39;rspec/autorun&amp;#39;&lt;/span&gt;
 
   &lt;span class=&quot;c1&quot;&gt;# Requires supporting ruby files with custom matchers and macros, etc,&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;# in spec/support/ and its subdirectories.&lt;/span&gt;
@@ -158,7 +167,7 @@ guard init rspec
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{features/support/}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:cucumber&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 
-&lt;span class=&quot;n&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;after_all_pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;cli&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;--drb&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:rspec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;zeus rspec --color --format documentation --fail-fast&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{^spec/.+_spec\.rb$}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;%r{^lib/(.+)\.rb$}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;spec/lib/&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_spec.rb&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;watch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;spec/spec_helper.rb&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;spec&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -180,11 +189,10 @@ guard init rspec
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Pay attention to the second secion, I added the &lt;code&gt;after_all_pass: false, cli: '--drb'&lt;/code&gt; to the original code.&lt;/p&gt;
+&lt;h2 id=&quot;running-the-tests&quot;&gt;Running the tests&lt;/h2&gt;
 
-&lt;h2 id=&quot;the-end&quot;&gt;The END&lt;/h2&gt;
+&lt;p&gt;Finally, let’s test. Run &lt;code&gt;guard&lt;/code&gt; to start the testing. Once the files being watched by &lt;code&gt;guard&lt;/code&gt; updated, it will re-run the tests. Super fast. &lt;/p&gt;
 
-&lt;p&gt;Finally, let’s test. Run &lt;code&gt;guard&lt;/code&gt; to see the result.&lt;/p&gt;
 </description>
     </item>
     

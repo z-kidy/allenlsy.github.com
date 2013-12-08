@@ -5,7 +5,7 @@ subtitle:
 cover_image: 
 excerpt: "In order to do unit testing easier, one should keep a word in mind: Isolation. Try your best to isolate the irrelevant things from your class, and make them easy to config."
 category: ""
-tags: []
+tags: [testing, java]
 ---
 
 * [How To Write Testable Code](#i1)

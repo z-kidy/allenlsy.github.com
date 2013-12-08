@@ -1,3 +1,15 @@
+.black {
+  color: black;
+}
+
+.red {
+  color: #E1523D;   
+}
+
+.special-header {
+  font-family: "Oswald";
+}
+
 body {
     margin:0;
     border:0;
@@ -318,4 +330,65 @@ address {
   margin-bottom: 0;
 
 }
+
+/***
+ * tags
+ */
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 0.7em;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-align: center;
+  background-color: #999999;
+  border-radius: 10px;
+}
+.badge:empty {
+  display: none;
+}
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+a.badge:hover,
+a.badge:focus {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #222;
+}
+
+.tag-cloud > a {
+  &:hover, &:focus {
+    text-decoration: underline;
+    cursor: pointer;
+    color: $accent;
+  }
+
+  &.set-1 {
+     font-size: 0.8em;
+  }
+  &.set-2 {
+     font-size: 1.0em;
+  }
+  &.set-3 {
+     font-size: 1.2em;
+  }
+  &.set-4 {
+     font-size: 1.4em;
+  }
+  &.set-5 {
+     font-size: 1.6em;
+  }
+}
+
+.tags > a {
+  @extend .badge;
+}
+
 

@@ -3,6 +3,7 @@ layout: post
 title: Virtual in C++
 excerpt:
 cover_image: cppcafe.jpg
+tags: [c++]
 
 ---
 

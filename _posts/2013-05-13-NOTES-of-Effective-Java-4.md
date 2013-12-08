@@ -3,6 +3,7 @@ layout: post
 title: Effective Java 4 - Generics
 excerpt:
 
+tags: [java]
 ---
 
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)

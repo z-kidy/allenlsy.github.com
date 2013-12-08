@@ -4,7 +4,7 @@ title: TDD in Rails With RSpec
 subtitle:
 cover_image: 
 excerpt: "I found many developers being confused by all the levels of testing in Rails, and some concepts in software testing. Rails community has a very very strong awareness of TDD, and even BDD. Apps are designd using an Outside-in approach, which makes me feel really comfortable and also effective. "
-
+tags: [testing, tdd, rails, rspec, ruby]
 ---
 
 ![](http://jeffkreeftmeijer.com/images/fuubar.png)

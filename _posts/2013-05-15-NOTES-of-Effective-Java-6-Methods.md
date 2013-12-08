@@ -2,7 +2,7 @@
 layout: post
 title: Effective Java 6 - Methods
 excerpt:
-
+tags: [java]
 ---
 
 ![1](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
