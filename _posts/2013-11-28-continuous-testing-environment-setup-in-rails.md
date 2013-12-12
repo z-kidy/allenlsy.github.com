@@ -1,24 +1,29 @@
 ---
 layout: post
-title: "Continuous Testing environment setup in Rails"
+title: " Super Fast Continuous Testing in Rails"
 subtitle: "An intruduction to set up a good testing environment in Ruby on Rails 4"
 cover_image: 
 excerpt: "My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process."
 category: ""
-tags: []
+tags: [testing, rails, ci, rspec, ruby]
 ---
 
 ![](http://www.continuoustests.com/images/logo.png)
+
+> Before reading the article, you need to have a understanding of `RSpec`
 
 My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process.
 
 ## The tools we use
 
-* `RSpec`: famous testing framework, complies to BDD concept.
-* `Spork`: When use `spec` command to run `RSpec`, it will load the whole Rails environment every time. `Spork` keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with `RSpec` faster. 
-* `Guard`: to guard the file change in Rails project.
+There are some tools we need to make testing __super fast__.
 
-To achieve continuous testing, `Guard` will watch the changes in the project, and re-run the related test cases the there is a change.
+* `RSpec`: famous testing framework, complies to BDD concept.
+* `Spork`: When use `rspec` command to run `RSpec`, it will load the whole Rails environment every time. `Spork` keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with `RSpec` faster. 
+* `Guard`: to guard the file change in Rails project.
+* `Zeus`: a tool to re-use the Rails environment in development environment, but also can be used in testing.
+
+To achieve continuous testing, `Guard` will watch the changes in the project, and re-run the updated test cases or all the related.
 
 Some of the gems I also use in testing:
 
@@ -32,6 +37,7 @@ Starting from a fresh Rails 4 application, <span class="red">after creating the 
 {% highlight ruby %}
 group :development, :test do
   gem 'rspec-rails'
+  gem 'guard-zeus'
   gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
@@ -43,6 +49,7 @@ group :development, :test do
 end
 
 group :test do
+  # if you need cucumber, uncomment these two lines
   # gem 'cucumber-rails', require: false
   # gem 'cucumber', '1.2.5'
   gem 'database_cleaner'
@@ -77,7 +84,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
-  require 'rspec/autorun'
+  # require 'rspec/autorun'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
@@ -148,7 +155,7 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard :rspec, cmd: "rspec --color --format documentation --fail-fast" do
+guard :rspec, cmd: 'zeus rspec --color --format documentation --fail-fast' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -170,22 +177,8 @@ guard :rspec, cmd: "rspec --color --format documentation --fail-fast" do
 end
 {% endhighlight %}
 
-Pay attention to the second secion, I added the `after_all_pass: false, cli: '--drb'` to the original code.
+## Running the tests
 
-Finally, let's test. Run `guard` to see the result.
-
-### Even faster testing environment (updated at Dec 5th, 2013)
-
-A super-fast way is to add [zeus](https://github.com/burke/zeus) to our current environment. 
-
-> There are a lot of usage of `zeus`. Some of my favorites are `zeus s`, `zeus c`, `zeus rake ...`. It really improves the developing speed.
-
-To integrate with `zeus`, let's edit several files. 
-
-1. Add `gem 'guard-zeus'` in to your `Gemfile`.
-2. Comment out `require 'rspec/autorun'` in `spec/spec_helper`. It does not work well with `factory_girl`
-3. Change the line in `Guardfile`, `guard :rspec, cmd: "zeus rspec --color --format documentation --fail-fast" do`
-
-Now, when you test using `guard`, the re-run speed is largely improved.
+Finally, let's test. Run `guard` to start the testing. Once the files being watched by `guard` updated, it will re-run the tests. Super fast. 
 
 

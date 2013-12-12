@@ -26,14 +26,15 @@ layout: base
   {% unless post.draft %}
     {% unless post.next %}
     <section class="index">
-      <h2>{{ post.date | date: '%Y' }}</h2>
+      <h2 class="special-header black">{{ post.date | date: '%Y' }}</h2>
     </section>
     {% else %}
       {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
       {% capture nyear %}{{ post.next.date | date: '%Y' }}{% endcapture %}
       {% if year != nyear %}
+      <p></p>
       <section class="index">
-        <h2>{{ post.date | date: '%Y' }}</h2>
+        <h2 class="special-header black">{{ post.date | date: '%Y' }}</h2>
       </section>
       {% endif %}
 

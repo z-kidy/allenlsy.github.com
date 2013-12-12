@@ -5,7 +5,7 @@ subtitle:
 cover_image: 
 excerpt: ""
 category: ""
-tags: []
+tags: [web, frontend]
 ---
 
 ### Web Service

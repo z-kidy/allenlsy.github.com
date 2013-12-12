@@ -2,6 +2,7 @@
 layout: post
 title: Effective Java 2 - Methods Common to All Objects
 excerpt:
+tags: [java]
 
 ---
 

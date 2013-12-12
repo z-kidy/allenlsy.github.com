@@ -3,17 +3,17 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Continuous Testing environment setup in Rails &mdash; Simple, Not Easy</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+    <title> Super Fast Continuous Testing in Rails &mdash; Simple, Not Easy</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
-    <meta name="title" content="Continuous Testing environment setup in Rails ">
+    <meta name="title" content=" Super Fast Continuous Testing in Rails ">
     <link rel="canonical" href="/continuous-testing-environment-setup-in-rails">
      
     <link rel="author" href="https://plus.google.com/118230970865161551961">       
-    <meta property="og:title" content="Continuous Testing environment setup in Rails "/>
+    <meta property="og:title" content=" Super Fast Continuous Testing in Rails "/>
     <meta property="og:url" content="/continuous-testing-environment-setup-in-rails"/>
     
     
@@ -36,6 +36,8 @@
             
               <a href="/about.html" >About</a>
             
+              <a href="/tags.html" >Tags</a>
+            
             <i class="icon-feed"></i> <a href="/feed.xml" title="Atom/RSS feed">Feed</a>
         </nav>
 
@@ -47,27 +49,37 @@
 
     <div class="container">
         <header>
-            <h1 class="title">Continuous Testing environment setup in Rails</h1>
-            <h2 class="subtitle">An intruduction to set up a good testing environment in Ruby on Rails 4</h2>
+            <h1 class="title"> Super Fast Continuous Testing in Rails</h1>
+            <h3 class="subtitle">An intruduction to set up a good testing environment in Ruby on Rails 4</h3>
             <div class="meta">
                 <time pubdate datetime="2013-28-November" title="November 28, 2013">November 28, 2013</time>
+            </div>
+            <div class="tags">
+              <a href="/tags/testing.html" rel="tag">testing</a> <a href="/tags/rails.html" rel="tag">rails</a> <a href="/tags/ci.html" rel="tag">ci</a> <a href="/tags/rspec.html" rel="tag">rspec</a> <a href="/tags/ruby.html" rel="tag">ruby</a>
             </div>
         </header>
 
         <section>
             <p><img src="http://www.continuoustests.com/images/logo.png" alt="" /></p>
 
+<blockquote>
+  <p>Before reading the article, you need to have a understanding of <code>RSpec</code></p>
+</blockquote>
+
 <p>My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using <code>RSpec</code>, <code>Spork</code> and <code>Guard</code>. The setup process may easily go wrong. Thus I made a note of the process.</p>
 
 <h2 id="the-tools-we-use">The tools we use</h2>
 
+<p>There are some tools we need to make testing <strong>super fast</strong>.</p>
+
 <ul>
   <li><code>RSpec</code>: famous testing framework, complies to BDD concept.</li>
-  <li><code>Spork</code>: When use <code>spec</code> command to run <code>RSpec</code>, it will load the whole Rails environment every time. <code>Spork</code> keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with <code>RSpec</code> faster. </li>
+  <li><code>Spork</code>: When use <code>rspec</code> command to run <code>RSpec</code>, it will load the whole Rails environment every time. <code>Spork</code> keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with <code>RSpec</code> faster. </li>
   <li><code>Guard</code>: to guard the file change in Rails project.</li>
+  <li><code>Zeus</code>: a tool to re-use the Rails environment in development environment, but also can be used in testing.</li>
 </ul>
 
-<p>To achieve continuous testing, <code>Guard</code> will watch the changes in the project, and re-run the related test cases the there is a change.</p>
+<p>To achieve continuous testing, <code>Guard</code> will watch the changes in the project, and re-run the updated test cases or all the related.</p>
 
 <p>Some of the gems I also use in testing:</p>
 
@@ -82,6 +94,7 @@
 
 <div class="highlight"><pre><code class="ruby"><span class="n">group</span> <span class="ss">:development</span><span class="p">,</span> <span class="ss">:test</span> <span class="k">do</span>
   <span class="n">gem</span> <span class="s1">&#39;rspec-rails&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;guard-zeus&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;guard-spork&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;guard-rspec&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span>
@@ -93,6 +106,7 @@
 <span class="k">end</span>
 
 <span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="c1"># if you need cucumber, uncomment these two lines</span>
   <span class="c1"># gem &#39;cucumber-rails&#39;, require: false</span>
   <span class="c1"># gem &#39;cucumber&#39;, &#39;1.2.5&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
@@ -127,7 +141,7 @@ guard init rspec
   <span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;RAILS_ENV&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;test&#39;</span>
   <span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s2">&quot;../../config/environment&quot;</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
   <span class="nb">require</span> <span class="s1">&#39;rspec/rails&#39;</span>
-  <span class="nb">require</span> <span class="s1">&#39;rspec/autorun&#39;</span>
+  <span class="c1"># require &#39;rspec/autorun&#39;</span>
 
   <span class="c1"># Requires supporting ruby files with custom matchers and macros, etc,</span>
   <span class="c1"># in spec/support/ and its subdirectories.</span>
@@ -196,7 +210,7 @@ guard init rspec
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{features/support/}</span><span class="p">)</span> <span class="p">{</span> <span class="ss">:cucumber</span> <span class="p">}</span>
 <span class="k">end</span>
 
-<span class="n">guard</span> <span class="ss">:rspec</span><span class="p">,</span> <span class="ss">cmd</span><span class="p">:</span> <span class="s2">&quot;rspec --color --format documentation --fail-fast&quot;</span> <span class="k">do</span>
+<span class="n">guard</span> <span class="ss">:rspec</span><span class="p">,</span> <span class="ss">cmd</span><span class="p">:</span> <span class="s1">&#39;zeus rspec --color --format documentation --fail-fast&#39;</span> <span class="k">do</span>
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{^spec/.+_spec\.rb$}</span><span class="p">)</span>
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{^lib/(.+)\.rb$}</span><span class="p">)</span>     <span class="p">{</span> <span class="o">|</span><span class="n">m</span><span class="o">|</span> <span class="s2">&quot;spec/lib/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">}</span>
   <span class="n">watch</span><span class="p">(</span><span class="s1">&#39;spec/spec_helper.rb&#39;</span><span class="p">)</span>  <span class="p">{</span> <span class="s2">&quot;spec&quot;</span> <span class="p">}</span>
@@ -218,9 +232,9 @@ guard init rspec
 <span class="k">end</span>
 </code></pre></div>
 
-<p>Pay attention to the second secion, I added the <code>after_all_pass: false, cli: '--drb'</code> to the original code.</p>
+<h2 id="running-the-tests">Running the tests</h2>
 
-<p>Finally, let’s test. Run <code>guard</code> to see the result.</p>
+<p>Finally, let’s test. Run <code>guard</code> to start the testing. Once the files being watched by <code>guard</code> updated, it will re-run the tests. Super fast. </p>
 
 <h3 id="even-faster-testing-environment-updated-at-dec-5th-2013">Even faster testing environment (updated at Dec 5th, 2013)</h3>
 
@@ -244,7 +258,7 @@ guard init rspec
             
 <div class="social">
     <div>
-        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Continuous Testing environment setup in Rails" data-related="allenlsy">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text=" Super Fast Continuous Testing in Rails" data-related="allenlsy">Tweet</a>
     </div>
     
     
