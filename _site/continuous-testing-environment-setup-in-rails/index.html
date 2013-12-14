@@ -55,7 +55,7 @@
                 <time pubdate datetime="2013-28-November" title="November 28, 2013">November 28, 2013</time>
             </div>
             <div class="tags">
-              <a href="/tags/testing.html" rel="tag">testing</a> <a href="/tags/rails.html" rel="tag">rails</a> <a href="/tags/ci.html" rel="tag">ci</a> <a href="/tags/rspec.html" rel="tag">rspec</a> <a href="/tags/ruby.html" rel="tag">ruby</a>
+              <a href="/tags/testing.html" rel="tag">testing</a>, <a href="/tags/rails.html" rel="tag">rails</a>, <a href="/tags/ci.html" rel="tag">ci</a>, <a href="/tags/rspec.html" rel="tag">rspec</a>, <a href="/tags/ruby.html" rel="tag">ruby</a>
             </div>
         </header>
 
@@ -235,24 +235,6 @@ guard init rspec
 <h2 id="running-the-tests">Running the tests</h2>
 
 <p>Finally, let’s test. Run <code>guard</code> to start the testing. Once the files being watched by <code>guard</code> updated, it will re-run the tests. Super fast. </p>
-
-<h3 id="even-faster-testing-environment-updated-at-dec-5th-2013">Even faster testing environment (updated at Dec 5th, 2013)</h3>
-
-<p>A super-fast way is to add <a href="https://github.com/burke/zeus">zeus</a> to our current environment. </p>
-
-<blockquote>
-  <p>There are a lot of usage of <code>zeus</code>. Some of my favorites are <code>zeus s</code>, <code>zeus c</code>, <code>zeus rake ...</code>. It really improves the developing speed.</p>
-</blockquote>
-
-<p>To integrate with <code>zeus</code>, let’s edit several files. </p>
-
-<ol>
-  <li>Add <code>gem 'guard-zeus'</code> in to your <code>Gemfile</code>.</li>
-  <li>Comment out <code>require 'rspec/autorun'</code> in <code>spec/spec_helper</code>. It does not work well with <code>factory_girl</code></li>
-  <li>Change the line in <code>Guardfile</code>, <code>guard :rspec, cmd: "zeus rspec --color --format documentation --fail-fast" do</code></li>
-</ol>
-
-<p>Now, when you test using <code>guard</code>, the re-run speed is largely improved.</p>
 
 
             
