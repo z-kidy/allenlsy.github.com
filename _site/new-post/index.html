@@ -57,7 +57,10 @@
             <div class="tags">
               <a href="/tags/ruby.html" rel="tag">ruby</a>
             </div>
-        </header>
+            <div class="hidden-seo">
+              By <a href="/new-post" title="Ruby Meta Programming - book" rel="author">allenlsy</a>
+            </div>
+        </header>:
 
         <section>
             <h1 id="object-model">1. Object Model</h1>
@@ -68,10 +71,6 @@ Class.instance_methods(false) # non-inherited methods
 
 superclass
 </code></pre>
-
-<blockquote>
-  <p>? p49, <code>load</code></p>
-</blockquote>
 
 <h3 id="calling-a-method">calling a method</h3>
 
@@ -346,6 +345,440 @@ superclass
 
 <h4 id="to-transpass-scope-gate-use-method-call-instead-of-class-module-and-def-keywords">to transpass scope gate, use method call instead of <code>class</code>, <code>module</code> and <code>def</code> keywords</h4>
 
+<h3 id="instanceeval"><code>instance_eval</code></h3>
+
+<p>Things passed into <code>instance_eval</code> is <strong>context probe</strong>.</p>
+
+<p><code>instance_exec</code> allow parameters</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">C</span>
+  <span class="k">def</span> <span class="nf">initialize</span>
+    <span class="vi">@x</span><span class="p">,</span> <span class="vi">@y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">C</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">instance_exec</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="n">arg</span><span class="o">|</span> <span class="p">(</span><span class="vi">@x</span> <span class="o">+</span> <span class="vi">@y</span><span class="p">)</span> <span class="o">*</span> <span class="n">arg</span> <span class="p">}</span>
+</code></pre></div>
+
+<h3 id="callable-object">Callable object</h3>
+
+<h4 id="proc-object"><code>Proc</code> object</h4>
+
+<p>Proc: convert block to object</p>
+
+<ul>
+  <li><code>Proc.new</code></li>
+  <li><code>Proc::lambda</code> (Kernel method)</li>
+  <li><code>proc</code> (Kernel method)</li>
+</ul>
+
+<p><code>dec = lambda { |x| x - 1 }</code></p>
+
+<h4 id="operator"><code>&amp;</code> operator</h4>
+
+<p>When using <code>yield</code></p>
+
+<ol>
+  <li>you want to pass the block to another method</li>
+  <li>you want to convert the block to a Proc</li>
+</ol>
+
+<p>Then you need to mark this block variable using <code>&amp;</code></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="o">&amp;</span><span class="n">the_proc</span><span class="p">)</span>
+  <span class="n">the_proc</span>
+<span class="k">end</span>
+
+<span class="nb">p</span> <span class="o">=</span> <span class="n">my_method</span> <span class="p">{</span> <span class="o">|</span><span class="nb">name</span><span class="o">|</span> <span class="s2">&quot;Hello, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
+<span class="nb">puts</span> <span class="nb">p</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Use <code>&amp;</code> to convert <code>Proc</code> to block.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">my_method</span><span class="p">(</span><span class="n">greeting</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">greeting</span><span class="si">}</span><span class="s2"> </span><span class="si">#{</span><span class="k">yield</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">end</span>
+
+<span class="n">my_proc</span> <span class="o">=</span> <span class="nb">proc</span> <span class="p">{</span> <span class="s2">&quot;world&quot;</span> <span class="p">}</span>
+<span class="n">my_method</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_proc</span><span class="p">)</span>
+</code></pre></div>
+
+<p><code>my_proc</code> can be yield.</p>
+
+<h4 id="lambda-and-proc-difference"><code>lambda</code> and <code>proc</code> difference</h4>
+
+<h5 id="the-meaning-of-return-is-different">1. The meaning of <code>return</code> is different.</h5>
+
+<ul>
+  <li><code>lambda</code> returns value from the proc</li>
+  <li><code>proc</code> returns(procedurely) from the code block</li>
+</ul>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">double</span>
+  <span class="nb">p</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">10</span> <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">20</span> <span class="c1"># unreachable code</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Correct way</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">double</span>
+  <span class="nb">p</span> <span class="o">=</span> <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="mi">10</span> <span class="p">}</span>
+  <span class="k">return</span> <span class="mi">20</span> <span class="c1"># unreachable code</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h5 id="number-of-arguments">2. number of arguments</h5>
+
+<p>if a <code>proc</code> has 2 arguments</p>
+
+<ul>
+  <li>if defined using <code>lambda</code>, it only accept 2 arguments. No more, no less, otherwise program will fail</li>
+  <li>if defined using <code>proc</code> or <code>Proc</code>, it will ignore redundant arguments, the non-passed arguments are defined as <code>nil</code></li>
+</ul>
+
+<h5 id="best-practise">Best practise</h5>
+
+<p>If you can use <code>lambda</code>, then use <code>lambda</code></p>
+
+<h4 id="kernelproc"><code>Kernel#proc</code></h4>
+
+<ul>
+  <li>In Ruby 1.8, it is alias of <code>Kernel#lambda</code></li>
+  <li>In Ruby 1.9, it is alias of <code>Proc.new</code></li>
+</ul>
+
+<h4 id="method-is-also-callable-object-like-lambda">Method is also callable object, like <code>lambda</code></h4>
+
+<p>Method can be detached and re-attached.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">unbound</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">unbound</span> <span class="c1"># m is a method object</span>
+<span class="n">another_obj</span> <span class="o">=</span> <span class="no">MyClass</span><span class="o">.</span><span class="n">new</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">unbound</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">another_obj</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">call</span>
+</code></pre></div>
+
+<p>Method can be binded to an object and run. But <code>lambda</code> is a closure. It does not require to be binded.</p>
+
+<h3 id="create-a-dsl">Create a DSL</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">event</span><span class="p">(</span><span class="nb">name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>                                                                                                                                                                                                                       
+  <span class="vi">@events</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="n">block</span>                                                                                                                                                                                                                       
+<span class="k">end</span>                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                              
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>                                                                                                                                                                                                                             
+  <span class="vi">@setups</span> <span class="o">&lt;&lt;</span> <span class="n">block</span>                                                                                                                                                                                                                            
+<span class="k">end</span>                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                              
+<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*events.rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>                                                                                                                                                                                                         
+  <span class="vi">@setups</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                                                                                
+  <span class="vi">@events</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                    
+  <span class="nb">load</span> <span class="n">file</span>                                                                                                                                                                       
+  <span class="vi">@events</span><span class="o">.</span><span class="n">each_pair</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">event</span><span class="o">|</span>                                                                                                                                              
+    <span class="n">env</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>                                                                                                                                                              
+    <span class="vi">@setups</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">setup</span><span class="o">|</span>                                                                                                                                                       
+      <span class="n">env</span><span class="o">.</span><span class="n">instance_eval</span> <span class="o">&amp;</span><span class="n">setup</span>                                                                                                                                                    
+    <span class="k">end</span>                                                                                                                                                                           
+    <span class="nb">p</span> <span class="s2">&quot;ALERT: </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">instance_eval</span> <span class="o">&amp;</span><span class="n">event</span>                                                                                                                                
+  <span class="k">end</span>                                                                                                                                                                             
+<span class="k">end</span>   
+</code></pre></div>
+
+<p>The DSL file ends with <code>*events.rb</code>:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">event</span> <span class="s1">&#39;the sky is falling&#39;</span> <span class="k">do</span>
+  <span class="vi">@sky_height</span> <span class="o">&lt;</span> <span class="mi">300</span>
+<span class="k">end</span>
+
+<span class="n">event</span> <span class="s2">&quot;It&#39;s getting closer&quot;</span> <span class="k">do</span>
+  <span class="vi">@sky_height</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">end</span>
+
+<span class="n">setup</span> <span class="k">do</span>
+  <span class="vi">@sky_height</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="k">end</span>
+
+<span class="n">setup</span> <span class="k">do</span>
+  <span class="vi">@mountains_height</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="k">end</span>
+  
+</code></pre></div>
+
+<p>Refactor: eliminate global variables <code>@events</code> and <code>@setups</code></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">lambda</span> <span class="p">{</span>                                                                                                                                                                                                                                      
+  <span class="n">setups</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                                                                                 
+  <span class="n">events</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                     
+                                                                                                                                                                                  
+  <span class="no">Kernel</span><span class="o">.</span><span class="n">send</span> <span class="ss">:define_method</span><span class="p">,</span> <span class="ss">:event</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="o">|</span>                                                                                                                            
+    <span class="n">events</span><span class="o">[</span><span class="nb">name</span><span class="o">]</span> <span class="o">=</span> <span class="n">block</span>                                                                                                                                                          
+  <span class="k">end</span>                                                                                                                                                                             
+                                                                                                                                                                                  
+  <span class="no">Kernel</span><span class="o">.</span><span class="n">send</span> <span class="ss">:define_method</span><span class="p">,</span> <span class="ss">:setup</span> <span class="k">do</span> <span class="o">|&amp;</span><span class="n">block</span><span class="o">|</span>                                                                                                                                  
+    <span class="n">setups</span> <span class="o">&lt;&lt;</span> <span class="n">block</span>                                                                                                                                                               
+  <span class="k">end</span>                                                                                                                                                                             
+                                                                                                                                                                                  
+  <span class="no">Kernel</span><span class="o">.</span><span class="n">send</span> <span class="ss">:define_method</span><span class="p">,</span> <span class="ss">:each_event</span> <span class="k">do</span> <span class="o">|&amp;</span><span class="n">block</span><span class="o">|</span>                                                                                                                             
+    <span class="n">events</span><span class="o">.</span><span class="n">each_pair</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">event</span><span class="o">|</span>                                                                                                                                             
+      <span class="n">block</span><span class="o">.</span><span class="n">call</span> <span class="nb">name</span><span class="p">,</span> <span class="n">event</span>                                                                                                                                                      
+    <span class="k">end</span>                                                                                                                                                                           
+  <span class="k">end</span>                                                                                                                                                                             
+                                                                                                                                                                                  
+  <span class="no">Kernel</span><span class="o">.</span><span class="n">send</span> <span class="ss">:define_method</span><span class="p">,</span> <span class="ss">:each_setup</span> <span class="k">do</span> <span class="o">|&amp;</span><span class="n">block</span><span class="o">|</span>                                                                                                                             
+    <span class="n">setups</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">setup</span><span class="o">|</span>                                                                                                                                                        
+      <span class="n">block</span><span class="o">.</span><span class="n">call</span> <span class="n">setup</span>                                                                                                                                                            
+    <span class="k">end</span>                                                                                                                                                                           
+<span class="p">}</span><span class="o">.</span><span class="n">call</span>                                                                                                                                                                                                                                        
+                                                                                                                                                                                  
+<span class="no">Dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">&#39;*events.rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>                                                                                                                                                                                                                                                                                                                               
+  <span class="vi">@setups</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                                                                                                                                                                                                      
+  <span class="vi">@events</span> <span class="o">=</span> <span class="o">[]</span>                                                                                                                                                                    
+  <span class="nb">load</span> <span class="n">file</span>                                                                                                                                                                       
+  <span class="vi">@events</span><span class="o">.</span><span class="n">each_pair</span> <span class="k">do</span> <span class="o">|</span><span class="nb">name</span><span class="p">,</span> <span class="n">event</span><span class="o">|</span>                                                                                                                                              
+    <span class="n">env</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>                                                                                                                                                              
+    <span class="vi">@setups</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">setup</span><span class="o">|</span>                                                                                                                                                       
+      <span class="n">env</span><span class="o">.</span><span class="n">instance_eval</span> <span class="o">&amp;</span><span class="n">setup</span>                                                                                                                                                    
+    <span class="k">end</span>                                                                                                                                                                           
+    <span class="nb">p</span> <span class="s2">&quot;ALERT: </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">instance_eval</span> <span class="o">&amp;</span><span class="n">event</span>                                                                                                                                
+  <span class="k">end</span>                                                                                                                                                                             
+<span class="k">end</span>             
+</code></pre></div>
+
+<p>The starting <code>lambda</code> defines all the DSL methods. THe point is, the DSL methods are sharing local variables <code>events</code> and <code>setups</code>.</p>
+
+<h1 id="class-definitions">4 Class definitions</h1>
+
+<h3 id="classeval"><code>class_eval</code></h3>
+
+<p>Run a block within current class</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">add_method_to</span><span class="p">(</span><span class="n">a_class</span><span class="p">)</span>
+  <span class="n">a_class</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span>
+    <span class="k">def</span> <span class="nf">m</span><span class="p">;</span> <span class="s1">&#39;Hello!&#39;</span><span class="p">;</span> <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">add_method_to</span> <span class="nb">String</span>
+<span class="s1">&#39;abc&#39;</span><span class="o">.</span><span class="n">m</span> <span class="c1"># =&gt; &quot;Hello&quot;</span>
+</code></pre></div>
+
+<ul>
+  <li><code>instance_eval</code> modifies <code>self</code></li>
+  <li><code>class_eval</code> modifies current class and <code>self</code></li>
+</ul>
+
+<p>When defining class, <code>self</code> means current <code>Class</code> object
+You can use variable outside of scope</p>
+
+<h3 id="singleton-methods">Singleton methods</h3>
+
+<p>Method effective on single object.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nc">str</span><span class="o">.</span><span class="nf">title?</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">upcase</span> <span class="o">==</span> <span class="nb">self</span>
+<span class="k">end</span>
+
+<span class="n">str</span><span class="o">.</span><span class="n">title?</span>
+<span class="n">str</span><span class="o">.</span><span class="n">singleton_methods</span>
+</code></pre></div>
+
+<p>Static method in Ruby defined as <code>def self.method</code>. This is actually a singleton method of the <code>Class</code> object.</p>
+
+<p>Another way to define singleton method (class method)</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nc">Myclass</span><span class="o">.</span><span class="nf">my_class_method</span><span class="p">;</span> <span class="k">end</span>
+</code></pre></div>
+
+<h3 id="class-macro">Class macro</h3>
+
+<p>An example: <code>attr_accessor</code>, <code>attr_reader</code>. These are class macros.</p>
+
+<p>All the <code>attr_*</code> are defined in <code>Module</code> class.</p>
+
+<p>Write your own class macro</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Book</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">deprecate</span><span class="p">(</span><span class="n">old_method</span><span class="p">,</span> <span class="n">new_method</span><span class="p">)</span>
+    <span class="nb">warn</span> <span class="s2">&quot;Warning: </span><span class="si">#{</span><span class="n">old_method</span><span class="si">}</span><span class="s2">() is deprecated. Use </span><span class="si">#{</span><span class="n">new_method</span><span class="si">}</span><span class="s2">()&quot;</span>
+    <span class="nb">send</span><span class="p">(</span><span class="n">new_method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+  <span class="k">end</span>
+  
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+
+<span class="n">deprecate</span> <span class="ss">:GetTitle</span><span class="p">,</span> <span class="ss">:title</span>
+</code></pre></div>
+
+<h3 id="eigenclass">Eigenclass</h3>
+
+<p>A hidden class on the ancestors chain.</p>
+
+<blockquote>
+  <p>insert a image here</p>
+</blockquote>
+
+<p>To access eigenclass:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">obj</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">new</span>
+<span class="n">eigenclass</span> <span class="o">=</span> <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="n">obj</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Eigenclass is a singleton class object. It stores the singleton method of an object.</p>
+
+<p>An helper method to get eigenclass object:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Object</span> 
+  <span class="k">def</span> <span class="nf">eigenclass</span>
+    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span><span class="p">;</span> <span class="nb">self</span><span class="p">;</span> <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>To define method in eigen class:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+    <span class="k">def</span> <span class="nf">my_method</span><span class="p">;</span> <span class="k">end</span>
+  <span class="k">end</span>
+<span class="n">ed</span>
+</code></pre></div>
+
+<h1 id="code-that-writes-code">5. Code that writes code</h1>
+
+<h3 id="kerneleval"><code>Kernel#eval</code></h3>
+
+<p>It uses string to eval:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">array</span>  <span class="o">=</span> <span class="o">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="o">]</span>
+<span class="n">element</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="nb">eval</span> <span class="s2">&quot;array &lt;&lt; element&quot;</span> <span class="c1"># =&gt; [10, 20, 30]</span>
+</code></pre></div>
+
+<h4 id="example-from-capistrano">Example from Capistrano</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">map</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># a hash</span>
+
+<span class="n">map</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">old</span><span class="p">,</span> <span class="kp">new</span><span class="o">|</span>
+  <span class="c1"># ...</span>
+  <span class="nb">eval</span> <span class="s2">&quot; task </span><span class="si">#{</span><span class="n">old</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2"> do</span>
+<span class="s2">    warn </span><span class="se">\&quot;</span><span class="s2">[DEPRECATED] `</span><span class="si">#{</span><span class="n">old</span><span class="si">}</span><span class="s2">&#39; is deprecated. Use `</span><span class="si">#{</span><span class="kp">new</span><span class="si">}</span><span class="s2">&#39; instead.</span><span class="se">\&quot;</span><span class="s2"></span>
+<span class="s2">    find_and execute_task </span><span class="si">#{</span><span class="kp">new</span><span class="o">.</span><span class="n">inspect</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">  end&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="binding-class"><code>Binding</code> class</h3>
+
+<p><code>Binding</code> represents a variable scope.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">MyClass</span>
+  <span class="k">def</span> <span class="nf">my_method</span>
+    <span class="vi">@x</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="nb">binding</span>
+  <span class="k">end</span> 
+<span class="k">end</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="no">MyClass</span><span class="o">.</span><span class="n">new</span><span class="o">.</span><span class="n">my_method</span>
+</code></pre></div>
+
+<p>For <code>*eval()</code> methods, you can pass a <code>Binding</code> object as parameter. Then code of <code>eval</code> will execute in scope.</p>
+
+<pre><code>eval "@x", b # =&gt; 1
+</code></pre>
+
+<p>A pre-defined constant <code>TOPLEVEL_BINDING</code></p>
+
+<h3 id="here-document"><code>here</code> document</h3>
+
+<p>For define multiple lines of code</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">s</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="no">END</span>
+<span class="sh">  # some code ...</span>
+<span class="no">END</span>
+
+<span class="nb">p</span> <span class="n">s</span>
+</code></pre></div>
+
+<h3 id="security">security</h3>
+
+<p>To prevent <code>eval</code> problem, use dynamic dispatch to replace <code>eval</code></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">explore_array</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+  <span class="o">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="o">].</span><span class="n">send</span><span class="p">(</span><span class="nb">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">explore_array_eval</span><span class="p">(</span><span class="nb">method</span><span class="p">)</span>
+  <span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;].</span><span class="si">#{</span><span class="nb">method</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="nb">eval</span> <span class="n">code</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="tainted-object">Tainted object</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">user_input</span> <span class="o">=</span> <span class="s2">&quot;User input: </span><span class="si">#{</span><span class="nb">gets</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">puts</span> <span class="n">user_input</span><span class="o">.</span><span class="n">tainted?</span>
+
+<span class="o">&gt;</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span>
+<span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+</code></pre></div>
+
+<h4 id="security-level">Security level</h4>
+
+<p>0 -&gt; 4. 0 means can do anything. &gt;0, cannot execute tainted code</p>
+
+<p>To adjust security level, use <code>obj.untaint()</code></p>
+
+<h4 id="kernelload-and-kernelrequire"><code>Kernel#load</code> and <code>Kernel#require</code></h4>
+
+<p><code>load</code> runs the code from file</p>
+
+<p><code>require</code> is the normal require</p>
+
+<h4 id="example-from-erb-create-sandbox">Example from eRB: create sandbox</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">ERB</span>
+  <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="no">TOPLEVEL_BINDING</span><span class="p">)</span>
+    <span class="k">if</span> <span class="vi">@safe_level</span>
+      <span class="nb">proc</span> <span class="p">{</span>
+        <span class="vg">$SAFE</span> <span class="o">=</span> <span class="vi">@save_level</span>
+        <span class="nb">eval</span><span class="p">(</span><span class="vi">@src</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="vi">@filename</span> <span class="o">||</span> <span class="s1">&#39;(erb)&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+      <span class="p">}</span><span class="o">.</span><span class="n">call</span>
+    <span class="k">else</span>
+      <span class="nb">eval</span><span class="p">(</span><span class="vi">@src</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="vi">@filename</span> <span class="o">||</span> <span class="s1">&#39;(erb)&#39;</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>      
+<span class="k">end</span>
+</code></pre></div>
+
+<h3 id="notice">Notice</h3>
+
+<ul>
+  <li><code>class_eval</code> does not accept variable is class name. Should use <code>eval</code> instead.</li>
+  <li><code>class_eval</code> does not accept <code>def</code> method with variable. Use <code>define_method()</code> instead.</li>
+</ul>
+
+<h3 id="hook-method">Hook method</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">String</span>
+  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">inherited</span>
+ 	 <span class="c1"># ...</span>
+  <span class="k">end</span>
+<span class="k">end</span>	
+</code></pre></div>
+
+<p><code>Class#inherited</code> is called when some class inherited from <code>String</code>.</p>
+
+<p>Other hook method:</p>
+
+<ul>
+  <li><code>Module#included</code></li>
+  <li><code>Module#extend_object</code></li>
+  <li><code>Module#method_added</code></li>
+</ul>
 
             
 <div class="social">

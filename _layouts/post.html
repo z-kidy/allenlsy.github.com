@@ -20,7 +20,10 @@ layout: base
             <div class="tags">
               {{ page | tags }}
             </div>
-        </header>
+            <div class="hidden-seo">
+              By <a href="{{ page.url }}" title="{{ page.title }}" rel="author">{{ site.author.name }}</a>
+            </div>
+        </header>:
 
         <section>
             {{ content }}
