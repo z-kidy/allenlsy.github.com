@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Tue, 17 Dec 2013 16:04:08 +0800</pubDate>
-    <lastBuildDate>Tue, 17 Dec 2013 16:04:08 +0800</lastBuildDate>
+    <pubDate>Tue, 17 Dec 2013 23:26:27 +0800</pubDate>
+    <lastBuildDate>Tue, 17 Dec 2013 23:26:27 +0800</lastBuildDate>
 
     
     
@@ -91,6 +91,33 @@ git co v2.0
 git cherry-pick f79b0b1
 &lt;/code&gt;&lt;/pre&gt;
 
+</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>Category test</title>
+      <link>/category-test</link>
+      <pubDate>Tue, 17 Dec 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/category-test</guid>
+      <description>&lt;h3 id=&quot;test&quot;&gt;test&lt;/h3&gt;
+
+&lt;p&gt;this is new post&lt;/p&gt;
+
+</description>
+    </item>
+    
+    
+    
+    <item>
+      <title>category test</title>
+      <link>/category-test</link>
+      <pubDate>Tue, 17 Dec 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/category-test</guid>
+      <description>
 </description>
     </item>
     

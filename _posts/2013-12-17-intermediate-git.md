@@ -4,7 +4,7 @@ title: "Intermediate GIT"
 subtitle: 
 cover_image: 
 excerpt: "Intermediate usage of git, on `add`, `rebase`, `reset`, `fetch` and `cherry-pick`"
-category: ""
+category: 
 tags: [git]
 ---
 

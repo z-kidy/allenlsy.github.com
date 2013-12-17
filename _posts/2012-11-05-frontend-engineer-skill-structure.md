@@ -3,8 +3,8 @@ layout: post
 title: "Frontend Engineer Skill Structure"
 subtitle: 
 cover_image: 
-excerpt: ""
-category: ""
+excerpt: 
+category: 
 tags: [web, frontend]
 ---
 

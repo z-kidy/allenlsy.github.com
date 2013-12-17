@@ -3,8 +3,8 @@ layout: post
 title: "Hand of Sorrow – By Within Temptation"
 subtitle: 
 cover_image: 
-excerpt: ""
-category: ""
+excerpt: 
+category: 
 tags: []
 ---
 

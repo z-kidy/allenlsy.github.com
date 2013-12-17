@@ -3,8 +3,8 @@ layout: post
 title: "CSS trick: float, overflow, clear"
 subtitle: 
 cover_image: 
-excerpt: ""
-category: ""
+excerpt: 
+category: 
 tags: [web, css, frontend]
 ---
 

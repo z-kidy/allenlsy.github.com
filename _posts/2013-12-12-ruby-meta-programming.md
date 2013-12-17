@@ -3,8 +3,8 @@ layout: post
 title: "Ruby Meta Programming - book"
 subtitle: 
 cover_image: 
-excerpt: ""
-category: ""
+excerpt: 
+category: 
 tags: [ruby]
 draft: true
 

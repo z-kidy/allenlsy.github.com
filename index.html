@@ -31,7 +31,7 @@ layout: base
     </address>
   </section>
   {% for post in paginator.posts %}
-    {% unless post.draft %}
+    {% unless (post.draft or post.category == "cast" %}
       <section class="index">
         <div>
             <h2 class="title"><a href="{{ post.url }}" rel="prefetch">{{ post.title }}</a></h2>

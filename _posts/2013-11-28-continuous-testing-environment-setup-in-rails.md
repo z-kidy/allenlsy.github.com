@@ -4,7 +4,7 @@ title: " Super Fast Continuous Testing in Rails"
 subtitle: "An intruduction to set up a good testing environment in Ruby on Rails 4"
 cover_image: 
 excerpt: "My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process."
-category: ""
+category: 
 tags: [testing, rails, ci, rspec, ruby]
 ---
 

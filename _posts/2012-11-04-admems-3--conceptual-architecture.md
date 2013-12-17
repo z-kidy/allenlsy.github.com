@@ -3,8 +3,8 @@ layout: post
 title: "ADMEMS架构方法 (3) – Conceptual Architecture"
 subtitle: 
 cover_image: 
-excerpt: ""
-category: ""
+excerpt: 
+category: 
 tags: [architecture, software]
 ---
 
