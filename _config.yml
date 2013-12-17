@@ -147,6 +147,8 @@ links:
     url: /about.html
   - title: Tags
     url: /tags.html
+  - title: Casts
+    url: http://cast.allenlsy.com
 
 tag_page_layout: tag_page
 tag_page_dir: tags

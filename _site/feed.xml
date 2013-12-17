@@ -6,9 +6,94 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Mon, 16 Dec 2013 21:59:06 +0800</pubDate>
-    <lastBuildDate>Mon, 16 Dec 2013 21:59:06 +0800</lastBuildDate>
+    <pubDate>Tue, 17 Dec 2013 16:04:08 +0800</pubDate>
+    <lastBuildDate>Tue, 17 Dec 2013 16:04:08 +0800</lastBuildDate>
 
+    
+    
+    <item>
+      <title>Intermediate GIT</title>
+      <link>/intermediate-git</link>
+      <pubDate>Tue, 17 Dec 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/intermediate-git</guid>
+      <description>&lt;h3 id=&quot;git-add&quot;&gt;git add&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #1&lt;/strong&gt;: I made changes on one file, I want to commit several changes in one file, and left the other changes for next commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git add -p&lt;/code&gt;: add patch. Add by change.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #2&lt;/strong&gt;: I made changes on several files, I want to commit some files, and left the other files for next commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git add -i&lt;/code&gt;: better than &lt;code&gt;-p&lt;/code&gt;. Add by file. Can split patch by using &lt;code&gt;s&lt;/code&gt; command&lt;/p&gt;
+
+&lt;h3 id=&quot;git-rebase&quot;&gt;git rebase&lt;/h3&gt;
+
+&lt;p&gt;Git rebase: forward-port local commits to the updated upstream head.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #3&lt;/strong&gt;: I’m developing, the remote branch changed. I want to add the remote changes to my developing branch, without creating the merge commit.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git pull --rebase&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #4&lt;/strong&gt;: I want to merge some previous commits, since they are related to the same feature.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;git rebase -i&lt;/code&gt;: interactive. Used to merge multiple commits. Can &lt;code&gt;squash&lt;/code&gt;, and &lt;code&gt;pick&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;git rebase -i HEAD~5&lt;/code&gt;: 5 versions before &lt;code&gt;HEAD&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;git rebase -i HEAD^^^^^&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;git-reset&quot;&gt;git reset&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;hard&lt;/code&gt;: clean index, clean cached file&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;mixed&lt;/code&gt;: clean index, keep cached file&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;soft&lt;/code&gt;: keep index, keep cached file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #5&lt;/strong&gt;: Same as &lt;strong&gt;Scenario #4&lt;/strong&gt;: &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git reset --mixed &amp;lt;commit id&amp;gt;
+git commit	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;--mixed&lt;/code&gt; can also be used to merge multiple commits. &lt;code&gt;git rebase -i&lt;/code&gt; is another way.&lt;/p&gt;
+
+&lt;p&gt;To check cached file, use &lt;code&gt;git diff --cached&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;git-fetch&quot;&gt;git fetch&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #6&lt;/strong&gt;: Get remote changes, but not merge into local branch.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git fetch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To merge, the workflow is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git fetch origin
+git rebase origin/master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which is equivalent to&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git pull --rebase
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-cherry-pick&quot;&gt;git cherry-pick&lt;/h3&gt;
+
+&lt;p&gt;Definition: merge a single commit from another branch to local branch&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Scenario #7&lt;/strong&gt;: I developed v3.0. I want to merge some stable feature of v3.0 to v2.0.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# suppose the new feature commit id is f79b0b1ffe445cab6e531260743fa4e08fb4048b
+git co v2.0
+git cherry-pick f79b0b1
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+    </item>
+    
     
     
     

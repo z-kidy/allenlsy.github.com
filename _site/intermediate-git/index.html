@@ -3,22 +3,22 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frontend Engineer Skill Structure &mdash; Simple, Not Easy</title>
+    <title>Intermediate GIT &mdash; Simple, Not Easy</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
-    <meta name="title" content="Frontend Engineer Skill Structure ">
-    <link rel="canonical" href="/frontend-engineer-skill-structure">
+    <meta name="title" content="Intermediate GIT ">
+    <link rel="canonical" href="/intermediate-git">
      
     <link rel="author" href="https://plus.google.com/118230970865161551961">       
-    <meta property="og:title" content="Frontend Engineer Skill Structure "/>
-    <meta property="og:url" content="/frontend-engineer-skill-structure"/>
+    <meta property="og:title" content="Intermediate GIT "/>
+    <meta property="og:url" content="/intermediate-git"/>
     
     
-    <meta property="og:description" content=""/>
-    <meta name="description" content=""/>
+    <meta property="og:description" content="Intermediate usage of git, on `add`, `rebase`, `reset`, `fetch` and `cherry-pick`"/>
+    <meta name="description" content="Intermediate usage of git, on `add`, `rebase`, `reset`, `fetch` and `cherry-pick`"/>
     
     <meta property="og:site_name" content="Simple, Not Easy">     
 </head>
@@ -51,124 +51,99 @@
 
     <div class="container">
         <header>
-            <h1 class="title">Frontend Engineer Skill Structure</h1>
+            <h1 class="title">Intermediate GIT</h1>
             
             <div class="meta">
-                <time pubdate datetime="2012-05-November" title="November 05, 2012">November 05, 2012</time>
+                <time pubdate datetime="2013-17-December" title="December 17, 2013">December 17, 2013</time>
             </div>
             <div class="tags">
-              <a href="/tags/web.html" rel="tag">web</a>, <a href="/tags/frontend.html" rel="tag">frontend</a>
+              <a href="/tags/git.html" rel="tag">git</a>
             </div>
             <div class="hidden-seo">
-              By <a href="/frontend-engineer-skill-structure" title="Frontend Engineer Skill Structure" rel="author">allenlsy</a>
+              By <a href="/intermediate-git" title="Intermediate GIT" rel="author">allenlsy</a>
             </div>
         </header>:
 
         <section>
-            <h3 id="web-service">Web Service</h3>
+            <h3 id="git-add">git add</h3>
+
+<p><strong>Scenario #1</strong>: I made changes on one file, I want to commit several changes in one file, and left the other changes for next commit.</p>
+
+<p><code>git add -p</code>: add patch. Add by change.</p>
+
+<p><strong>Scenario #2</strong>: I made changes on several files, I want to commit some files, and left the other files for next commit.</p>
+
+<p><code>git add -i</code>: better than <code>-p</code>. Add by file. Can split patch by using <code>s</code> command</p>
+
+<h3 id="git-rebase">git rebase</h3>
+
+<p>Git rebase: forward-port local commits to the updated upstream head.</p>
+
+<p><strong>Scenario #3</strong>: I’m developing, the remote branch changed. I want to add the remote changes to my developing branch, without creating the merge commit.</p>
+
+<p><code>git pull --rebase</code></p>
+
+<p><strong>Scenario #4</strong>: I want to merge some previous commits, since they are related to the same feature.</p>
+
+<p><code>git rebase -i</code>: interactive. Used to merge multiple commits. Can <code>squash</code>, and <code>pick</code>.</p>
+
 <ul>
-  <li>YQL: Yahoo Query Langauge</li>
-  <li>App Engine</li>
-  <li>Google Open API / Github</li>
+  <li><code>git rebase -i HEAD~5</code>: 5 versions before <code>HEAD</code></li>
+  <li><code>git rebase -i HEAD^^^^^</code></li>
 </ul>
 
-<h3 id="communities--conferences">Communities / Conferences</h3>
+<h3 id="git-reset">git reset</h3>
+
 <ul>
-  <li>Yahoo! related: YDN / YUIConf / JSConf</li>
-  <li>QCon / Velocity</li>
-  <li>D2 / WebRebuild</li>
-  <li>NodeParty / HTML5</li>
+  <li><code>hard</code>: clean index, clean cached file</li>
+  <li><code>mixed</code>: clean index, keep cached file</li>
+  <li><code>soft</code>: keep index, keep cached file</li>
 </ul>
 
-<h3 id="mobile-client">Mobile Client</h3>
-<ul>
-  <li>JQueryMobile / HTML5 / CSS3</li>
-  <li>iOS / Andriod</li>
-  <li>responsive UI Design</li>
-</ul>
+<p><strong>Scenario #5</strong>: Same as <strong>Scenario #4</strong>: </p>
 
-<h3 id="security">Security</h3>
-<ul>
-  <li>CSRF / XSS</li>
-  <li>ADSafe / Caja / FBJS / Sandbox</li>
-</ul>
+<pre><code>git reset --mixed &lt;commit id&gt;
+git commit	
+</code></pre>
 
-<h3 id="deploy">Deploy</h3>
-<ul>
-  <li>JSLint / CSSLint / YUICompressor</li>
-  <li>JSMin / TPacker-minifier</li>
-  <li>Ant / Make</li>
-  <li>LAMP</li>
-</ul>
+<p><code>--mixed</code> can also be used to merge multiple commits. <code>git rebase -i</code> is another way.</p>
 
-<h3 id="framework--library">Framework / Library</h3>
-<ul>
-  <li>jQuery / YUI</li>
-  <li>Prototype / Mootools / ExtJS</li>
-  <li>Smarty / Django / Zend</li>
-  <li>YUITest / QUnit / Jasmine</li>
-</ul>
+<p>To check cached file, use <code>git diff --cached</code></p>
 
-<h3 id="programming">Programming</h3>
-<ul>
-  <li>JavaScript</li>
-  <li>PHP / Python / Perl / Ruby / BashShell</li>
-  <li>NodeJS / FlashActionScript</li>
-  <li>MVC</li>
-  <li>OOP / AOP</li>
-  <li>Functional Programming Language</li>
-  <li>Design Pattern</li>
-</ul>
+<h3 id="git-fetch">git fetch</h3>
 
-<h3 id="debugging-tool">Debugging tool</h3>
-<ul>
-  <li>Firebug / Web Inspector</li>
-  <li>YSlow / Smushit</li>
-  <li>IETester / IEDeveloperToolBar</li>
-  <li>SuperPreview / JsBeautifier</li>
-  <li>Fiddler / WireShark / tcpdump</li>
-</ul>
+<p><strong>Scenario #6</strong>: Get remote changes, but not merge into local branch.</p>
 
-<h3 id="development-tool">Development tool</h3>
-<ul>
-  <li>Vim / Aptana / Notepad++ / Sublime / Emacs</li>
-  <li>svn / git</li>
-</ul>
+<pre><code>git fetch
+</code></pre>
 
-<h3 id="computer-basics">Computer basics</h3>
-<ul>
-  <li>Compiling</li>
-  <li>Network</li>
-  <li>Operating System</li>
-  <li>Algorithm</li>
-  <li>Software Engineering / Testing</li>
-</ul>
+<p>To merge, the workflow is:</p>
 
-<h3 id="standards">Standards</h3>
-<ul>
-  <li>w3c / DOM / BOM / XHTML / JSON / JSONP</li>
-  <li>HTML5 / CSS3</li>
-  <li>ECMAScript</li>
-  <li>CommonJS</li>
-  <li>HTTP1.1</li>
-</ul>
+<pre><code>git fetch origin
+git rebase origin/master
+</code></pre>
 
-<h3 id="prformance">Prformance</h3>
-<ul>
-  <li>WebPageTest</li>
-  <li>ShowSlow / YSlow</li>
-  <li>PageSpeed</li>
-  <li>HttpWatch</li>
-  <li>DynaTrace’s Ajax</li>
-</ul>
+<p>Which is equivalent to</p>
 
-<p>Reference: <a href="http://addyosmani.com/resources/toolschart/chart.pdf">http://addyosmani.com/resources/toolschart/chart.pdf</a></p>
+<pre><code>git pull --rebase
+</code></pre>
+
+<h3 id="git-cherry-pick">git cherry-pick</h3>
+
+<p>Definition: merge a single commit from another branch to local branch</p>
+
+<p><strong>Scenario #7</strong>: I developed v3.0. I want to merge some stable feature of v3.0 to v2.0.</p>
+
+<pre><code># suppose the new feature commit id is f79b0b1ffe445cab6e531260743fa4e08fb4048b
+git co v2.0
+git cherry-pick f79b0b1
+</code></pre>
 
 
             
 <div class="social">
     <div>
-        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Frontend Engineer Skill Structure" data-related="allenlsy">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Intermediate GIT" data-related="allenlsy">Tweet</a>
     </div>
     
     
