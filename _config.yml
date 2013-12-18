@@ -154,3 +154,7 @@ links:
 tag_page_layout: tag_page
 tag_page_dir: tags
    
+# config for video
+video:
+  width: 800
+  height: 450

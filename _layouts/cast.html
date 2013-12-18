@@ -25,10 +25,16 @@ layout: base
             </div>
         </header>
         
-        <!-- video -->
-        <!-- <iframe src="{{ page.youtube_video }}" frameborder="0" allowfullscreen></iframe> -->
-        <!-- end of video -->
-
+        <section class="video-section" style="margin-bottom: 1em;">
+            {% if page.youtube %}
+              <iframe width="{{ site.video.width }}" height="{{ site.video.height }}" src="//www.youtube.com/embed/{{ page.youtube }}" frameborder="0" allowfullscreen class="video"></iframe>
+            {% else %}
+              <video class="video" width="{{ site.video.width }}" height="{{ site.video.height }}" preload=true>
+                <source src="{{ page.video }}" />
+              </video>
+            {% endif %}
+        </section>
+        
         <section>
             {{ content }}
             {% include _social.html %}

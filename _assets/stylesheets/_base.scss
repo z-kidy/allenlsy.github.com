@@ -394,3 +394,11 @@ a.badge:focus {
 .hidden-seo {
   display:none;
 }
+
+section.video-section {
+  & > .video, & > .mejs-video {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
