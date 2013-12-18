@@ -36,7 +36,6 @@ inc:
       # eg. 'UA-123-12'
       id: 'UA-24647338-1'
       
-      
   # Google Fonts
   # eg. 'Droid+Sans:400,700|Droid+Serif:400,700'
   google_font: 'Open+Sans:400,700|Oswald'
@@ -148,10 +147,8 @@ links:
   - title: Tags
     url: /tags.html
   - title: Casts
-    url: /cast/index.html
+    url: cast.allenlsy.com
 
 tag_page_layout: tag_page
 tag_page_dir: tags
    
-cast_layout: cast
-category_archive:
