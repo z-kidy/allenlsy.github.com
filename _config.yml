@@ -140,14 +140,16 @@ permalink:  /:title
 # Links to include in top navigation
 # For external links add external: true
 links:
+  - title: Blog
+    url: http://allenlsy.com
   - title: Archives
     url: /archives.html
   - title: About
-    url: /about.html
+    url: http://allenlsy.com/about.html
   - title: Tags
     url: /tags.html
   - title: Casts
-    url: cast.allenlsy.com
+    url: /
 
 tag_page_layout: tag_page
 tag_page_dir: tags

@@ -3,8 +3,9 @@ set :repo_url, 'git@github.com:allenlsy/allenlsy.github.com.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-set :deploy_to, "/home/allenlsy/allenlsy.github.com"
+set :deploy_to, "/home/allenlsy/cast.allenlsy.com"
 set :scm, :git
+set :branch, :cast
 
 # role :blog, '162.217.248.104'
 set :user, 'allenlsy'
