@@ -12,14 +12,13 @@ tags: [testing, rails, ci, rspec, ruby]
 
 > Before reading the article, you need to have a understanding of `RSpec`
 
-My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process.
+My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Guard` and `Zeus`. The setup process may easily go wrong. Thus I made a note of the process.
 
 ## The tools we use
 
 There are some tools we need to make testing __super fast__.
 
 * `RSpec`: famous testing framework, complies to BDD concept.
-* `Spork`: When use `rspec` command to run `RSpec`, it will load the whole Rails environment every time. `Spork` keeps one Rails environment running behind, to run test suite using that environment, and not close it after running, to make testing with `RSpec` faster. 
 * `Guard`: to guard the file change in Rails project.
 * `Zeus`: a tool to re-use the Rails environment in development environment, but also can be used in testing.
 
@@ -38,10 +37,8 @@ Starting from a fresh Rails 4 application, <span class="red">after creating the 
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-zeus'
-  gem 'guard-spork'
   gem 'guard-rspec'
   gem 'guard-cucumber'
-  gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'childprocess'
   gem 'capybara'
   gem 'factory_girl_rails'
@@ -61,13 +58,9 @@ end
 Then run these command in shell:
 
 	rails g rspec:isntall
-	spork rspec --bootstrap
-	guard init spork
 	guard init rspec
 
-It will install `RSpec`, `Spork` and `Guard`.
-
-Next step is to configure `Spork`. Edit your `spec/spec_hepler.rb` file, like this:
+It will install `RSpec` and `Guard`.
 
 {% highlight ruby %}
 require 'rubygems'
@@ -75,31 +68,13 @@ require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
-Spork.prefork do
-  # Loading more in this block will cause your tests to run faster. However,
-  # if you change any configuration or code from libraries loaded here, you'll
-  # need to restart spork for it take effect.
+ENV["RAILS_ENV"] ||= 'test'
+require File.expand_path("../../config/environment", __FILE__)
+require 'rspec/rails'
+# require 'rspec/autorun'
 
-  # This file is copied to spec/ when you run 'rails generate rspec:install'
-  ENV["RAILS_ENV"] ||= 'test'
-  require File.expand_path("../../config/environment", __FILE__)
-  require 'rspec/rails'
-  # require 'rspec/autorun'
-
-  # Requires supporting ruby files with custom matchers and macros, etc,
-  # in spec/support/ and its subdirectories.
-  Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
-  # Checks for pending migrations before tests are run.
-  # If you are not using ActiveRecord, you can remove this line.
-  ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
-
-end
-
-Spork.each_run do
-  # This code will be run each time you run your specs.
-
-end
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   require 'email_spec'
@@ -139,22 +114,9 @@ end
 
 {% endhighlight %}
 
-This piece of code makes `Spork` to load the Rails environment when starting. 
-
 Next, edit `Guardfile` a little bit. I will paste my `Guardfile` here:
 
 {% highlight ruby %}
-guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
-  watch('config/application.rb')
-  watch('config/environment.rb')
-  watch('config/environments/test.rb')
-  watch(%r{^config/initializers/.+\.rb$})
-  watch('Gemfile.lock')
-  watch('spec/spec_helper.rb') { :rspec }
-  watch('test/test_helper.rb') { :test_unit }
-  watch(%r{features/support/}) { :cucumber }
-end
-
 guard :rspec, cmd: 'zeus rspec --color --format documentation --fail-fast' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
