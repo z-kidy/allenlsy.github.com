@@ -34,8 +34,15 @@ layout: base
               </video>
             {% endif %}
         </section>
+
+        {% if page.video %}
+        <section>
+           <a href="/videos/{{ page.video }}" alt="Video download link">Download Video</a>
+        </section>
+        {% endif %}
         
         <section>
+            
             {{ content }}
             {% include _social.html %}
         </section>
