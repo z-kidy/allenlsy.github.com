@@ -6,20 +6,67 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Thu, 19 Dec 2013 00:13:26 +0800</pubDate>
-    <lastBuildDate>Thu, 19 Dec 2013 00:13:26 +0800</lastBuildDate>
+    <pubDate>Sun, 22 Dec 2013 14:11:17 +0800</pubDate>
+    <lastBuildDate>Sun, 22 Dec 2013 14:11:17 +0800</lastBuildDate>
 
     
     
     <item>
-      <title>Youtube video test</title>
-      <link>/youtube-video-test</link>
-      <pubDate>Wed, 18 Dec 2013 00:00:00 +0800</pubDate>
+      <title>#1 - Rails Dev Environment & Vim</title>
+      <link>/1---rails-dev-environment--vim</link>
+      <pubDate>Sun, 22 Dec 2013 00:00:00 +0800</pubDate>
       <author></author>
-      <guid>/youtube-video-test</guid>
-      <description>&lt;p&gt;Youtube video test&lt;/p&gt;
+      <guid>/1---rails-dev-environment--vim</guid>
+      <description>&lt;h2 id=&quot;installing-ruby-on-rails&quot;&gt;Installing Ruby on Rails&lt;/h2&gt;
 
-&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo orci a fringilla sollicitudin. In justo sem, posuere nec tellus sit amet, iaculis dictum diam. Maecenas vel dolor vulputate, egestas massa nec, molestie lorem. Fusce dignissim turpis molestie ullamcorper sollicitudin. Sed feugiat, elit a auctor pellentesque, nisi diam consequat erat, eget fermentum tortor est id ipsum. Nam vel erat eu odio blandit fringilla. Proin vulputate pretium augue id congue. Curabitur vitae justo felis. Nulla ultricies purus augue, sit amet eleifend nisi ultrices sed.&lt;/p&gt;
+&lt;p&gt;Alternative to &lt;code&gt;rvm&lt;/code&gt; is &lt;code&gt;rbenv&lt;/code&gt;. I prefer using &lt;code&gt;rvm&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;\curl -sSL https://get.rvm.io | bash -s stable
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;configure-development-environment-using-my-dotfiles&quot;&gt;Configure development environment using my dotfiles&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/allenlsy/dotfiles/&quot;&gt;Here is my dotfiles repository on Github.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Please ensure you understand what I’m doing in the &lt;code&gt;bootstrap.sh&lt;/code&gt; before running it.&lt;/strong&gt; It will replace your own &lt;code&gt;.zshrc&lt;/code&gt; and some other important files.&lt;/p&gt;
+
+&lt;h2 id=&quot;vim-plugins&quot;&gt;Vim plugins&lt;/h2&gt;
+
+&lt;p&gt;I list my usage of these plugins in the viode. You can searhc in Google about these plugins for more information.&lt;/p&gt;
+
+&lt;h4 id=&quot;ctrlpvim&quot;&gt;ctrlp.vim&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Ctrl+p&lt;/code&gt; to fuzzy search any file in the project.&lt;/p&gt;
+
+&lt;h4 id=&quot;tabular&quot;&gt;tabular&lt;/h4&gt;
+
+&lt;p&gt;This is a &lt;a href=&quot;http://vimcasts.org/episodes/aligning-text-with-tabular-vim/&quot;&gt;screencast&lt;/a&gt; on Tabular. For more information please refer to it.&lt;/p&gt;
+
+&lt;p&gt;In my video, I used &lt;code&gt;:Tab/:&lt;/code&gt; to format the text.&lt;/p&gt;
+
+&lt;h4 id=&quot;vim-colorscheme-switcher&quot;&gt;vim-colorscheme-switcher&lt;/h4&gt;
+
+&lt;p&gt;Press &lt;code&gt;F8&lt;/code&gt; to use next colorscheme, &lt;code&gt;Shift+F8&lt;/code&gt; to use previous one.&lt;/p&gt;
+
+&lt;h4 id=&quot;vim-easymotion&quot;&gt;vim-easymotion&lt;/h4&gt;
+
+&lt;p&gt;A good &lt;a href=&quot;http://www.youtube.com/watch?v=Dmv6-dguS3g‎&quot;&gt;youtube video here&lt;/a&gt; demonstrates vim-easymotion.&lt;/p&gt;
+
+&lt;h4 id=&quot;vim-indent-guides&quot;&gt;vim-indent-guides&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;\ig&lt;/code&gt; to goggle the indentation guidelines.&lt;/p&gt;
+
+&lt;h4 id=&quot;vim-surround&quot;&gt;vim-surround&lt;/h4&gt;
+
+&lt;p&gt;Another video from &lt;a href=&quot;http://www.youtube.com/watch?v=5HF4jSyPpvs‎&quot;&gt;Jeffery Way&lt;/a&gt;. (Yes, Tutsplus makes better video than I do)&lt;/p&gt;
+
+&lt;p&gt;Select the text in visual mode first, then press &lt;code&gt;Shift+S&lt;/code&gt; followed by &lt;code&gt;&amp;lt;div class=&quot;container&quot;&amp;gt;&lt;/code&gt; (I made a typo in the video).&lt;/p&gt;
+
+&lt;h4 id=&quot;vim-sparkup&quot;&gt;vim-sparkup&lt;/h4&gt;
+
+&lt;p&gt;I forgot to mention it in the video. It is a better implementation of Zen-coding in Vim.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.youtube.com/watch?v=dB2Q9EN37eY&quot;&gt;Click to watch the video&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

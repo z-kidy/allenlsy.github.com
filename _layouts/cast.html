@@ -30,7 +30,7 @@ layout: base
               <iframe width="{{ site.video.width }}" height="{{ site.video.height }}" src="//www.youtube.com/embed/{{ page.youtube }}" frameborder="0" allowfullscreen class="video"></iframe>
             {% else %}
               <video class="video" width="{{ site.video.width }}" height="{{ site.video.height }}" preload=true>
-                <source src="{{ page.video }}" />
+                <source src="/videos/{{ page.video }}" />
               </video>
             {% endif %}
         </section>

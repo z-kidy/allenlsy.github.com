@@ -3,22 +3,22 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Youtube video test &mdash; Simple, Not Easy</title>
+    <title>#1 - Rails Dev Environment & Vim &mdash; Simple, Not Easy</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
-    <meta name="title" content="Youtube video test ">
-    <link rel="canonical" href="/youtube-video-test">
+    <meta name="title" content="#1 - Rails Dev Environment & Vim ">
+    <link rel="canonical" href="/1---rails-dev-environment--vim">
      
     <link rel="author" href="https://plus.google.com/118230970865161551961">       
-    <meta property="og:title" content="Youtube video test "/>
-    <meta property="og:url" content="/youtube-video-test"/>
+    <meta property="og:title" content="#1 - Rails Dev Environment & Vim "/>
+    <meta property="og:url" content="/1---rails-dev-environment--vim"/>
     
     
-    <meta property="og:description" content=""/>
-    <meta name="description" content=""/>
+    <meta property="og:description" content="Introduction to setting up Rails development environment, and a demo to my Vim plugins"/>
+    <meta name="description" content="Introduction to setting up Rails development environment, and a demo to my Vim plugins"/>
     
     <meta property="og:site_name" content="Simple, Not Easy">     
 </head>
@@ -52,34 +52,81 @@
 
     <div class="container">
         <header>
-            <h1 class="title">Youtube video test</h1>
+            <h1 class="title">#1 - Rails Dev Environment & Vim</h1>
             
             <div class="meta">
-                <time pubdate datetime="2013-18-December" title="December 18, 2013">December 18, 2013</time>
+                <time pubdate datetime="2013-22-December" title="December 22, 2013">December 22, 2013</time>
             </div>
             <div class="tags">
-              
+              <a href="/tags/rails.html" rel="tag">rails</a> <a href="/tags/ruby.html" rel="tag">ruby</a> <a href="/tags/vim.html" rel="tag">vim</a>
             </div>
             <div class="hidden-seo">
-              By <a href="/youtube-video-test" title="Youtube video test" rel="author">allenlsy</a>
+              By <a href="/1---rails-dev-environment--vim" title="#1 - Rails Dev Environment & Vim" rel="author">allenlsy</a>
             </div>
         </header>
         
         <section class="video-section" style="margin-bottom: 1em;">
             
-              <iframe width="800" height="450" src="//www.youtube.com/embed/52JoGkFjPeU" frameborder="0" allowfullscreen class="video"></iframe>
+              <iframe width="800" height="450" src="//www.youtube.com/embed/EOU4VGs4j2Y" frameborder="0" allowfullscreen class="video"></iframe>
             
         </section>
         
         <section>
-            <p>Youtube video test</p>
+            <h2 id="installing-ruby-on-rails">Installing Ruby on Rails</h2>
 
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo orci a fringilla sollicitudin. In justo sem, posuere nec tellus sit amet, iaculis dictum diam. Maecenas vel dolor vulputate, egestas massa nec, molestie lorem. Fusce dignissim turpis molestie ullamcorper sollicitudin. Sed feugiat, elit a auctor pellentesque, nisi diam consequat erat, eget fermentum tortor est id ipsum. Nam vel erat eu odio blandit fringilla. Proin vulputate pretium augue id congue. Curabitur vitae justo felis. Nulla ultricies purus augue, sit amet eleifend nisi ultrices sed.</p>
+<p>Alternative to <code>rvm</code> is <code>rbenv</code>. I prefer using <code>rvm</code></p>
+
+<pre><code>\curl -sSL https://get.rvm.io | bash -s stable
+</code></pre>
+
+<h2 id="configure-development-environment-using-my-dotfiles">Configure development environment using my dotfiles</h2>
+
+<p><a href="https://github.com/allenlsy/dotfiles/">Here is my dotfiles repository on Github.</a></p>
+
+<p><strong>Please ensure you understand what I’m doing in the <code>bootstrap.sh</code> before running it.</strong> It will replace your own <code>.zshrc</code> and some other important files.</p>
+
+<h2 id="vim-plugins">Vim plugins</h2>
+
+<p>I list my usage of these plugins in the viode. You can searhc in Google about these plugins for more information.</p>
+
+<h4 id="ctrlpvim">ctrlp.vim</h4>
+
+<p><code>Ctrl+p</code> to fuzzy search any file in the project.</p>
+
+<h4 id="tabular">tabular</h4>
+
+<p>This is a <a href="http://vimcasts.org/episodes/aligning-text-with-tabular-vim/">screencast</a> on Tabular. For more information please refer to it.</p>
+
+<p>In my video, I used <code>:Tab/:</code> to format the text.</p>
+
+<h4 id="vim-colorscheme-switcher">vim-colorscheme-switcher</h4>
+
+<p>Press <code>F8</code> to use next colorscheme, <code>Shift+F8</code> to use previous one.</p>
+
+<h4 id="vim-easymotion">vim-easymotion</h4>
+
+<p>A good <a href="http://www.youtube.com/watch?v=Dmv6-dguS3g‎">youtube video here</a> demonstrates vim-easymotion.</p>
+
+<h4 id="vim-indent-guides">vim-indent-guides</h4>
+
+<p><code>\ig</code> to goggle the indentation guidelines.</p>
+
+<h4 id="vim-surround">vim-surround</h4>
+
+<p>Another video from <a href="http://www.youtube.com/watch?v=5HF4jSyPpvs‎">Jeffery Way</a>. (Yes, Tutsplus makes better video than I do)</p>
+
+<p>Select the text in visual mode first, then press <code>Shift+S</code> followed by <code>&lt;div class="container"&gt;</code> (I made a typo in the video).</p>
+
+<h4 id="vim-sparkup">vim-sparkup</h4>
+
+<p>I forgot to mention it in the video. It is a better implementation of Zen-coding in Vim.</p>
+
+<p><a href="http://www.youtube.com/watch?v=dB2Q9EN37eY">Click to watch the video</a></p>
 
             
 <div class="social">
     <div>
-        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Youtube video test" data-related="allenlsy">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="#1 - Rails Dev Environment & Vim" data-related="allenlsy">Tweet</a>
     </div>
     
     
