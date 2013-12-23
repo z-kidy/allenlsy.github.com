@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Sun, 22 Dec 2013 14:27:05 +0800</pubDate>
-    <lastBuildDate>Sun, 22 Dec 2013 14:27:05 +0800</lastBuildDate>
+    <pubDate>Mon, 23 Dec 2013 09:43:07 +0800</pubDate>
+    <lastBuildDate>Mon, 23 Dec 2013 09:43:07 +0800</lastBuildDate>
 
     
     
@@ -182,33 +182,33 @@ guard init rspec
 
   &lt;span class=&quot;c1&quot;&gt;# Include FactoryGirl syntax&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;FactoryGirl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Syntax&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Methods&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;# ## Mock Framework&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# config.mock_with :mocha&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# config.mock_with :flexmock&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# config.mock_with :rr&lt;/span&gt;
-
+  
   &lt;span class=&quot;c1&quot;&gt;# Remove this line if you&amp;#39;re not using ActiveRecord or ActiveRecord fixtures&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fixture_path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Rails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/spec/fixtures&amp;quot;&lt;/span&gt;
 
-  &lt;span class=&quot;c1&quot;&gt;# If you&amp;#39;re not using ActiveRecord, or you&amp;#39;d prefer not to run each of your&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# examples within a transaction, remove the following line or assign false&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# instead of true.&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_transactional_fixtures&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# We use Database Cleaner. Change this one to false&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use_transactional_fixtures&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
 
-  &lt;span class=&quot;c1&quot;&gt;# If true, the base class of anonymous controllers will be inferred&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# automatically. This will be the default behavior in future versions of&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# rspec-rails.&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;infer_base_class_for_anonymous_controllers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
 
-  &lt;span class=&quot;c1&quot;&gt;# Run specs in random order to surface order dependencies. If you find an&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# order dependency and want to debug it, you can fix the order by providing&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# the seed, which is printed after each run.&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;#     --seed 1234&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;random&amp;quot;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;color_enabled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# https://github.com/bmabey/database_cleaner#rspec-example&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:suite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;DatabaseCleaner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strategy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:transaction&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;DatabaseCleaner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clean_with&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:truncation&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;before&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;DatabaseCleaner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:each&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;DatabaseCleaner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;clean&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 

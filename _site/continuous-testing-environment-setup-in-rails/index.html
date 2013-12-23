@@ -20,7 +20,10 @@
     <meta property="og:description" content="My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process."/>
     <meta name="description" content="My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process."/>
     
-    <meta property="og:site_name" content="Simple, Not Easy">     
+    <meta property="og:site_name" content="Simple, Not Easy">
+    
+    <meta property="keywords" content="testingrailscirspecruby">
+    
 </head>
 <body>
     
@@ -57,7 +60,7 @@
                 <time pubdate datetime="2013-28-November" title="November 28, 2013">November 28, 2013</time>
             </div>
             <div class="tags">
-              <a href="/tags/testing.html" rel="tag">testing</a> <a href="/tags/rails.html" rel="tag">rails</a> <a href="/tags/ci.html" rel="tag">ci</a> <a href="/tags/rspec.html" rel="tag">rspec</a> <a href="/tags/ruby.html" rel="tag">ruby</a>
+              <a href="/tags/testing.html" rel="tag">testing</a>, <a href="/tags/rails.html" rel="tag">rails</a>, <a href="/tags/ci.html" rel="tag">ci</a>, <a href="/tags/rspec.html" rel="tag">rspec</a>, <a href="/tags/ruby.html" rel="tag">ruby</a>
             </div>
             <div class="hidden-seo">
               By <a href="/continuous-testing-environment-setup-in-rails" title=" Super Fast Continuous Testing in Rails" rel="author">allenlsy</a>
@@ -145,33 +148,33 @@ guard init rspec
 
   <span class="c1"># Include FactoryGirl syntax</span>
   <span class="n">config</span><span class="o">.</span><span class="n">include</span> <span class="no">FactoryGirl</span><span class="o">::</span><span class="no">Syntax</span><span class="o">::</span><span class="no">Methods</span>
-
-  <span class="c1"># ## Mock Framework</span>
-  <span class="c1">#</span>
-  <span class="c1"># If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:</span>
-  <span class="c1">#</span>
-  <span class="c1"># config.mock_with :mocha</span>
-  <span class="c1"># config.mock_with :flexmock</span>
-  <span class="c1"># config.mock_with :rr</span>
-
+  
   <span class="c1"># Remove this line if you&#39;re not using ActiveRecord or ActiveRecord fixtures</span>
   <span class="n">config</span><span class="o">.</span><span class="n">fixture_path</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="o">::</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/spec/fixtures&quot;</span>
 
-  <span class="c1"># If you&#39;re not using ActiveRecord, or you&#39;d prefer not to run each of your</span>
-  <span class="c1"># examples within a transaction, remove the following line or assign false</span>
-  <span class="c1"># instead of true.</span>
-  <span class="n">config</span><span class="o">.</span><span class="n">use_transactional_fixtures</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="c1"># We use Database Cleaner. Change this one to false</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">use_transactional_fixtures</span> <span class="o">=</span> <span class="kp">false</span>
 
-  <span class="c1"># If true, the base class of anonymous controllers will be inferred</span>
-  <span class="c1"># automatically. This will be the default behavior in future versions of</span>
-  <span class="c1"># rspec-rails.</span>
   <span class="n">config</span><span class="o">.</span><span class="n">infer_base_class_for_anonymous_controllers</span> <span class="o">=</span> <span class="kp">false</span>
 
-  <span class="c1"># Run specs in random order to surface order dependencies. If you find an</span>
-  <span class="c1"># order dependency and want to debug it, you can fix the order by providing</span>
-  <span class="c1"># the seed, which is printed after each run.</span>
-  <span class="c1">#     --seed 1234</span>
   <span class="n">config</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="s2">&quot;random&quot;</span>
+
+  <span class="n">config</span><span class="o">.</span><span class="n">color_enabled</span> <span class="o">=</span> <span class="kp">true</span>
+
+  <span class="c1"># https://github.com/bmabey/database_cleaner#rspec-example</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="ss">:suite</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="ss">:transaction</span>
+    <span class="no">DatabaseCleaner</span><span class="o">.</span><span class="n">clean_with</span> <span class="ss">:truncation</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="o">.</span><span class="n">start</span>
+  <span class="k">end</span>
+
+  <span class="n">config</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
+    <span class="no">DatabaseCleaner</span><span class="o">.</span><span class="n">clean</span>
+  <span class="k">end</span>
+
 <span class="k">end</span>
 </code></pre></div>
 
