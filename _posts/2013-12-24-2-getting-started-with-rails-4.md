@@ -6,7 +6,7 @@ excerpt: "  Start coding the project Sharebook"
 category: ""
 tags: [ruby, rails]
 youtube: "RoL4GaNP264"
-thumbnail: "002-thumb.jpg"
+thumbnail: "/tb/002-thumb.jpg"
 video: 
 ---
 

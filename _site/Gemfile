@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'jekyll'
 gem 'jekyll-assets'
-gem 'jekyll-tagging'
+gem 'jekyll-tagging', github: 'allenlsy/jekyll-tagging'
 gem 'maruku'
 gem 'rake'
 gem 'sass'

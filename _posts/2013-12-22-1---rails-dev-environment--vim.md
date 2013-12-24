@@ -7,8 +7,8 @@ excerpt: "Introduction to setting up Rails development environment, and a demo t
 category: ""
 youtube: "EOU4VGs4j2Y"
 video: 
-tags: [rails, ruby, vim]
-thumbnail: "001-thumb.jpg"
+tags: "rails ruby vim"
+thumbnail: "/tb/001-thumb.jpg"
 ---
 
 ## Installing Ruby on Rails
