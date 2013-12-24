@@ -10,7 +10,7 @@ article {
     .social {
         height:40px;
         padding:10px 0;
-        
+
         > div {
             display:inline-block;
             min-width:120px;
@@ -51,21 +51,21 @@ article {
 
 
     }
-    
-    
+
+
     ol, ul {
         font-weight: 600;
         margin: 1.5em 0;
         padding: 0;
         list-style-position: outside;
         padding-left: 1.5em;
-        
+
         li {
             font-weight:400;
             margin-bottom:0.5em;
         }
     }
-    
+
     blockquote {
         border-left: 4px solid #777;
         padding: 0 15px;
@@ -103,6 +103,11 @@ article {
     h4 {
         font-size:1.2em;
         font-weight:600;
+        color: #11598A;
+    }
+
+    h5, h6 {
+        color: #094066;
     }
 
     hr {
@@ -173,23 +178,23 @@ article {
         font-size:0.8em;
         overflow-x: auto;
         display:block;
-        
+
         code {
             font-size:0.8em;
             border:0;
         }
     }
-    
+
     code {
         border-bottom:1px solid #ddd;
         border-radius:2px;
         color:#222;
-    } 
+    }
 
     .rounded img {
         border-radius:6px;
     }
-    
+
     .border img {
         border:1px solid #ddd;
     }
