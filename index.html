@@ -33,20 +33,37 @@ layout: base
   {% for post in paginator.posts %}
     {% unless post.draft %}
       <section class="index">
-            <h2 class="title"><a href="{{ post.url }}" rel="prefetch">{{ post.title }}</a></h2>
-            {% if post.subtitle %}
-            <h5 class="subtitle">{{ post.subtitle }}</h5>
-            {% endif %}
-            <p class="tags">
-              {{ post | tags }}
-            </p>
-            {% if post.excerpt %}
-            <p>{{ post.excerpt }}</p>
-            {% endif %}
-            <div class="meta">
-                <time pubdate datetime="{{ post.date | date: "%Y-%d-%B" }}" title="{{ post.date | date: "%B %d, %Y" }}">{{ post.date | date: "%B %d, %Y" }}</time>
+        <div class="row">
+          {% if post.thumbnail %}
+            <div class="col-sm-8">
+          {% else %}
+            <div class="col-sm-12">
+          {% endif %}
+              <h2 class="title"><a href="{{ post.url }}" rel="prefetch">{{ post.title }}</a></h2>
+              {% if post.subtitle %}
+              <h5 class="subtitle">{{ post.subtitle }}</h5>
+              {% endif %}
+              <p class="tags">
+                {{ post | tags }}
+              </p>
+              {% if post.excerpt %}
+              <p>{{ post.excerpt }}</p>
+              {% endif %}
+              <div class="meta">
+                  <time pubdate datetime="{{ post.date | date: "%Y-%d-%B" }}" title="{{ post.date | date: "%B %d, %Y" }}">{{ post.date | date: "%B %d, %Y" }}</time>
+              </div>
+          {% if post.thumbnail %}
             </div>
+            <div class="col-sm-4">
+              <a href="{{ post.url }}" rel="prefetch"><img src="/thumbnails/{{ post.thumbnail }}" alt="thumbnail" class="thumbnail"></a>
+            </div>
+          {% else %}
+            </div>
+          {% endif %}
+        </div>
+        <hr>
       </section>
+  
     {% endunless %}
   {% endfor %}
   <section class="pagination" style="text-align:center">

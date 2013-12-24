@@ -402,3 +402,14 @@ section.video-section {
     display: block;
   }
 }
+
+img.thumbnail {
+  width: 100%;
+  vertical-align: top;
+  box-shadow: 5px 5px 5px rgba(0,0,0,.4);
+  margin-top: 0;
+}
+
+.index {
+  margin-bottom: 1em;
+}

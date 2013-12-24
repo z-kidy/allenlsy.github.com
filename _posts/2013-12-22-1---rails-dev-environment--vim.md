@@ -8,6 +8,7 @@ category: ""
 youtube: "EOU4VGs4j2Y"
 video: 
 tags: [rails, ruby, vim]
+thumbnail: "001-thumb.jpg"
 ---
 
 ## Installing Ruby on Rails
