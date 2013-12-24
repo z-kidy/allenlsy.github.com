@@ -6,9 +6,33 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Sun, 22 Dec 2013 14:33:03 +0800</pubDate>
-    <lastBuildDate>Sun, 22 Dec 2013 14:33:03 +0800</lastBuildDate>
+    <pubDate>Tue, 24 Dec 2013 21:56:37 +0800</pubDate>
+    <lastBuildDate>Tue, 24 Dec 2013 21:56:37 +0800</lastBuildDate>
 
+    
+    
+    <item>
+      <title>#2 - Getting Started With Rails 4</title>
+      <link>/2-getting-started-with-rails-4</link>
+      <pubDate>Tue, 24 Dec 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/2-getting-started-with-rails-4</guid>
+      <description>&lt;p&gt;I recommend a video course on &lt;a href=&quot;https://tutsplus.com/course/the-fundamentals-of-ruby/&quot;&gt;Ruby language&lt;/a&gt; if you are interested in Ruby Language.&lt;/p&gt;
+
+&lt;h4 id=&quot;in-this-episode-we-discussed&quot;&gt;In this episode, we discussed…&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rails project structure&lt;/li&gt;
+  &lt;li&gt;Start coding a Rails project&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/plataformatec/devise&quot;&gt;Devise&lt;/a&gt; gem&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;rails&lt;/code&gt;, &lt;code&gt;rake&lt;/code&gt;, &lt;code&gt;bundle&lt;/code&gt; command&lt;/li&gt;
+  &lt;li&gt;Database migration&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;I have committed the project to Github&lt;/strong&gt;, &lt;a href=&quot;https://github.com/allenlsy/sharebook&quot;&gt;click to see the repository&lt;/a&gt;. Use &lt;code&gt;git checkout ep02&lt;/code&gt; to read the finished code of this episode.&lt;/p&gt;
+</description>
+    </item>
+    
     
     
     <item>
