@@ -27,9 +27,8 @@
     <meta name="description" content="{{ page.excerpt }}"/>
     {% endif %}
     <meta property="og:site_name" content="{{ site.inc.title }}">
-    {% if page.tags %}
-    <meta property="keywords" content="{{ page.tags }}">
-    {% endif %}
+    <link rel="stylesheet" href="bt-responsive.css" type="text/css" media="screen" charset="utf-8">
+    <meta name="keywords" content="{{ page | keywords }}">
 </head>
 <body>
     
