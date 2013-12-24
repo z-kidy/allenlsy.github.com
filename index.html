@@ -31,7 +31,7 @@ layout: base
     </address>
   </section>
   {% for post in paginator.posts %}
-    {% unless (post.draft or post.category == "cast" %}
+    {% unless post.draft %}
       <section class="index">
         <div class="row">
           {% if post.thumbnail %}
@@ -59,6 +59,7 @@ layout: base
             </div>
           {% else %}
             </div>
+          {% endif %}
         </div>
         <hr>
       </section>

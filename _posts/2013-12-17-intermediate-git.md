@@ -6,6 +6,7 @@ cover_image:
 excerpt: "Intermediate usage of git, on `add`, `rebase`, `reset`, `fetch` and `cherry-pick`"
 category: 
 tags: [git]
+thumbnail: "/tb/git.png"
 ---
 
 ### git add

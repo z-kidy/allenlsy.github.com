@@ -6,6 +6,7 @@ cover_image:
 excerpt: "My understanding of continuous testing is that, there is a testing tool in the background, which while developing and modifying code, it will continuously notify you the broken of correct code. I usually set up the testing environment using `RSpec`, `Spork` and `Guard`. The setup process may easily go wrong. Thus I made a note of the process."
 category: 
 tags: [testing, rails, ci, rspec, ruby]
+thumbnail: "http://www.continuoustests.com/images/logo.png"
 ---
 
 ![](http://www.continuoustests.com/images/logo.png)

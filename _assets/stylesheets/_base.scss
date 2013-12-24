@@ -394,3 +394,22 @@ a.badge:focus {
 .hidden-seo {
   display:none;
 }
+
+section.video-section {
+  & > .video, & > .mejs-video {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+
+img.thumbnail {
+  width: 100%;
+  vertical-align: top;
+  box-shadow: 5px 5px 5px rgba(0,0,0,.4);
+  margin-top: 0;
+}
+
+.index {
+  margin-bottom: 1em;
+}
