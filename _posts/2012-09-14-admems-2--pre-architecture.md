@@ -6,6 +6,7 @@ cover_image:
 excerpt: 
 category:
 tags: [architecture, software]
+thumbnail: "http://www.educity.cn/blog/UploadFiles/2009-9/241339652732.jpg"
 ---
 
 我们需要知道，哪些因素构成了架构设计的约束性需求？或者说，哪些因素约束着架构设计？

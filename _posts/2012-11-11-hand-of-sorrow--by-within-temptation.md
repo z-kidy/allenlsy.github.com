@@ -6,6 +6,7 @@ cover_image:
 excerpt: 
 category: 
 tags: []
+thumbnail: "http://www.piercingmetal.com/graphics/cd_withintemptation_blacksymphony.jpg"
 ---
 
 <iframe width="420" height="315" src="//www.youtube.com/embed/7Vt3kxmuioM" frameborder="0" allowfullscreen></iframe>
