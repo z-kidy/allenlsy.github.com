@@ -1,7 +1,8 @@
 ---
 layout: post
 title: Effective Java 7 - General Programming
-excerpt: 
+excerpt:
+tags: [java]
 
 ---
 
