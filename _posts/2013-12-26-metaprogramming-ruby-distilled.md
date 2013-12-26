@@ -69,7 +69,7 @@ Methods used for metaprogramming:
 {% highlight ruby %}
 module M
   Y = 'a constant'
-  class X
+  class C
     ::M::Y
   end
 end
