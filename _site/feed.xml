@@ -6,9 +6,52 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Thu, 26 Dec 2013 18:08:49 +0800</pubDate>
-    <lastBuildDate>Thu, 26 Dec 2013 18:08:49 +0800</lastBuildDate>
+    <pubDate>Fri, 03 Jan 2014 14:08:52 +0800</pubDate>
+    <lastBuildDate>Fri, 03 Jan 2014 14:08:52 +0800</lastBuildDate>
 
+    
+    
+    <item>
+      <title>Notes of December 2013</title>
+      <link>/notes-2013-12</link>
+      <pubDate>Mon, 30 Dec 2013 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/notes-2013-12</guid>
+      <description>&lt;h2 id=&quot;serialization--deserialization-in-ruby&quot;&gt;Serialization &amp;amp; Deserialization in Ruby&lt;/h2&gt;
+
+&lt;p&gt;Using &lt;code&gt;YAML&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;marshalled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dump&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;unmarshaled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;marshalled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;questions-of-the-month&quot;&gt;Questions of the month&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is the usage of eigenclass in Ruby?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;References:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;http://www.skorks.com/2010/04/serializing-and-deserializing-objects-with-ruby/&quot;&gt;Serializing (And Deserializing) Objects With Ruby&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://richonrails.com/articles/rails-4-code-concerns-in-active-record-models&quot;&gt;Rails 4 code concerns in ActiveRecord models&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://www.intridea.com/blog/2012/3/22/define-custom-callbacks-for-activerecord-and-more&quot;&gt;Define Custom Callbacks for ActiveRecord and More&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://blog.lucascaton.com.br/index.php/2010/10/25/how-to-test-mailers-in-rails-3-with-rspec/&quot;&gt;How to test mailers in Rails 3 with RSpec&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://ejholmes.io/2012/04/08/active-admin-with-omniauth.html&quot;&gt;Salesforce OAuth2 Authentication With Active Admin&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://ruby-china.org/topics/15737&quot;&gt;写出好的 commit message&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;https://medium.com/p/ba896a142ac&quot;&gt;Capistrano Version 3 - 7 reasons to be excited about deployment&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;So Funny. &lt;a href=&quot;http://mattsears.com/articles/2011/11/16/nyan-cat-rspec-formatter&quot;&gt;Nyan Cat RSpec Formatter&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;http://blog.marceloaltmann.com/how-to-rename-a-database-in-mysql/&quot;&gt;How to rename a database in mysql&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+</description>
+    </item>
+    
     
     
     <item>

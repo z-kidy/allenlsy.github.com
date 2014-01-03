@@ -3,27 +3,23 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual in C++ &mdash; Simple, Not Easy</title>
+    <title>Notes of December 2013 &mdash; Simple, Not Easy</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Oswald" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/main.css">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
-    <meta name="title" content="Virtual in C++ ">
-    <link rel="canonical" href="/virtual-in%E2%80%93C%2B%2B">
+    <meta name="title" content="Notes of December 2013 ">
+    <link rel="canonical" href="/notes-2013-12">
     
     <link rel="author" href="https://plus.google.com/118230970865161551961">
-    <meta property="og:title" content="Virtual in C++ "/>
-    <meta property="og:url" content="/virtual-in%E2%80%93C%2B%2B"/>
-    
-    <meta property="og:image" content="/images/cppcafe.jpg"/>
-    
-    <meta property="og:image" content="/images/logo.jpg"/>
+    <meta property="og:title" content="Notes of December 2013 "/>
+    <meta property="og:url" content="/notes-2013-12"/>
     
     
     <meta property="og:site_name" content="Simple, Not Easy">
     <link rel="stylesheet" href="/bt-responsive.css" type="text/css" media="screen" charset="utf-8">
-    <meta name="keywords" content="c++">
+    <meta name="keywords" content="reading,note">
 </head>
 <body>
 
@@ -50,76 +46,61 @@
 </section>
 
 
-<div class="article-cover">
-    <div>
-        <img src="/images/cppcafe.jpg" class="image">
-    </div>
-</div>
-
 <article>
 
     <div class="container">
         <header>
-            <h1 class="title">Virtual in C++</h1>
+            <h1 class="title">Notes of December 2013</h1>
             
             <div class="meta">
-                <time pubdate datetime="2013-27-May" title="May 27, 2013">May 27, 2013</time>
+                <time pubdate datetime="2013-30-December" title="December 30, 2013">December 30, 2013</time>
             </div>
             <div class="tags">
-              <a href="/tags/c%2B%2B.html" rel="tag">c++</a>
+              <a href="/tags/reading.html" rel="tag">reading</a> <a href="/tags/note.html" rel="tag">note</a>
             </div>
             <div class="hidden-seo">
-              By <a href="/virtual-in%E2%80%93C%2B%2B" title="Virtual in C++" rel="author">allenlsy</a>
+              By <a href="/notes-2013-12" title="Notes of December 2013" rel="author">allenlsy</a>
             </div>
         </header>
 
         <section>
-            <p>I have a program to explain the <strong>static typing</strong> and <strong>dynamic typing</strong> in C++.</p>
+            <h2 id="serialization--deserialization-in-ruby">Serialization &amp; Deserialization in Ruby</h2>
 
-<div class="highlight"><pre><code class="cpp"><span class="cp">#include &lt;iostream&gt;</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<p>Using <code>YAML</code></p>
 
-<span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
-<span class="nl">public:</span>
-    <span class="n">A</span> <span class="p">()</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="n">bark</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;this is A&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">B</span><span class="o">:</span> <span class="k">public</span> <span class="n">A</span>
-<span class="p">{</span>
-<span class="nl">public:</span>
-    <span class="n">B</span> <span class="p">()</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="n">bark</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;this is B&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="n">B</span> <span class="n">b</span><span class="p">;</span>
-    <span class="n">A</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>
-    <span class="n">a</span><span class="o">-&gt;</span><span class="n">bark</span><span class="p">();</span>
-    
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<div class="highlight"><pre><code class="ruby"><span class="n">marshalled</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">object</span><span class="p">)</span>
+<span class="n">unmarshaled</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">marshalled</span><span class="p">)</span>
 </code></pre></div>
 
-<p>This program outputs <code>this is A</code>. If you are a Java programmer, you might thihk this should be <code>this is B</code>. But it is not.</p>
+<h3 id="questions-of-the-month">Questions of the month</h3>
 
-<p><code>bark()</code> in <code>A</code> is static typing now, which means <code>a</code>’s type is always <code>A</code>. <code>a</code> does not know <code>B</code>.</p>
+<ul>
+  <li>What is the usage of eigenclass in Ruby?</li>
+</ul>
 
-<p>To make it barking <code>this is B</code>, it’s easy. Add <code>virtual</code> before the <code>void bark()</code> in <code>A</code>.</p>
+<hr />
 
-<p><code>virtual</code> makes <code>bark()</code> be called based on the real type, which might be the subclass of <code>A</code>, which is <code>B</code> here.</p>
+<blockquote>
+  <p>References:</p>
+
+  <ol>
+    <li><a href="http://www.skorks.com/2010/04/serializing-and-deserializing-objects-with-ruby/">Serializing (And Deserializing) Objects With Ruby</a></li>
+    <li><a href="http://richonrails.com/articles/rails-4-code-concerns-in-active-record-models">Rails 4 code concerns in ActiveRecord models</a></li>
+    <li><a href="http://www.intridea.com/blog/2012/3/22/define-custom-callbacks-for-activerecord-and-more">Define Custom Callbacks for ActiveRecord and More</a></li>
+    <li><a href="http://blog.lucascaton.com.br/index.php/2010/10/25/how-to-test-mailers-in-rails-3-with-rspec/">How to test mailers in Rails 3 with RSpec</a></li>
+    <li><a href="http://ejholmes.io/2012/04/08/active-admin-with-omniauth.html">Salesforce OAuth2 Authentication With Active Admin</a></li>
+    <li><a href="http://ruby-china.org/topics/15737">写出好的 commit message</a></li>
+    <li><a href="https://medium.com/p/ba896a142ac">Capistrano Version 3 - 7 reasons to be excited about deployment</a></li>
+    <li>So Funny. <a href="http://mattsears.com/articles/2011/11/16/nyan-cat-rspec-formatter">Nyan Cat RSpec Formatter</a></li>
+    <li><a href="http://blog.marceloaltmann.com/how-to-rename-a-database-in-mysql/">How to rename a database in mysql</a></li>
+  </ol>
+</blockquote>
+
 
             
 <div class="social">
     <div>
-        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Virtual in C++" data-related="allenlsy">Tweet</a>
+        <a href="https://twitter.com/share" class="twitter-share-button"  data-text="Notes of December 2013" data-related="allenlsy">Tweet</a>
     </div>
     
     
