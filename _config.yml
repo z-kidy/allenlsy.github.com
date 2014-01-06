@@ -49,7 +49,8 @@ author:
   gplus: 118230970865161551961 
   image: avatar.jpg
   logo: logo.jpg
-  bio: Live in Singapore. Ruby on Rails Developer. Like coffee making (latte & macchiato), metal music, photography. Chelsea fan. 
+  bio: 
+      Live in Singapore. Ruby on Rails Developer. Like coffee, music, photography & Chelsea. 
 
 # url:         http://incorporated.sendtoinc.com
 source:      .
