@@ -6,75 +6,20 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Tue, 07 Jan 2014 09:21:19 +0800</pubDate>
-    <lastBuildDate>Tue, 07 Jan 2014 09:21:19 +0800</lastBuildDate>
+    <pubDate>Tue, 07 Jan 2014 22:43:14 +0800</pubDate>
+    <lastBuildDate>Tue, 07 Jan 2014 22:43:14 +0800</lastBuildDate>
 
     
-    
-    <item>
-      <title>Monthly January 2014</title>
-      <link>/monthly-january-2014</link>
-      <pubDate>Tue, 07 Jan 2014 00:00:00 +0800</pubDate>
-      <author></author>
-      <guid>/monthly-january-2014</guid>
-      <description>&lt;h3 id=&quot;recomemend-readings&quot;&gt;Recomemend Readings&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.blacktie.co/&quot;&gt;Free Bootstrap Themes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://5minutenpause.com/blog/2013/09/04/multiple-file-upload-with-jquery-rails-4-and-paperclip/&quot;&gt;Multiple file upload with jQuery, Rails 4 and Paperclip&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://bestcbooks.com/recommended-cpp-books&quot;&gt;C++必读书籍推荐&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;emacs&quot;&gt;Emacs&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://batsov.com/articles/2011/11/30/the-ultimate-collection-of-emacs-resources/&quot;&gt;The Ultimate Collection of Emacs Resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;videos&quot;&gt;Videos&lt;/h3&gt;
-
-&lt;h5 id=&quot;ben-orenstein---write-code-faster-expert-level-vim-railsberry-2012httpswwwyoutubecomwatchvskdrywhh-8s&quot;&gt;1. &lt;a href=&quot;https://www.youtube.com/watch?v=SkdrYWhh-8s&quot;&gt;Ben Orenstein - Write code faster: expert-level vim (Railsberry 2012)&lt;/a&gt;&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Simplify saving file&lt;/li&gt;
-  &lt;li&gt;Using leader&lt;/li&gt;
-  &lt;li&gt;Grow your vimrc&lt;/li&gt;
-  &lt;li&gt;Use hjkl&lt;/li&gt;
-  &lt;li&gt;Navigate: command-t, vim-rails&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;more-git-and-github-secrets-with-zach-holmanhttpsvimeocom76197230&quot;&gt;2.  &lt;a href=&quot;https://vimeo.com/76197230&quot;&gt;More Git and GitHub Secrets with Zach Holman&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://zachholman.com/talk/more-git-and-github-secrets/&quot;&gt;Here his blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;git merge master -s ours&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git merge master -s recursive -X patience&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Second Order Diff&lt;/li&gt;
-  &lt;li&gt;Emoji diff, &lt;code&gt;git --no-pager diff&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git diff --check&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git stripspace&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git merge --abort | --no-commit&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Proper message&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;y&lt;/code&gt; key: look for deleted file&lt;/li&gt;
-  &lt;li&gt;/allenlsy.keys&lt;/li&gt;
-  &lt;li&gt;Fetching pull request: &lt;code&gt;git fetch origin pull/12/head:pr&lt;/code&gt;, fetches Pull Request #12 into a branch named “pr”&lt;/li&gt;
-  &lt;li&gt;Top emoji on Github: :clap:, :+1:, :-1:, :sparkles:, :shipit:&lt;/li&gt;
-  &lt;li&gt;Page as a todo list&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-    </item>
     
     
     
     <item>
-      <title>Notes of December 2013</title>
-      <link>/notes-2013-12</link>
+      <title>Monthly December 2013</title>
+      <link>/monthly-december-2013</link>
       <pubDate>Mon, 30 Dec 2013 00:00:00 +0800</pubDate>
       <author></author>
-      <guid>/notes-2013-12</guid>
-      <description>&lt;h2 id=&quot;serialization--deserialization-in-ruby&quot;&gt;Serialization &amp;amp; Deserialization in Ruby&lt;/h2&gt;
+      <guid>/monthly-december-2013</guid>
+      <description>&lt;h3 id=&quot;serialization--deserialization-in-ruby&quot;&gt;Serialization &amp;amp; Deserialization in Ruby&lt;/h3&gt;
 
 &lt;p&gt;Using &lt;code&gt;YAML&lt;/code&gt;&lt;/p&gt;
 

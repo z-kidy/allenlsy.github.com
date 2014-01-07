@@ -7,6 +7,7 @@ excerpt: ""
 category: ""
 tags: [monthly]
 thumbnail:
+draft: true
 ---
 
 ### Recomemend Readings
@@ -14,6 +15,9 @@ thumbnail:
 1. [Free Bootstrap Themes](http://www.blacktie.co/)
 2. [Multiple file upload with jQuery, Rails 4 and Paperclip](http://5minutenpause.com/blog/2013/09/04/multiple-file-upload-with-jquery-rails-4-and-paperclip/)
 3. [C++必读书籍推荐](http://bestcbooks.com/recommended-cpp-books)
+4. [What are some time-saving tips that every Linux user should know?](http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#step=6), [每个Linux用户都应该了解的命令行省时技巧](http://blog.jobbole.com/54425/)
+	* `pgrep`, `pkill`, `xargs`, `lsof`, `*stat`, `mtr`, `siege`...
+5. 	
 
 ### Emacs
 
