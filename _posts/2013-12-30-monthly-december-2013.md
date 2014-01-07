@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Notes of December 2013"
-subtitle: 
-cover_image: 
-excerpt: 
-category: 
-tags: [reading, note]
+title: "Monthly December 2013"
+subtitle:
+cover_image:
+excerpt:
+category:
+tags: [monthly]
 thumbnail: "http://www.catholicvote.org/wp-content/uploads/2013/10/coffee-ending.jpg"
 ---
 
-## Serialization & Deserialization in Ruby
+### Serialization & Deserialization in Ruby
 
 Using `YAML`
 
@@ -25,7 +25,7 @@ unmarshaled = YAML.load(marshalled)
 ---
 
 > References:
-> 
+>
 > 1. [Serializing (And Deserializing) Objects With Ruby](http://www.skorks.com/2010/04/serializing-and-deserializing-objects-with-ruby/)
 > 2. [Rails 4 code concerns in ActiveRecord models](http://richonrails.com/articles/rails-4-code-concerns-in-active-record-models)
 > 3. [Define Custom Callbacks for ActiveRecord and More](http://www.intridea.com/blog/2012/3/22/define-custom-callbacks-for-activerecord-and-more)
