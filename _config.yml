@@ -4,7 +4,7 @@ inc:
   subtitle:     "allenlsy.com"
   cover_image:  blog-cover.jpg
   logo:         logo.jpg
-  
+
   # Company information
   company:      allenlsy
   url:          http://allenlsy.com/
@@ -12,45 +12,44 @@ inc:
   twitter:      allenlsy
   gplus:        '118230970865161551961'
   # about_link:   /about/
-  
+
   # Product Information
   # product_link: http://incorporated.sendtoinc.com/
   # tagline:      "Get a modern blog for your company"
-  
+
   # Comments
   disqus:
     # Eg. "exampleblog" Set to false to disable comments
     shortname: 'allenlsy'
-  
+
   # Sharing settings
   sharing:
     twitter:    true
     facebook:   true
     gplus:      true
     hn:         true
-    
-  
-  # Analytics     
+
+
+  # Analytics
   analytics:
-    google: 
+    google:
       # eg. 'UA-123-12'
       id: 'UA-24647338-1'
-      
+
   # Google Fonts
-  # eg. 'Droid+Sans:400,700|Droid+Serif:400,700'
-  google_font: 'Open+Sans:400,700|Oswald'
-  
+  google_font: 'Open+Sans:400,700,800|Oswald|PT+Mono|Ubuntu+Mono'
+
   # Setup your fonts, colors etc at _assets/stylesheets/main.scss
 
 # site author
 author:
   name: allenlsy
   twitter: allenlsy
-  gplus: 118230970865161551961 
+  gplus: 118230970865161551961
   image: avatar.jpg
   logo: logo.jpg
-  bio: 
-      Live in Singapore. Ruby on Rails Developer. Like coffee, music, photography & Chelsea. 
+  bio:
+      Live in Singapore. Ruby on Rails Developer. Like coffee, music, photography & Chelsea.
 
 # url:         http://incorporated.sendtoinc.com
 source:      .
@@ -152,4 +151,4 @@ links:
 
 tag_page_layout: tag_page
 tag_page_dir: tags
-   
+
