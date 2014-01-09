@@ -7,7 +7,6 @@ excerpt: ""
 category: ""
 tags: [monthly]
 thumbnail:
-draft: true
 ---
 
 ### Recomemend Readings
@@ -17,12 +16,10 @@ draft: true
 3. [C++必读书籍推荐](http://bestcbooks.com/recommended-cpp-books)
 4. [What are some time-saving tips that every Linux user should know?](http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#step=6), [每个Linux用户都应该了解的命令行省时技巧](http://blog.jobbole.com/54425/)
 	* `pgrep`, `pkill`, `xargs`, `lsof`, `*stat`, `mtr`, `siege`...
-5. 	
 
 ### Emacs
 
 1. [The Ultimate Collection of Emacs Resources](http://batsov.com/articles/2011/11/30/the-ultimate-collection-of-emacs-resources/)
-
 
 ### Videos
 

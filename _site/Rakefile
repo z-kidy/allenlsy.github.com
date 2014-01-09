@@ -71,6 +71,8 @@ task :post do
     post.puts "category: \"#{category.gsub(/-/,' ')}\""
     post.puts "tags: #{tags}"
     post.puts "thumbnail: "
+    post.puts "draft: true"
+
     post.puts "---"
   end
 end # task :post

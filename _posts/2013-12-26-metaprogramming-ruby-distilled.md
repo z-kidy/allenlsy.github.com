@@ -5,7 +5,7 @@ subtitle: NOTES on Metaprogramming Ruby
 cover_image:
 excerpt: ""
 category: ""
-tags: [ruby, note, metaprogramming]
+tags: [ruby, metaprogramming, book]
 thumbnail: "http://johntopley.com/images/posts/2010/12/02/metaprogramming_ruby.jpg"
 ---
 
@@ -54,7 +54,7 @@ Methods used for metaprogramming:
 	String.instance_methods
 	Class.instance_methods(false) # non-inherited methods	superclass
 
-> Example
+Example:
 
 	[].methods.grep /^re/ # list all the methods of Array starts with `re`
 
