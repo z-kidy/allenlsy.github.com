@@ -6,8 +6,8 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Tue, 14 Jan 2014 17:56:42 +0800</pubDate>
-    <lastBuildDate>Tue, 14 Jan 2014 17:56:42 +0800</lastBuildDate>
+    <pubDate>Wed, 15 Jan 2014 07:18:53 +0800</pubDate>
+    <lastBuildDate>Wed, 15 Jan 2014 07:18:53 +0800</lastBuildDate>
 
     
     
@@ -17,7 +17,9 @@
       <pubDate>Thu, 09 Jan 2014 00:00:00 +0800</pubDate>
       <author></author>
       <guid>/working-with-unix-process-in-ruby</guid>
-      <description>&lt;h2 id=&quot;reference-of-ruby-process-related-methods&quot;&gt;Reference of Ruby Process related methods&lt;/h2&gt;
+      <description>&lt;p&gt;&lt;a href=&quot;http://www.jstorimer.com/products/working-with-unix-processes&quot;&gt;Book home page&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;reference-of-ruby-process-related-methods&quot;&gt;Reference of Ruby Process related methods&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
@@ -46,12 +48,12 @@
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process.getrlimit&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;getrlimit&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;get system resource limit&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process.setrlimit&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;setrlimit&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;set system resource limit&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;-&lt;/td&gt;
@@ -96,17 +98,17 @@
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process#waitpid&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;waitpid&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Ruby: wait for process&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process#waitpid2&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;waitpid&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Ruby: wait for process, returns&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process#detach&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;-&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;create a new process, only to wait for a centain process to end&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process#kill&lt;/code&gt;&lt;/td&gt;
@@ -116,32 +118,42 @@
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Process#trap&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;sigaction&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;define signal handling function&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;IO.pipe&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;pipe&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;define new pipe&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Socket.pair&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;socketpair&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;define pair of sockets&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Socket.recv&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;recv&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;sockets receive&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Socket.send&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;&lt;code&gt;send&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;sockets send&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Process.setsid&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;getsid&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;create new session group&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Process.getpgrp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;getpgrp&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;get process group id&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h1 id=&quot;basic-of-process&quot;&gt;Basic of Process&lt;/h1&gt;
+&lt;h1 id=&quot;basic-of-process&quot;&gt;1. Basic of Process&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Get process descriptor in shell: &lt;code&gt;$$&lt;/code&gt;&lt;/li&gt;
@@ -149,11 +161,11 @@
   &lt;li&gt;Get process name in ruby: &lt;code&gt;$PROGRAM_NAME&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;about-file-descriptor&quot;&gt;About file descriptor&lt;/h4&gt;
+&lt;h4 id=&quot;file-descriptor&quot;&gt;File descriptor&lt;/h4&gt;
 
 &lt;ol&gt;
   &lt;li&gt;File descriptor number is resuable&lt;/li&gt;
-  &lt;li&gt;STDIN, STDOUT, STDERR&lt;/li&gt;
+  &lt;li&gt;STDIN, STDOUT, STDERR is predefined&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;STDIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileno&lt;/span&gt; 	&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0&lt;/span&gt;
@@ -184,11 +196,23 @@
 
 &lt;p&gt;&lt;code&gt;exit&lt;/code&gt;, &lt;code&gt;abort&lt;/code&gt;, &lt;code&gt;raise&lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;multiple-processes-fork&quot;&gt;Multiple processes: &lt;code&gt;fork&lt;/code&gt;&lt;/h1&gt;
+&lt;h3 id=&quot;examples-of-process-basic&quot;&gt;Examples of process basic&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# IO#fileno&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;passwd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/etc/passwd&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passwd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileno&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Resource limitations&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:NPROC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:FSIZE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:STACK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;multiple-processes-fork&quot;&gt;2. Multiple processes: &lt;code&gt;fork&lt;/code&gt;&lt;/h1&gt;
 
 &lt;p&gt;Child process will inherit the whole memory of parent process. To improve performance, memory uses &lt;em&gt;copy-on-write&lt;/em&gt; strategy.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt;: &lt;code&gt;fork&lt;/code&gt; returns nil in child process, returns the pid of child process in parent process.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;IMPORTANT&lt;/strong&gt;: &lt;code&gt;fork&lt;/code&gt; returns &lt;code&gt;nil&lt;/code&gt; in child process, returns the pid of child process in parent process.&lt;/p&gt;
 
 &lt;h3 id=&quot;process-wait&quot;&gt;Process Wait&lt;/h3&gt;
 
@@ -202,9 +226,9 @@
 
 &lt;h3 id=&quot;zombie-process&quot;&gt;Zombie process&lt;/h3&gt;
 
-&lt;p&gt;The kernel will retain the status of exited child processes until the parent process requests that status using &lt;code&gt;Process.wait&lt;/code&gt;. If the parent never requests the status then the kernel can never reap that status information.&lt;/p&gt;
+&lt;p&gt;The kernel will retain the status of exited child processes until the parent process requests that status using &lt;code&gt;Process.wait&lt;/code&gt;. If the parent never requests the status then the kernel can never return that status information.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;Process.detach&lt;/code&gt; will for specified child process exit.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Process.detach&lt;/code&gt; will create a process wating for specified child process to exit.&lt;/p&gt;
 
 &lt;p&gt;Using &lt;code&gt;ps&lt;/code&gt; to check process, zombie process will be marked &lt;code&gt;z&lt;/code&gt; or &lt;code&gt;Z+&lt;/code&gt;&lt;/p&gt;
 
@@ -236,13 +260,13 @@
 &lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;detach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;signal&quot;&gt;Signal&lt;/h1&gt;
+&lt;h1 id=&quot;signal&quot;&gt;3. Signal&lt;/h1&gt;
 
-&lt;p&gt;&lt;code&gt;wait&lt;/code&gt; is a blocking method: until child process exit, the method returns.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;wait&lt;/code&gt; is a &lt;strong&gt;blocking method&lt;/strong&gt;: until child process exit, the method returns.&lt;/p&gt;
 
-&lt;p&gt;Cathing signal is non-blocking.&lt;/p&gt;
+&lt;p&gt;Catching signal is non-blocking.&lt;/p&gt;
 
-&lt;p&gt;Singal delivering is not reliable. &lt;/p&gt;
+&lt;p&gt;Signal delivering is not reliable. &lt;/p&gt;
 
 &lt;p&gt;We suggest using &lt;code&gt;Process.wait&lt;/code&gt; to deal with signal. &lt;/p&gt;
 
@@ -251,25 +275,25 @@
 
 &lt;p&gt;&lt;code&gt;Process::WNOHANG&lt;/code&gt; means, if no child process exit, then do not block.&lt;/p&gt;
 
-&lt;h3 id=&quot;catch-signal&quot;&gt;Catch signal&lt;/h3&gt;
+&lt;h4 id=&quot;catch-signal&quot;&gt;Catch signal&lt;/h4&gt;
 
-&lt;h3 id=&quot;send-signal&quot;&gt;Send signal&lt;/h3&gt;
+&lt;h4 id=&quot;send-signal&quot;&gt;Send signal&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;Process.kill(:INT, pid_of_a_process)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3 id=&quot;re-define-signal-handling-process&quot;&gt;Re-define signal handling process&lt;/h3&gt;
+&lt;h4 id=&quot;re-define-signal-handling-process&quot;&gt;Re-define signal handling process&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;trap(:INT) { ... }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;But some of the signal handling cannot be re-defined.Pr&lt;/p&gt;
+&lt;p&gt;But some of the signal handling cannot be re-defined.&lt;/p&gt;
 
-&lt;p&gt;But &lt;code&gt;INT&lt;/code&gt; has lower priority than &lt;code&gt;KILL&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;INT&lt;/code&gt; is actually &lt;code&gt;Ctrl+C&lt;/code&gt;, which is not as powerful as &lt;code&gt;KILL&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h4 id=&quot;re-define-signal-propertly&quot;&gt;Re-define signal propertly&lt;/h4&gt;
 
-&lt;p&gt;Kepp system default handling&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Notice&lt;/strong&gt; to Keep system default handling&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;trap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:INT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;This is the first signal handler&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;old_handler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;trap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:INT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -319,11 +343,11 @@
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h1 id=&quot;pipe&quot;&gt;Pipe&lt;/h1&gt;
+&lt;h1 id=&quot;pipe&quot;&gt;4. Pipe&lt;/h1&gt;
 
 &lt;p&gt;Pipe is a single direction data stream.&lt;/p&gt;
 
-&lt;h3 id=&quot;shared-pipe-in-multi-processes&quot;&gt;Shared pipe in multi-processes&lt;/h3&gt;
+&lt;h4 id=&quot;shared-pipe-in-multi-processes&quot;&gt;Shared pipe in multi-processes&lt;/h4&gt;
 
 &lt;p&gt;&lt;code&gt;IO&lt;/code&gt; operations: &lt;code&gt;read&lt;/code&gt;, &lt;code&gt;write&lt;/code&gt;, &lt;code&gt;close&lt;/code&gt;, &lt;code&gt;gets&lt;/code&gt;, &lt;code&gt;puts&lt;/code&gt;&lt;/p&gt;
 
@@ -387,18 +411,117 @@
 &lt;span class=&quot;c1&quot;&gt;# Feather lifting accomplished!&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;hr /&gt;
+&lt;h1 id=&quot;daemon-process&quot;&gt;5. Daemon Process&lt;/h1&gt;
 
-&lt;h1 id=&quot;examples&quot;&gt;Examples:&lt;/h1&gt;
+&lt;p&gt;Daemon process normally won’t stop by itself.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# IO#fileno&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;passwd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/etc/passwd&amp;#39;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passwd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileno&lt;/span&gt;
+&lt;p&gt;When system boots, there is a &lt;code&gt;init&lt;/code&gt; process, whose ppid is &lt;strong&gt;0&lt;/strong&gt;. It is the ancestor of all processes.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;# Resource limitations&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:NPROC&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:FSIZE&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getrlimit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:STACK&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;h4 id=&quot;create-a-daemon-process&quot;&gt;Create a daemon process&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;exit if fork&lt;/code&gt; or &lt;code&gt;Process.daemon&lt;/code&gt;. In parent process, it returns the pid of child, which leads to exit.&lt;/p&gt;
+
+&lt;p&gt;After parent exit, the &lt;code&gt;ppid&lt;/code&gt; of orphan process is always &lt;strong&gt;1&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;process-group--session-group&quot;&gt;Process group &amp;amp; Session group&lt;/h4&gt;
+
+&lt;p&gt;Use &lt;code&gt;Process.setpgrp(new_group_id)&lt;/code&gt; to set process group.&lt;/p&gt;
+
+&lt;p&gt;Process group id is the pid of the group leader process.&lt;/p&gt;
+
+&lt;p&gt;A child process has the same process group id as the parent process.&lt;/p&gt;
+
+&lt;p&gt;Terminal receives signal, and dispatches to every child processes in this process group.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Session group&lt;/strong&gt; is a set of process groups.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git log | grep shipped | less
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example, every sub-command has its own process group. They all belongs to the same session group.&lt;/p&gt;
+
+&lt;p&gt;When signal comes to the leader of the session group, it passes the signal to all the leaders of the process groups inside, and the leaders pass the signal again to processes in the process group.&lt;/p&gt;
+
+&lt;p&gt;Hierarchical signal passing.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Process.setsid&lt;/code&gt; to get session group id. It can also fork a new process group and a new leader of session group.&lt;/p&gt;
+
+&lt;p&gt;After that if we run &lt;code&gt;exit if fork&lt;/code&gt;, the new session group leader will leave the control of terminal. The new session group can be used as daemon processes.&lt;/p&gt;
+
+&lt;p&gt;Also set the streams of the process to &lt;code&gt;/dev/null&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;STDIN.reopen &quot;/dev/null&quot;
+STDOUT.reopen &quot;/dev/null&quot;, &quot;a&quot;
+STDERR.reopen &quot;/dev/null&quot;, &quot;a&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;examples-of-daemon-process&quot;&gt;Examples of daemon process&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# process group id&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getpgrp&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;fork&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getpgrp&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;spawning-terminal-process&quot;&gt;6. Spawning terminal process&lt;/h1&gt;
+
+&lt;p&gt;&lt;code&gt;exec&lt;/code&gt; command can convert current process to another process, unrevertable.&lt;/p&gt;
+
+&lt;p&gt;Use &lt;code&gt;fork + exec&lt;/code&gt; to spawn new process. &lt;code&gt;exec&lt;/code&gt; cannot convert a process back. But with &lt;code&gt;fork&lt;/code&gt; can maintain a unconverted copy of process.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;/etc/hosts&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;-c&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;import os; print os.fdopen(&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hosts&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileno&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;).read()&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;exec&lt;/code&gt; runs a shell command actually. &lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Kernel#system&lt;/code&gt; runs shell command, and returns the terminal exit code.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Kernel#`&lt;/code&gt; returns the STDOUT string. Same as &lt;code&gt;%x[]&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;sb&quot;&gt;`ls`&lt;/span&gt;
+&lt;span class=&quot;sb&quot;&gt;`ls --help`&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;%x[git log | tail -10]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;Process.spawn&lt;/code&gt; is a non-blocking call.&lt;/p&gt;
+
+&lt;h4 id=&quot;iopopen&quot;&gt;&lt;code&gt;IO.popen&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;popen&lt;/code&gt; opens a pipe, returns file descriptor number.&lt;/p&gt;
+
+&lt;h4 id=&quot;ioopen3&quot;&gt;&lt;code&gt;IO.open3&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;Opens STDIN, STDOUT, STDERR at the same time.&lt;/p&gt;
+
+&lt;h4 id=&quot;last-word-about-fork&quot;&gt;Last word about &lt;code&gt;fork&lt;/code&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;fork&lt;/code&gt; consumes a lot of memory. Some system call have optimization. Original Ruby library does not support system call, but &lt;code&gt;posix-spawn&lt;/code&gt; project supports.&lt;/p&gt;
+
+&lt;h3 id=&quot;example-of-spawn&quot;&gt;Example of spawn&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;RAILS_ENV&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rails server&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Process&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;--help&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;STDERR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;STDOUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# example of popen&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;popen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;less&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;some&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# example of open3&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;open3&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Open3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;popen3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;grep&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;data&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stderr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;some&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;data&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;close&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Open3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;popen3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;ls&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;-uhh&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stderr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>

@@ -18,12 +18,12 @@
     <meta property="og:url" content="/working-with-unix-process-in-ruby"/>
      
     
-    <meta property="og:description" content=""/>
-    <meta name="description" content=""/>
+    <meta property="og:description" content="NOTES of Working with Unix Process in Ruby, by Jesse Storimer"/>
+    <meta name="description" content="NOTES of Working with Unix Process in Ruby, by Jesse Storimer"/>
     
     <meta property="og:site_name" content="Simple, Not Easy">
     <link rel="stylesheet" href="/bt-responsive.css" type="text/css" media="screen" charset="utf-8">
-    <meta name="keywords" content="book">
+    <meta name="keywords" content="book,ruby,process,unix">
 </head>
 <body>
 
@@ -60,7 +60,7 @@
                 <time pubdate datetime="2014-09-January" title="January 09, 2014">January 09, 2014</time>
             </div>
             <div class="tags">
-              <a href="/tags/book.html" rel="tag">book</a>
+              <a href="/tags/book.html" rel="tag">book</a>, <a href="/tags/ruby.html" rel="tag">ruby</a>, <a href="/tags/process.html" rel="tag">process</a>, <a href="/tags/unix.html" rel="tag">unix</a>
             </div>
             <div class="hidden-seo">
               By <a href="/working-with-unix-process-in-ruby" title="Working with Unix Process in Ruby" rel="author">allenlsy</a>
@@ -68,7 +68,9 @@
         </header>
 
         <section class="article">
-            <h2 id="reference-of-ruby-process-related-methods">Reference of Ruby Process related methods</h2>
+            <p><a href="http://www.jstorimer.com/products/working-with-unix-processes">Book home page</a></p>
+
+<h2 id="reference-of-ruby-process-related-methods">Reference of Ruby Process related methods</h2>
 
 <table>
   <thead>
@@ -97,12 +99,12 @@
     <tr>
       <td><code>Process.getrlimit</code></td>
       <td><code>getrlimit</code></td>
-      <td> </td>
+      <td>get system resource limit</td>
     </tr>
     <tr>
       <td><code>Process.setrlimit</code></td>
       <td><code>setrlimit</code></td>
-      <td> </td>
+      <td>set system resource limit</td>
     </tr>
     <tr>
       <td>-</td>
@@ -147,17 +149,17 @@
     <tr>
       <td><code>Process#waitpid</code></td>
       <td><code>waitpid</code></td>
-      <td> </td>
+      <td>Ruby: wait for process</td>
     </tr>
     <tr>
       <td><code>Process#waitpid2</code></td>
       <td><code>waitpid</code></td>
-      <td> </td>
+      <td>Ruby: wait for process, returns</td>
     </tr>
     <tr>
       <td><code>Process#detach</code></td>
       <td>-</td>
-      <td> </td>
+      <td>create a new process, only to wait for a centain process to end</td>
     </tr>
     <tr>
       <td><code>Process#kill</code></td>
@@ -167,32 +169,42 @@
     <tr>
       <td><code>Process#trap</code></td>
       <td><code>sigaction</code></td>
-      <td> </td>
+      <td>define signal handling function</td>
     </tr>
     <tr>
       <td><code>IO.pipe</code></td>
       <td><code>pipe</code></td>
-      <td> </td>
+      <td>define new pipe</td>
     </tr>
     <tr>
       <td><code>Socket.pair</code></td>
       <td><code>socketpair</code></td>
-      <td> </td>
+      <td>define pair of sockets</td>
     </tr>
     <tr>
       <td><code>Socket.recv</code></td>
       <td><code>recv</code></td>
-      <td> </td>
+      <td>sockets receive</td>
     </tr>
     <tr>
       <td><code>Socket.send</code></td>
       <td><code>send</code></td>
-      <td> </td>
+      <td>sockets send</td>
+    </tr>
+    <tr>
+      <td><code>Process.setsid</code></td>
+      <td><code>getsid</code></td>
+      <td>create new session group</td>
+    </tr>
+    <tr>
+      <td><code>Process.getpgrp</code></td>
+      <td><code>getpgrp</code></td>
+      <td>get process group id</td>
     </tr>
   </tbody>
 </table>
 
-<h1 id="basic-of-process">Basic of Process</h1>
+<h1 id="basic-of-process">1. Basic of Process</h1>
 
 <ul>
   <li>Get process descriptor in shell: <code>$$</code></li>
@@ -200,11 +212,11 @@
   <li>Get process name in ruby: <code>$PROGRAM_NAME</code></li>
 </ul>
 
-<h4 id="about-file-descriptor">About file descriptor</h4>
+<h4 id="file-descriptor">File descriptor</h4>
 
 <ol>
   <li>File descriptor number is resuable</li>
-  <li>STDIN, STDOUT, STDERR</li>
+  <li>STDIN, STDOUT, STDERR is predefined</li>
 </ol>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">puts</span> <span class="no">STDIN</span><span class="o">.</span><span class="n">fileno</span> 	<span class="c1"># =&gt; 0</span>
@@ -235,11 +247,23 @@
 
 <p><code>exit</code>, <code>abort</code>, <code>raise</code></p>
 
-<h1 id="multiple-processes-fork">Multiple processes: <code>fork</code></h1>
+<h3 id="examples-of-process-basic">Examples of process basic</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># IO#fileno</span>
+<span class="n">passwd</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span> <span class="p">)</span>
+<span class="nb">puts</span> <span class="n">passwd</span><span class="o">.</span><span class="n">fileno</span>
+
+<span class="c1"># Resource limitations</span>
+<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:NPROC</span> <span class="p">)</span>
+<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:FSIZE</span> <span class="p">)</span>
+<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:STACK</span> <span class="p">)</span>
+</code></pre></div>
+
+<h1 id="multiple-processes-fork">2. Multiple processes: <code>fork</code></h1>
 
 <p>Child process will inherit the whole memory of parent process. To improve performance, memory uses <em>copy-on-write</em> strategy.</p>
 
-<p><strong>IMPORTANT</strong>: <code>fork</code> returns nil in child process, returns the pid of child process in parent process.</p>
+<p><strong>IMPORTANT</strong>: <code>fork</code> returns <code>nil</code> in child process, returns the pid of child process in parent process.</p>
 
 <h3 id="process-wait">Process Wait</h3>
 
@@ -253,9 +277,9 @@
 
 <h3 id="zombie-process">Zombie process</h3>
 
-<p>The kernel will retain the status of exited child processes until the parent process requests that status using <code>Process.wait</code>. If the parent never requests the status then the kernel can never reap that status information.</p>
+<p>The kernel will retain the status of exited child processes until the parent process requests that status using <code>Process.wait</code>. If the parent never requests the status then the kernel can never return that status information.</p>
 
-<p><code>Process.detach</code> will for specified child process exit.</p>
+<p><code>Process.detach</code> will create a process wating for specified child process to exit.</p>
 
 <p>Using <code>ps</code> to check process, zombie process will be marked <code>z</code> or <code>Z+</code></p>
 
@@ -287,13 +311,13 @@
 <span class="no">Process</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
 </code></pre></div>
 
-<h1 id="signal">Signal</h1>
+<h1 id="signal">3. Signal</h1>
 
-<p><code>wait</code> is a blocking method: until child process exit, the method returns.</p>
+<p><code>wait</code> is a <strong>blocking method</strong>: until child process exit, the method returns.</p>
 
-<p>Cathing signal is non-blocking.</p>
+<p>Catching signal is non-blocking.</p>
 
-<p>Singal delivering is not reliable. </p>
+<p>Signal delivering is not reliable. </p>
 
 <p>We suggest using <code>Process.wait</code> to deal with signal. </p>
 
@@ -302,25 +326,25 @@
 
 <p><code>Process::WNOHANG</code> means, if no child process exit, then do not block.</p>
 
-<h3 id="catch-signal">Catch signal</h3>
+<h4 id="catch-signal">Catch signal</h4>
 
-<h3 id="send-signal">Send signal</h3>
+<h4 id="send-signal">Send signal</h4>
 
 <pre><code>Process.kill(:INT, pid_of_a_process)
 </code></pre>
 
-<h3 id="re-define-signal-handling-process">Re-define signal handling process</h3>
+<h4 id="re-define-signal-handling-process">Re-define signal handling process</h4>
 
 <pre><code>trap(:INT) { ... }
 </code></pre>
 
-<p>But some of the signal handling cannot be re-defined.Pr</p>
+<p>But some of the signal handling cannot be re-defined.</p>
 
-<p>But <code>INT</code> has lower priority than <code>KILL</code>.</p>
+<p><code>INT</code> is actually <code>Ctrl+C</code>, which is not as powerful as <code>KILL</code>.</p>
 
 <h4 id="re-define-signal-propertly">Re-define signal propertly</h4>
 
-<p>Kepp system default handling</p>
+<p><strong>Notice</strong> to Keep system default handling</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">trap</span><span class="p">(</span><span class="ss">:INT</span><span class="p">)</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">&#39;This is the first signal handler&#39;</span> <span class="p">}</span>
 <span class="n">old_handler</span> <span class="o">=</span> <span class="nb">trap</span><span class="p">(</span><span class="ss">:INT</span><span class="p">)</span> <span class="p">{</span>
@@ -370,11 +394,11 @@
 <span class="k">end</span>
 </code></pre></div>
 
-<h1 id="pipe">Pipe</h1>
+<h1 id="pipe">4. Pipe</h1>
 
 <p>Pipe is a single direction data stream.</p>
 
-<h3 id="shared-pipe-in-multi-processes">Shared pipe in multi-processes</h3>
+<h4 id="shared-pipe-in-multi-processes">Shared pipe in multi-processes</h4>
 
 <p><code>IO</code> operations: <code>read</code>, <code>write</code>, <code>close</code>, <code>gets</code>, <code>puts</code></p>
 
@@ -438,18 +462,117 @@
 <span class="c1"># Feather lifting accomplished!</span>
 </code></pre></div>
 
-<hr />
+<h1 id="daemon-process">5. Daemon Process</h1>
 
-<h1 id="examples">Examples:</h1>
+<p>Daemon process normally won’t stop by itself.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1"># IO#fileno</span>
-<span class="n">passwd</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span> <span class="p">)</span>
-<span class="nb">puts</span> <span class="n">passwd</span><span class="o">.</span><span class="n">fileno</span>
+<p>When system boots, there is a <code>init</code> process, whose ppid is <strong>0</strong>. It is the ancestor of all processes.</p>
 
-<span class="c1"># Resource limitations</span>
-<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:NPROC</span> <span class="p">)</span>
-<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:FSIZE</span> <span class="p">)</span>
-<span class="no">Process</span><span class="o">.</span><span class="n">getrlimit</span><span class="p">(</span><span class="ss">:STACK</span> <span class="p">)</span>
+<h4 id="create-a-daemon-process">Create a daemon process</h4>
+
+<p><code>exit if fork</code> or <code>Process.daemon</code>. In parent process, it returns the pid of child, which leads to exit.</p>
+
+<p>After parent exit, the <code>ppid</code> of orphan process is always <strong>1</strong>.</p>
+
+<h4 id="process-group--session-group">Process group &amp; Session group</h4>
+
+<p>Use <code>Process.setpgrp(new_group_id)</code> to set process group.</p>
+
+<p>Process group id is the pid of the group leader process.</p>
+
+<p>A child process has the same process group id as the parent process.</p>
+
+<p>Terminal receives signal, and dispatches to every child processes in this process group.</p>
+
+<p><strong>Session group</strong> is a set of process groups.</p>
+
+<pre><code>git log | grep shipped | less
+</code></pre>
+
+<p>In this example, every sub-command has its own process group. They all belongs to the same session group.</p>
+
+<p>When signal comes to the leader of the session group, it passes the signal to all the leaders of the process groups inside, and the leaders pass the signal again to processes in the process group.</p>
+
+<p>Hierarchical signal passing.</p>
+
+<p><code>Process.setsid</code> to get session group id. It can also fork a new process group and a new leader of session group.</p>
+
+<p>After that if we run <code>exit if fork</code>, the new session group leader will leave the control of terminal. The new session group can be used as daemon processes.</p>
+
+<p>Also set the streams of the process to <code>/dev/null</code>.</p>
+
+<pre><code>STDIN.reopen "/dev/null"
+STDOUT.reopen "/dev/null", "a"
+STDERR.reopen "/dev/null", "a"
+</code></pre>
+
+<h3 id="examples-of-daemon-process">Examples of daemon process</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># process group id</span>
+<span class="nb">puts</span> <span class="no">Process</span><span class="o">.</span><span class="n">pid</span>
+<span class="nb">puts</span> <span class="no">Process</span><span class="o">.</span><span class="n">getpgrp</span>
+<span class="nb">fork</span> <span class="p">{</span>
+  <span class="nb">puts</span> <span class="no">Process</span><span class="o">.</span><span class="n">pid</span>
+  <span class="nb">puts</span> <span class="no">Process</span><span class="o">.</span><span class="n">getpgrp</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1 id="spawning-terminal-process">6. Spawning terminal process</h1>
+
+<p><code>exec</code> command can convert current process to another process, unrevertable.</p>
+
+<p>Use <code>fork + exec</code> to spawn new process. <code>exec</code> cannot convert a process back. But with <code>fork</code> can maintain a unconverted copy of process.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">hosts</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;/etc/hosts&#39;</span><span class="p">)</span>
+<span class="nb">exec</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s2">&quot;import os; print os.fdopen(</span><span class="si">#{</span><span class="n">hosts</span><span class="o">.</span><span class="n">fileno</span><span class="si">}</span><span class="s2">).read()&quot;</span>
+</code></pre></div>
+
+<p><code>exec</code> runs a shell command actually. </p>
+
+<p><code>Kernel#system</code> runs shell command, and returns the terminal exit code.</p>
+
+<p><code>Kernel#`</code> returns the STDOUT string. Same as <code>%x[]</code></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="sb">`ls`</span>
+<span class="sb">`ls --help`</span>
+<span class="sx">%x[git log | tail -10]</span>
+</code></pre></div>
+
+<p><code>Process.spawn</code> is a non-blocking call.</p>
+
+<h4 id="iopopen"><code>IO.popen</code></h4>
+
+<p><code>popen</code> opens a pipe, returns file descriptor number.</p>
+
+<h4 id="ioopen3"><code>IO.open3</code></h4>
+
+<p>Opens STDIN, STDOUT, STDERR at the same time.</p>
+
+<h4 id="last-word-about-fork">Last word about <code>fork</code></h4>
+
+<p><code>fork</code> consumes a lot of memory. Some system call have optimization. Original Ruby library does not support system call, but <code>posix-spawn</code> project supports.</p>
+
+<h3 id="example-of-spawn">Example of spawn</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">({</span><span class="s1">&#39;RAILS_ENV&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;test&#39;</span><span class="p">},</span> <span class="s1">&#39;rails server&#39;</span><span class="p">)</span>
+<span class="no">Process</span><span class="o">.</span><span class="n">spawn</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;--help&#39;</span><span class="p">,</span> <span class="no">STDERR</span> <span class="o">=&gt;</span> <span class="no">STDOUT</span><span class="p">)</span>
+
+<span class="c1"># example of popen</span>
+<span class="no">IO</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;less&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">stream</span><span class="o">|</span>
+  <span class="n">stream</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;some</span><span class="se">\n</span><span class="s2">data&quot;</span>
+<span class="p">}</span>
+
+<span class="c1"># example of open3</span>
+
+<span class="nb">require</span> <span class="s1">&#39;open3&#39;</span>
+<span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span><span class="p">(</span><span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">|</span>
+  <span class="n">stdin</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;some</span><span class="se">\n</span><span class="s2">data&quot;</span>
+  <span class="n">stdin</span><span class="o">.</span><span class="n">close</span>
+  <span class="nb">puts</span> <span class="n">stdout</span><span class="o">.</span><span class="n">read</span>
+<span class="p">}</span>
+<span class="no">Open3</span><span class="o">.</span><span class="n">popen3</span><span class="p">(</span><span class="s1">&#39;ls&#39;</span><span class="p">,</span> <span class="s1">&#39;-uhh&#39;</span><span class="p">,</span> <span class="ss">:err</span> <span class="o">=&gt;</span> <span class="ss">:out</span><span class="p">)</span> <span class="p">{</span> <span class="o">|</span><span class="n">stdin</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="n">stdout</span><span class="o">.</span><span class="n">read</span>
+<span class="p">}</span>
 </code></pre></div>
 
 

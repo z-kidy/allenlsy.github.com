@@ -3,12 +3,14 @@ layout: post
 title: "Working with Unix Process in Ruby"
 subtitle: 
 cover_image: 
-excerpt: ""
+excerpt: "NOTES of Working with Unix Process in Ruby, by Jesse Storimer"
 category: ""
-tags: [book]
-thumbnail: 
-draft: true
+tags: [book, ruby, process, unix]
+thumbnail: http://rayhightower.com/images/working-w-unix-processes.jpg
+draft: 
 ---
+
+[Book home page](http://www.jstorimer.com/products/working-with-unix-processes)
 
 ## Reference of Ruby Process related methods
 
@@ -17,8 +19,8 @@ Ruby Library Method | Unix System Method | Description
 `Process.pid` | `getpid` | get calling process identification
 `Process.ppid` | `getppid` | get parent process identification
 `IO#fileno` | | get file descriptor number 
-`Process.getrlimit` | `getrlimit` | 
-`Process.setrlimit` | `setrlimit` |
+`Process.getrlimit` | `getrlimit` | get system resource limit
+`Process.setrlimit` | `setrlimit` | set system resource limit
  - | `setenv` | set environment variable
  - | `getenv` | get environment variable value
  `Kernel#exit` | `exit` | exit program
@@ -27,28 +29,28 @@ Ruby Library Method | Unix System Method | Description
  `Kernel#fork` | `fork` | 
  `Process#wait` | `waitpid` | wait until one of the child processes exit
  `Process#wait2` | `waitpid` | returns (pid, status)
- `Process#waitpid`| `waitpid` |
- `Process#waitpid2` | `waitpid` |
- `Process#detach` | - | 
+ `Process#waitpid`| `waitpid` | Ruby: wait for process
+ `Process#waitpid2` | `waitpid` | Ruby: wait for process, returns 
+ `Process#detach` | - | create a new process, only to wait for a centain process to end
  `Process#kill` | `kill` | 
- `Process#trap` | `sigaction` |
- `IO.pipe` | `pipe` |
- `Socket.pair` | `socketpair` |
- `Socket.recv` | `recv` | 
- `Socket.send` | `send` |
- 
- 
+ `Process#trap` | `sigaction` | define signal handling function
+ `IO.pipe` | `pipe` | define new pipe
+ `Socket.pair` | `socketpair` | define pair of sockets
+ `Socket.recv` | `recv` | sockets receive
+ `Socket.send` | `send` | sockets send
+ `Process.setsid` | `getsid` | create new session group
+ `Process.getpgrp` | `getpgrp` | get process group id
 
-# Basic of Process
+# 1. Basic of Process
 
 * Get process descriptor in shell: `$$`
 * In Unix, everything is FILE. Every file gets a descriptor
 * Get process name in ruby: `$PROGRAM_NAME`
 
-#### About file descriptor
+#### File descriptor
 
 1. File descriptor number is resuable
-2. STDIN, STDOUT, STDERR
+2. STDIN, STDOUT, STDERR is predefined
 
 {% highlight ruby %}
 puts STDIN.fileno 	# => 0puts STDOUT.fileno 	# => 1puts STDERR.fileno 	# => 2
@@ -75,11 +77,18 @@ A ruby library `optparse` is used for parsing command line options.
 
 `exit`, `abort`, `raise`
 
-# Multiple processes: `fork`
+### Examples of process basic
+
+{% highlight ruby %}
+# IO#fileno
+passwd = File.open('/etc/passwd' )puts passwd.fileno# Resource limitationsProcess.getrlimit(:NPROC )Process.getrlimit(:FSIZE )Process.getrlimit(:STACK )
+{% endhighlight %}
+
+# 2. Multiple processes: `fork`
 
 Child process will inherit the whole memory of parent process. To improve performance, memory uses _copy-on-write_ strategy.
 
-__IMPORTANT__: `fork` returns nil in child process, returns the pid of child process in parent process.
+__IMPORTANT__: `fork` returns `nil` in child process, returns the pid of child process in parent process.
 
 ### Process Wait
 
@@ -93,9 +102,9 @@ If there is no child process, `Process.wait` will throw `Errno::ECHILD` exceptio
 
 ### Zombie process
 
-The kernel will retain the status of exited child processes until the parent process requests that status using `Process.wait`. If the parent never requests the status then the kernel can never reap that status information.
+The kernel will retain the status of exited child processes until the parent process requests that status using `Process.wait`. If the parent never requests the status then the kernel can never return that status information.
 
-`Process.detach` will for specified child process exit.
+`Process.detach` will create a process wating for specified child process to exit.
 
 Using `ps` to check process, zombie process will be marked `z` or `Z+`
 
@@ -129,13 +138,13 @@ Process.detach(pid)
 
 {% endhighlight %}
 
-# Signal
+# 3. Signal
 
-`wait` is a blocking method: until child process exit, the method returns.
+`wait` is a __blocking method__: until child process exit, the method returns.
 
-Cathing signal is non-blocking.
+Catching signal is non-blocking.
 
-Singal delivering is not reliable. 
+Signal delivering is not reliable. 
 
 We suggest using `Process.wait` to deal with signal. 
 
@@ -143,23 +152,23 @@ We suggest using `Process.wait` to deal with signal.
 	
 `Process::WNOHANG` means, if no child process exit, then do not block.
 
-### Catch signal
+#### Catch signal
 
-### Send signal
+#### Send signal
 
 	Process.kill(:INT, pid_of_a_process)
 
-### Re-define signal handling process
+#### Re-define signal handling process
 
 	trap(:INT) { ... }
 	
-But some of the signal handling cannot be re-defined.Pr
+But some of the signal handling cannot be re-defined.
 
-But `INT` has lower priority than `KILL`.
+`INT` is actually `Ctrl+C`, which is not as powerful as `KILL`.
 
 #### Re-define signal propertly
 
-Kepp system default handling
+__Notice__ to Keep system default handling
 
 {% highlight ruby %}
 trap(:INT) { puts 'This is the first signal handler' }old_handler = trap(:INT) {  old_handler.call  puts 'This is the second handler'  exit}sleep
@@ -205,11 +214,11 @@ loop do
 end
 {% endhighlight %}
 
-# Pipe
+# 4. Pipe
 
 Pipe is a single direction data stream.
 
-### Shared pipe in multi-processes
+#### Shared pipe in multi-processes
 
 `IO` operations: `read`, `write`, `close`, `gets`, `puts`
 
@@ -237,14 +246,97 @@ require 'socket'child_socket, parent_socket = Socket.pair(:UNIX, :DGRAM, 0)max
 
 {% endhighlight %}
 
-* * *
+# 5. Daemon Process
 
-# Examples: 
+Daemon process normally won't stop by itself.
+
+When system boots, there is a `init` process, whose ppid is __0__. It is the ancestor of all processes.
+
+#### Create a daemon process
+
+`exit if fork` or `Process.daemon`. In parent process, it returns the pid of child, which leads to exit.
+
+After parent exit, the `ppid` of orphan process is always __1__.
+
+#### Process group & Session group
+
+Use `Process.setpgrp(new_group_id)` to set process group.
+
+Process group id is the pid of the group leader process.
+
+A child process has the same process group id as the parent process.
+
+Terminal receives signal, and dispatches to every child processes in this process group.
+
+__Session group__ is a set of process groups.
+
+	git log | grep shipped | less
+	
+In this example, every sub-command has its own process group. They all belongs to the same session group.
+
+When signal comes to the leader of the session group, it passes the signal to all the leaders of the process groups inside, and the leaders pass the signal again to processes in the process group.
+
+Hierarchical signal passing.
+
+`Process.setsid` to get session group id. It can also fork a new process group and a new leader of session group.
+
+After that if we run `exit if fork`, the new session group leader will leave the control of terminal. The new session group can be used as daemon processes.
+
+Also set the streams of the process to `/dev/null`.
+
+	STDIN.reopen "/dev/null"	STDOUT.reopen "/dev/null", "a"	STDERR.reopen "/dev/null", "a"
+
+### Examples of daemon process
 
 {% highlight ruby %}
-# IO#fileno
-passwd = File.open('/etc/passwd' )puts passwd.fileno# Resource limitationsProcess.getrlimit(:NPROC )Process.getrlimit(:FSIZE )Process.getrlimit(:STACK )
+# process group id
+puts Process.pidputs Process.getpgrpfork {  puts Process.pid  puts Process.getpgrp}
+
 {% endhighlight %}
 
+# 6. Spawning terminal process
 
+`exec` command can convert current process to another process, unrevertable.
+
+Use `fork + exec` to spawn new process. `exec` cannot convert a process back. But with `fork` can maintain a unconverted copy of process.
+
+{% highlight ruby %}
+hosts = File.open('/etc/hosts')exec 'python', '-c', "import os; print os.fdopen(#{hosts.fileno}).read()"
+{% endhighlight %}
+
+`exec` runs a shell command actually. 
+
+`Kernel#system` runs shell command, and returns the terminal exit code.
+
+`` Kernel#` `` returns the STDOUT string. Same as `%x[]`
+
+{% highlight ruby %}
+`ls``ls --help`%x[git log | tail -10]
+{% endhighlight %}
+
+`Process.spawn` is a non-blocking call.
+
+#### `IO.popen`
+
+`popen` opens a pipe, returns file descriptor number.
+
+#### `IO.open3`
+
+Opens STDIN, STDOUT, STDERR at the same time.
+
+#### Last word about `fork`
+
+`fork` consumes a lot of memory. Some system call have optimization. Original Ruby library does not support system call, but `posix-spawn` project supports.
+
+### Example of spawn
+
+{% highlight ruby %}
+Process.spawn({'RAILS_ENV' => 'test'}, 'rails server')Process.spawn('ls', '--help', STDERR => STDOUT)
+
+# example of popen
+IO.popen('less', 'w') { |stream|  stream.puts "some\ndata"}
+# example of open3
+require 'open3'Open3.popen3('grep', 'data') { |stdin, stdout, stderr|  stdin.puts "some\ndata"  stdin.close  puts stdout.read}Open3.popen3('ls', '-uhh', :err => :out) { |stdin, stdout, stderr|  puts stdout.read}
+
+{% endhighlight %}
 
