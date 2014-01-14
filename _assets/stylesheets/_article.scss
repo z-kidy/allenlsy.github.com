@@ -264,9 +264,20 @@ section.article {
         padding: 5px 20px;
     }
 
-    h1, h2, h3 {
+    h1, h2 {
         margin-left: -30px;
         border-left: 7px solid #eee;
+    }
+
+    h3 {
+        margin-left: -20px;
+        &:before {
+            content: "\f0da";
+            font-family: FontAwesome;
+            padding-right: 10px;
+            margin-left: -20px;
+            font-size: 1.1em;
+        }
     }
 
     h4 {

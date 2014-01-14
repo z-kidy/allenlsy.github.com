@@ -21,9 +21,22 @@ Ruby Library Method | Unix System Method | Description
 `Process.setrlimit` | `setrlimit` |
  - | `setenv` | set environment variable
  - | `getenv` | get environment variable value
- `Kernel#exit` | exit | exit program
+ `Kernel#exit` | `exit` | exit program
  `Kernel#abort` | | exit, and message print to STDERR
  `Kernel#raise` | | like `raise` in ruby, look for exception handling. Exit if not found.
+ `Kernel#fork` | `fork` | 
+ `Process#wait` | `waitpid` | wait until one of the child processes exit
+ `Process#wait2` | `waitpid` | returns (pid, status)
+ `Process#waitpid`| `waitpid` |
+ `Process#waitpid2` | `waitpid` |
+ `Process#detach` | - | 
+ `Process#kill` | `kill` | 
+ `Process#trap` | `sigaction` |
+ `IO.pipe` | `pipe` |
+ `Socket.pair` | `socketpair` |
+ `Socket.recv` | `recv` | 
+ `Socket.send` | `send` |
+ 
  
 
 # Basic of Process
@@ -67,6 +80,164 @@ A ruby library `optparse` is used for parsing command line options.
 Child process will inherit the whole memory of parent process. To improve performance, memory uses _copy-on-write_ strategy.
 
 __IMPORTANT__: `fork` returns nil in child process, returns the pid of child process in parent process.
+
+### Process Wait
+
+`Process#wait`, `Process#wait2`, `Process#waitpid`, `Process#waitpid2`
+
+`wait` and `waitpid` are actually the same. They accepts the same type of arguments, and behave the same.
+
+Pass argument `-1` to `wait` will wait for any child process.
+
+If there is no child process, `Process.wait` will throw `Errno::ECHILD` exception.
+
+### Zombie process
+
+The kernel will retain the status of exited child processes until the parent process requests that status using `Process.wait`. If the parent never requests the status then the kernel can never reap that status information.
+
+`Process.detach` will for specified child process exit.
+
+Using `ps` to check process, zombie process will be marked `z` or `Z+`
+
+### Code example of `fork`
+
+{% highlight ruby %}
+# Fork a process
+if fork
+  ...
+else
+  ...
+end
+# or
+fork do 
+  ...
+end
+
+# wait2
+pid, status = Process.wait2
+
+# waitpid2
+favorite = fork do; exit 77; end
+pid, status = Process.waitpid2 favorite
+puts status.exitstatus	
+
+# zombie process
+pid = fork do
+  # ...
+end
+Process.detach(pid)
+
+{% endhighlight %}
+
+# Signal
+
+`wait` is a blocking method: until child process exit, the method returns.
+
+Cathing signal is non-blocking.
+
+Singal delivering is not reliable. 
+
+We suggest using `Process.wait` to deal with signal. 
+
+	Process.wait(-1, Process::WNOHANG)
+	
+`Process::WNOHANG` means, if no child process exit, then do not block.
+
+### Catch signal
+
+### Send signal
+
+	Process.kill(:INT, pid_of_a_process)
+
+### Re-define signal handling process
+
+	trap(:INT) { ... }
+	
+But some of the signal handling cannot be re-defined.Pr
+
+But `INT` has lower priority than `KILL`.
+
+#### Re-define signal propertly
+
+Kepp system default handling
+
+{% highlight ruby %}
+trap(:INT) { puts 'This is the first signal handler' }old_handler = trap(:INT) {  old_handler.call  puts 'This is the second handler'  exit}sleep
+{% endhighlight %}
+
+Also we can use `at_exit` hook.
+
+### Example of Signal
+
+{% highlight ruby %}
+# catch SIGCHLD
+trap(:CHLD) do
+  ...
+end
+
+# Full example
+child_processes = 3
+dead_processes = 0
+
+child_processes.times do
+  fork do
+    sleep 3
+  end
+end
+
+# To ensure CHLD will not call flush for #puts call
+$stdout.sync = true
+
+trap(:CHLD) do
+  begin
+    while pid = Process.wait(-1, Process::WNOHANG)
+      puts pid
+	  dead_processes += 1
+	  exit if dead_processes == child_processes
+    end
+  rescue Errno::ECHILD
+  end
+end
+
+loop do
+  (Math.sqrt(rand(44)) ** 8).floor
+  sleep 1
+end
+{% endhighlight %}
+
+# Pipe
+
+Pipe is a single direction data stream.
+
+### Shared pipe in multi-processes
+
+`IO` operations: `read`, `write`, `close`, `gets`, `puts`
+
+Stream is endless. It has protocol specified _delimeter_ to define _chunks_. `gets`, `puts` can R/W a string seperated by `newline` sign. `newline` is a delimeter.
+
+IPC (Inter-process communication) uses _sockets_, rather than TCP, because sockets is faster in IPC.
+
+Sockets uses _datagram_ to communicate rather than stream. Datagram is a full piece of message, not using delimeter.
+
+### Example of Pipe
+
+{% highlight ruby %}
+reader, write = IO.pipe
+
+# basic communication
+reader, writer = IO.pipewriter.write("Into the pipe I go...")writer.close # close unused stream endpointputs reader.read
+
+# shared pipe
+reader, writer = IO.pipefork do  reader.close10.times dowriter.puts "Another one bites the dust"end endwriter.closewhile message = reader.gets  $stdout.puts messageend
+# Socketsrequire 'socket'Socket.pair(:UNIX, :DGRAM, 0) #=> [#<Socket:fd 15>, #<Socket:fd 16>]
+
+# Full example of sockets
+require 'socket'child_socket, parent_socket = Socket.pair(:UNIX, :DGRAM, 0)maxlen = 1000fork do  parent_socket.close  4.times do    instruction = child_socket.recv(maxlen)    child_socket.send("#{instruction} accomplished!", 0)end endchild_socket.close2.times do  parent_socket.send("Heavy lifting", 0)end2.times do  parent_socket.send("Feather lifting", 0)end4.times do  $stdout.puts parent_socket.recv(maxlen)	end
+# OUTPUT# Heavy lifting accomplished!# Heavy lifting accomplished!# Feather lifting accomplished!# Feather lifting accomplished!
+
+{% endhighlight %}
+
+* * *
 
 # Examples: 
 

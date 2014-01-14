@@ -6,6 +6,7 @@
     <title>Working with Unix Process in Ruby &mdash; Simple, Not Easy</title>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,800|Oswald|PT+Mono|Ubuntu+Mono" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="/assets/main.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
@@ -15,7 +16,7 @@
     <link rel="author" href="https://plus.google.com/118230970865161551961">
     <meta property="og:title" content="Working with Unix Process in Ruby "/>
     <meta property="og:url" content="/working-with-unix-process-in-ruby"/>
-    
+     
     
     <meta property="og:description" content=""/>
     <meta name="description" content=""/>
@@ -115,7 +116,7 @@
     </tr>
     <tr>
       <td><code>Kernel#exit</code></td>
-      <td>exit</td>
+      <td><code>exit</code></td>
       <td>exit program</td>
     </tr>
     <tr>
@@ -127,6 +128,66 @@
       <td><code>Kernel#raise</code></td>
       <td> </td>
       <td>like <code>raise</code> in ruby, look for exception handling. Exit if not found.</td>
+    </tr>
+    <tr>
+      <td><code>Kernel#fork</code></td>
+      <td><code>fork</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Process#wait</code></td>
+      <td><code>waitpid</code></td>
+      <td>wait until one of the child processes exit</td>
+    </tr>
+    <tr>
+      <td><code>Process#wait2</code></td>
+      <td><code>waitpid</code></td>
+      <td>returns (pid, status)</td>
+    </tr>
+    <tr>
+      <td><code>Process#waitpid</code></td>
+      <td><code>waitpid</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Process#waitpid2</code></td>
+      <td><code>waitpid</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Process#detach</code></td>
+      <td>-</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Process#kill</code></td>
+      <td><code>kill</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Process#trap</code></td>
+      <td><code>sigaction</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>IO.pipe</code></td>
+      <td><code>pipe</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Socket.pair</code></td>
+      <td><code>socketpair</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Socket.recv</code></td>
+      <td><code>recv</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code>Socket.send</code></td>
+      <td><code>send</code></td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -179,6 +240,205 @@
 <p>Child process will inherit the whole memory of parent process. To improve performance, memory uses <em>copy-on-write</em> strategy.</p>
 
 <p><strong>IMPORTANT</strong>: <code>fork</code> returns nil in child process, returns the pid of child process in parent process.</p>
+
+<h3 id="process-wait">Process Wait</h3>
+
+<p><code>Process#wait</code>, <code>Process#wait2</code>, <code>Process#waitpid</code>, <code>Process#waitpid2</code></p>
+
+<p><code>wait</code> and <code>waitpid</code> are actually the same. They accepts the same type of arguments, and behave the same.</p>
+
+<p>Pass argument <code>-1</code> to <code>wait</code> will wait for any child process.</p>
+
+<p>If there is no child process, <code>Process.wait</code> will throw <code>Errno::ECHILD</code> exception.</p>
+
+<h3 id="zombie-process">Zombie process</h3>
+
+<p>The kernel will retain the status of exited child processes until the parent process requests that status using <code>Process.wait</code>. If the parent never requests the status then the kernel can never reap that status information.</p>
+
+<p><code>Process.detach</code> will for specified child process exit.</p>
+
+<p>Using <code>ps</code> to check process, zombie process will be marked <code>z</code> or <code>Z+</code></p>
+
+<h3 id="code-example-of-fork">Code example of <code>fork</code></h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># Fork a process</span>
+<span class="k">if</span> <span class="nb">fork</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">else</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+<span class="c1"># or</span>
+<span class="nb">fork</span> <span class="k">do</span> 
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="c1"># wait2</span>
+<span class="n">pid</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">wait2</span>
+
+<span class="c1"># waitpid2</span>
+<span class="n">favorite</span> <span class="o">=</span> <span class="nb">fork</span> <span class="k">do</span><span class="p">;</span> <span class="nb">exit</span> <span class="mi">77</span><span class="p">;</span> <span class="k">end</span>
+<span class="n">pid</span><span class="p">,</span> <span class="n">status</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">waitpid2</span> <span class="n">favorite</span>
+<span class="nb">puts</span> <span class="n">status</span><span class="o">.</span><span class="n">exitstatus</span>	
+
+<span class="c1"># zombie process</span>
+<span class="n">pid</span> <span class="o">=</span> <span class="nb">fork</span> <span class="k">do</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+<span class="no">Process</span><span class="o">.</span><span class="n">detach</span><span class="p">(</span><span class="n">pid</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="signal">Signal</h1>
+
+<p><code>wait</code> is a blocking method: until child process exit, the method returns.</p>
+
+<p>Cathing signal is non-blocking.</p>
+
+<p>Singal delivering is not reliable. </p>
+
+<p>We suggest using <code>Process.wait</code> to deal with signal. </p>
+
+<pre><code>Process.wait(-1, Process::WNOHANG)
+</code></pre>
+
+<p><code>Process::WNOHANG</code> means, if no child process exit, then do not block.</p>
+
+<h3 id="catch-signal">Catch signal</h3>
+
+<h3 id="send-signal">Send signal</h3>
+
+<pre><code>Process.kill(:INT, pid_of_a_process)
+</code></pre>
+
+<h3 id="re-define-signal-handling-process">Re-define signal handling process</h3>
+
+<pre><code>trap(:INT) { ... }
+</code></pre>
+
+<p>But some of the signal handling cannot be re-defined.Pr</p>
+
+<p>But <code>INT</code> has lower priority than <code>KILL</code>.</p>
+
+<h4 id="re-define-signal-propertly">Re-define signal propertly</h4>
+
+<p>Kepp system default handling</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">trap</span><span class="p">(</span><span class="ss">:INT</span><span class="p">)</span> <span class="p">{</span> <span class="nb">puts</span> <span class="s1">&#39;This is the first signal handler&#39;</span> <span class="p">}</span>
+<span class="n">old_handler</span> <span class="o">=</span> <span class="nb">trap</span><span class="p">(</span><span class="ss">:INT</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">old_handler</span><span class="o">.</span><span class="n">call</span>
+  <span class="nb">puts</span> <span class="s1">&#39;This is the second handler&#39;</span>
+  <span class="nb">exit</span>
+<span class="p">}</span>
+<span class="nb">sleep</span>
+</code></pre></div>
+
+<p>Also we can use <code>at_exit</code> hook.</p>
+
+<h3 id="example-of-signal">Example of Signal</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="c1"># catch SIGCHLD</span>
+<span class="nb">trap</span><span class="p">(</span><span class="ss">:CHLD</span><span class="p">)</span> <span class="k">do</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+<span class="k">end</span>
+
+<span class="c1"># Full example</span>
+<span class="n">child_processes</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">dead_processes</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">child_processes</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="nb">fork</span> <span class="k">do</span>
+    <span class="nb">sleep</span> <span class="mi">3</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="c1"># To ensure CHLD will not call flush for #puts call</span>
+<span class="vg">$stdout</span><span class="o">.</span><span class="n">sync</span> <span class="o">=</span> <span class="kp">true</span>
+
+<span class="nb">trap</span><span class="p">(</span><span class="ss">:CHLD</span><span class="p">)</span> <span class="k">do</span>
+  <span class="k">begin</span>
+    <span class="k">while</span> <span class="n">pid</span> <span class="o">=</span> <span class="no">Process</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="no">Process</span><span class="o">::</span><span class="no">WNOHANG</span><span class="p">)</span>
+      <span class="nb">puts</span> <span class="n">pid</span>
+	  <span class="n">dead_processes</span> <span class="o">+=</span> <span class="mi">1</span>
+	  <span class="nb">exit</span> <span class="k">if</span> <span class="n">dead_processes</span> <span class="o">==</span> <span class="n">child_processes</span>
+    <span class="k">end</span>
+  <span class="k">rescue</span> <span class="no">Errno</span><span class="o">::</span><span class="no">ECHILD</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="kp">loop</span> <span class="k">do</span>
+  <span class="p">(</span><span class="no">Math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span><span class="mi">44</span><span class="p">))</span> <span class="o">**</span> <span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">floor</span>
+  <span class="nb">sleep</span> <span class="mi">1</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<h1 id="pipe">Pipe</h1>
+
+<p>Pipe is a single direction data stream.</p>
+
+<h3 id="shared-pipe-in-multi-processes">Shared pipe in multi-processes</h3>
+
+<p><code>IO</code> operations: <code>read</code>, <code>write</code>, <code>close</code>, <code>gets</code>, <code>puts</code></p>
+
+<p>Stream is endless. It has protocol specified <em>delimeter</em> to define <em>chunks</em>. <code>gets</code>, <code>puts</code> can R/W a string seperated by <code>newline</code> sign. <code>newline</code> is a delimeter.</p>
+
+<p>IPC (Inter-process communication) uses <em>sockets</em>, rather than TCP, because sockets is faster in IPC.</p>
+
+<p>Sockets uses <em>datagram</em> to communicate rather than stream. Datagram is a full piece of message, not using delimeter.</p>
+
+<h3 id="example-of-pipe">Example of Pipe</h3>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">reader</span><span class="p">,</span> <span class="n">write</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">pipe</span>
+
+<span class="c1"># basic communication</span>
+<span class="n">reader</span><span class="p">,</span> <span class="n">writer</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">pipe</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Into the pipe I go...&quot;</span><span class="p">)</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">close</span> <span class="c1"># close unused stream endpoint</span>
+<span class="nb">puts</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span>
+
+<span class="c1"># shared pipe</span>
+<span class="n">reader</span><span class="p">,</span> <span class="n">writer</span> <span class="o">=</span> <span class="no">IO</span><span class="o">.</span><span class="n">pipe</span>
+<span class="nb">fork</span> <span class="k">do</span>
+  <span class="n">reader</span><span class="o">.</span><span class="n">close</span>
+<span class="mi">10</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;Another one bites the dust&quot;</span>
+<span class="k">end</span> <span class="k">end</span>
+<span class="n">writer</span><span class="o">.</span><span class="n">close</span>
+<span class="k">while</span> <span class="n">message</span> <span class="o">=</span> <span class="n">reader</span><span class="o">.</span><span class="n">gets</span>
+  <span class="vg">$stdout</span><span class="o">.</span><span class="n">puts</span> <span class="n">message</span>
+<span class="k">end</span>
+
+<span class="c1"># Sockets</span>
+<span class="nb">require</span> <span class="s1">&#39;socket&#39;</span>
+<span class="no">Socket</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="ss">:UNIX</span><span class="p">,</span> <span class="ss">:DGRAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">#=&gt; [#&lt;Socket:fd 15&gt;, #&lt;Socket:fd 16&gt;]</span>
+
+<span class="c1"># Full example of sockets</span>
+<span class="nb">require</span> <span class="s1">&#39;socket&#39;</span>
+<span class="n">child_socket</span><span class="p">,</span> <span class="n">parent_socket</span> <span class="o">=</span> <span class="no">Socket</span><span class="o">.</span><span class="n">pair</span><span class="p">(</span><span class="ss">:UNIX</span><span class="p">,</span> <span class="ss">:DGRAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">maxlen</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="nb">fork</span> <span class="k">do</span>
+  <span class="n">parent_socket</span><span class="o">.</span><span class="n">close</span>
+  <span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+    <span class="n">instruction</span> <span class="o">=</span> <span class="n">child_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>
+    <span class="n">child_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">#{</span><span class="n">instruction</span><span class="si">}</span><span class="s2"> accomplished!&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span> <span class="k">end</span>
+<span class="n">child_socket</span><span class="o">.</span><span class="n">close</span>
+<span class="mi">2</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="n">parent_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Heavy lifting&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="mi">2</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="n">parent_socket</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Feather lifting&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="mi">4</span><span class="o">.</span><span class="n">times</span> <span class="k">do</span>
+  <span class="vg">$stdout</span><span class="o">.</span><span class="n">puts</span> <span class="n">parent_socket</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">maxlen</span><span class="p">)</span>	
+<span class="k">end</span>
+
+<span class="c1"># OUTPUT</span>
+<span class="c1"># Heavy lifting accomplished!</span>
+<span class="c1"># Heavy lifting accomplished!</span>
+<span class="c1"># Feather lifting accomplished!</span>
+<span class="c1"># Feather lifting accomplished!</span>
+</code></pre></div>
+
+<hr />
 
 <h1 id="examples">Examples:</h1>
 
