@@ -10,6 +10,8 @@ thumbnail: http://rayhightower.com/images/working-w-unix-processes.jpg
 draft: 
 ---
 
+![](http://rayhightower.com/images/working-w-unix-processes.jpg)
+
 [Book home page](http://www.jstorimer.com/products/working-with-unix-processes)
 
 ## Reference of Ruby Process related methods
