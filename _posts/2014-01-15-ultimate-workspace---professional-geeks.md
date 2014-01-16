@@ -38,13 +38,13 @@ Workspace collection for all the geeks, programmers and designers. These workspa
 
 ![](http://i0.wp.com/farm9.staticflickr.com/8525/8685326024_91ef4d3ed3_z.jpg)
 
-![](http://www.webdesigndev.com/wp-content/uploads/2009/12/98.jpg)
+![](http://www.workstationsetups.com/wp-content/uploads/2009/12/lukewhitson1.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/231.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/251.jpg)
 
-![](http://www.webdesigndev.com/wp-content/uploads/2009/12/261.jpg)
+![](http://d1piko3ylsjhpd.cloudfront.net/uploads/roboto/slide/image/3646/slide_workstation06_800.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/321.jpg)
 
@@ -66,7 +66,7 @@ Workspace collection for all the geeks, programmers and designers. These workspa
 
 ![](http://s3.amazonaws.com/37assets/svn/820-IMG_1467.jpg)
 
-![](http://i0.wp.com/farm8.staticflickr.com/7180/6916675472_4b256ea9e7_z.jpg)
+![](http://31.media.tumblr.com/aad01e39d8699bc927f1f679c06c06f0/tumblr_mwxqjo78Or1t405dvo1_1280.jpg)
 
 ![](http://i2.wp.com/farm6.staticflickr.com/5445/7049595573_05c853e53d_z.jpg)
 
@@ -84,28 +84,28 @@ Workspace collection for all the geeks, programmers and designers. These workspa
 
 ![](http://i2.wp.com/farm3.static.flickr.com/2610/5795124371_f81d47c6ed_z.jpg)
 
-![](http://i1.wp.com/farm7.static.flickr.com/6186/6153401214_7eecffdb77_z.jpg)
+![](http://farm7.staticflickr.com/6186/6153401214_7eecffdb77_b.jpg)
 
 ![](http://i0.wp.com/farm4.static.flickr.com/3094/5832437491_a8d1b4512d_z.jpg)
 
 ![](http://i2.wp.com/farm6.static.flickr.com/5279/5913481706_f146560731_z.jpg)
 
-![](http://i2.wp.com/farm7.static.flickr.com/6111/6215291763_21fb2d7caa_z.jpg)
+![](http://asset-e.soup.io/asset/2423/9859_ec0a_960.jpeg)
 
 ![](http://i0.wp.com/farm7.static.flickr.com/6123/6012432113_16106f43b6_z.jpg)
 
-![](http://i0.wp.com/farm7.static.flickr.com/6027/6012418414_31ab3c9416_z.jpg)
+![](http://farm7.static.flickr.com/6027/6012418414_31ab3c9416_b.jpg)
 
-![](http://i1.wp.com/farm7.static.flickr.com/6008/5965938828_0a45df00af_z.jpg)
+![](http://farm4.staticflickr.com/3454/3288268269_a9ef3b9a5e_b.jpg)
 
 ![](http://i0.wp.com/farm7.static.flickr.com/6149/6036513601_aac3de23de_z.jpg)
 
-![](http://i0.wp.com/farm7.static.flickr.com/6124/6010187010_88997b6259_z.jpg)
+![](http://farm7.static.flickr.com/6124/6010187010_88997b6259_b.jpg)
 
-![](http://i0.wp.com/farm7.static.flickr.com/6192/6053562036_cef63594c7_z.jpg)
+![](http://farm7.static.flickr.com/6192/6053562036_cef63594c7_b.jpg)
 
-![](http://i1.wp.com/farm7.staticflickr.com/6232/6316451069_c5ff917ec9_z.jpg)
+![](http://farm7.staticflickr.com/6232/6316451069_c5ff917ec9_b.jpg)
 
-![](http://i1.wp.com/farm6.static.flickr.com/5182/5745558239_bc178929c5_z.jpg)
+![](http://farm6.static.flickr.com/5182/5745558239_bc178929c5_b.jpg)
 
 ![](http://www.andysowards.com/blog/assets/01-workspace.jpg?84cd58)
