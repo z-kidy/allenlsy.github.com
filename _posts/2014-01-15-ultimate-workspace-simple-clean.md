@@ -6,29 +6,29 @@ cover_image:
 excerpt: "Simple style is welcomed by thousands of people. These workspaces below are suitable for people who like clean desk as their workspace. Made for simplicity, and cost saving. You will not feel dull with it. Geeks are also welcome to have a look."
 category: ""
 tags: [workspace, simple, mac, life]
-thumbnail: 
-draft: true
+thumbnail: "http://i2.wp.com/farm7.static.flickr.com/6186/6102539512_39eb601c08_z.jpg"
+draft: 
 ---
 
 Simple style is welcomed by thousands of people. These workspaces below are suitable for people who like clean desk as their workspace. Made for simplicity, and cost saving. You will not feel dull with it. Geeks are also welcome to have a look.
 
-![](http://i2.wp.com/25.media.tumblr.com/5b27935044ddd5bffd76cd511c8c8191/tumblr_mkal96zQvy1qkegsbo1_500.jpg)
+![](http://marcianosmx.com/wp-content/uploads/2013/08/Random-Access-2-55.jpg)
 
-![](http://i0.wp.com/farm9.staticflickr.com/8056/8106252043_6cac1f1393_z.jpg)
+![](http://i0.wp.com/farm9.staticflickr.com/8056/8106252043_6cac1f1393_b.jpg)
 
 ![](http://i0.wp.com/dribbble.s3.amazonaws.com/users/19894/screenshots/888324/untitled-2.jpg)
 
 ![](http://i0.wp.com/dribbble.s3.amazonaws.com/users/15848/screenshots/944369/workspace.png)
 
-![](http://i2.wp.com/farm9.staticflickr.com/8245/8471968000_1ecda6ab15_z.jpg)
+![](http://i2.wp.com/farm9.staticflickr.com/8245/8471968000_1ecda6ab15_b.jpg)
 
-![](http://i2.wp.com/25.media.tumblr.com/27be056734ddd6b644ab12b5c5b8afc3/tumblr_mrqwx886iO1qkegsbo1_500.jpg)
+![](http://cossi.cz/wp-content/uploads/2013/08/novy-web.jpg)
 
 ![](http://i0.wp.com/25.media.tumblr.com/tumblr_m8wsnsms6c1r9tee7o1_1280.jpg)
 
 ![](http://i1.wp.com/24.media.tumblr.com/tumblr_kx5oky7zpK1qzz7gro1_500.jpg)
 
-![](http://i1.wp.com/25.media.tumblr.com/0b7e5d69781a7b0835354c2bc84d47ea/tumblr_mg6fvd4BQt1qkegsbo1_500.jpg)
+![](http://www.usualhouse.com/wp-content/uploads/2013/04/5700.jpg)
 
 ![](http://i2.wp.com/25.media.tumblr.com/tumblr_meboermxia1qkegsbo1_500.jpg)
 
@@ -52,13 +52,13 @@ Simple style is welcomed by thousands of people. These workspaces below are suit
 
 ![](http://i2.wp.com/farm7.staticflickr.com/6218/6347031739_4f0e43b9f0_z.jpg)
 
-![](http://i0.wp.com/www.deskography.org/media/desks/images/desk_8_jpg_640x640_q85.jpg)
+![](http://25.media.tumblr.com/tumblr_m77bcnb9pD1rqeb09o1_1280.jpg)
 
-![](http://i0.wp.com/25.media.tumblr.com/tumblr_m5pn9wh6AS1qkegsbo1_500.jpg)
+![](http://www.i-decoracao.com/Uploads/i-decoracao.com/ImagensGrandes/interior-paredes-shantell-martin-9.jpg)
 
 ![](http://i0.wp.com/farm9.staticflickr.com/8498/8348599003_125259183b_z.jpg)
 
-![](http://i0.wp.com/24.media.tumblr.com/tumblr_m6smzwfNgd1qkegsbo1_500.jpg)
+![](http://www.primefox.com/wp-content/uploads/2012/11/ios-6-0-1-jailbreak.jpg)
 
 ![](http://i0.wp.com/farm9.staticflickr.com/8546/8890110902_743a1860dd_z.jpg)
 
@@ -66,7 +66,7 @@ Simple style is welcomed by thousands of people. These workspaces below are suit
 
 ![](http://i2.wp.com/dribbble.s3.amazonaws.com/users/223616/screenshots/782397/workspace-large.png)
 
-![](http://i2.wp.com/26.media.tumblr.com/tumblr_lsr5lgm1Xv1qb83abo1_500.jpg)
+![](http://whatsfab.ca/wp-content/uploads/2012/03/desk1.jpg)
 
 ![](http://i0.wp.com/farm7.static.flickr.com/6154/6185494109_e6c8ab2622_z.jpg)
 
@@ -78,11 +78,11 @@ Simple style is welcomed by thousands of people. These workspaces below are suit
 
 ![](http://i1.wp.com/farm7.static.flickr.com/6197/6036720300_85361986c9_z.jpg)
 
-![](http://i1.wp.com/25.media.tumblr.com/37dde91e9f0d177fa5707cc9a38cabf4/tumblr_mm53l0QvK31qkegsbo1_500.jpg)
+![](http://gruponovacasa.files.wordpress.com/2013/03/grupo-nova-casa-mc3b2veis-e-decorac3a7c3b5es-home-office-7.jpg)
 
 ![](http://i1.wp.com/25.media.tumblr.com/34b341d58b683a41d7b71a287baabf92/tumblr_mk8l0ycckR1qkegsbo1_500.jpg)
 
-![](http://i2.wp.com/28.media.tumblr.com/tumblr_luws4e9vZu1qax5c3o1_500.jpg)
+![](http://quotemyoffice.com/wp-content/uploads/2013/11/Decorating-Your-Home-Office.jpg)
 
 ![](http://i2.wp.com/farm8.staticflickr.com/7161/6525315447_87e1879ee9_z.jpg)
 
@@ -90,7 +90,7 @@ Simple style is welcomed by thousands of people. These workspaces below are suit
 
 ![](http://i1.wp.com/farm7.static.flickr.com/6022/5967159987_a5fc1f03db_z.jpg)
 
-![](http://i0.wp.com/25.media.tumblr.com/0fd03af1554826026c18cd6fd4207650/tumblr_mhm81dGMe31qkegsbo1_500.jpg)
+![](http://hungariansuccessstories.files.wordpress.com/2013/01/viktor_csap_9_creative_studio_photo_by_csaba_barbay.jpg%3Fw%3D610)
 
 ![](http://i1.wp.com/farm8.staticflickr.com/7207/6985498487_a632269f01_z.jpg)
 
@@ -108,20 +108,17 @@ Simple style is welcomed by thousands of people. These workspaces below are suit
 
 ![](http://i0.wp.com/farm5.static.flickr.com/4019/4669069323_deb342bbca_z.jpg)
 
-![](http://i0.wp.com/29.media.tumblr.com/tumblr_lqx2g1KIjk1qavlt8o1_500.jpg)
-
-![](http://www.webdesigndev.com/wp-content/uploads/2009/12/212.jpg)
+![](http://www.workstationsetups.com/wp-content/uploads/2009/11/falkencreative.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/154.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/172.jpg)
 
-![](http://i2.wp.com/24.media.tumblr.com/tumblr_md8uzb9d0t1qkegsbo1_500.jpg)
+![](http://31.media.tumblr.com/tumblr_md8uzb9d0t1qkegsbo1_1280.jpg)
 
 ![](http://i0.wp.com/27.media.tumblr.com/tumblr_lzm16089WD1r9tee7o1_1280.jpg)
 
-
-![](http://i1.wp.com/24.media.tumblr.com/0d0a2a164c54f646550a79bab9d5983e/tumblr_mnkzplKKhR1qkegsbo1_1280.png)
+![](https://s3.amazonaws.com/screenshots.angel.co/dd/145339/fa099b82d424cc57651817f3d6a056e1-original.png)
 
 ![](http://s3.amazonaws.com/37assets/svn/822-jamie.png)
 

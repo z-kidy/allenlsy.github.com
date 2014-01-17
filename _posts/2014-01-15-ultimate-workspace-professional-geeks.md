@@ -6,7 +6,7 @@ cover_image:
 excerpt: "Workspace collection for all the geeks, programmers and designers. These workspaces redefine the meaning of productivity. Lots of macbook, iMac, iPad and iPhones. Multiple monitors, a cup of coffee on the desk, great gadgets (aimchair, keyboard, headphone, speaker...). They may not have good room, but they got the best digital devices. "
 category: ""
 tags: [workspace, mac, life] 
-thumbnail: 
+thumbnail: "http://d1piko3ylsjhpd.cloudfront.net/uploads/roboto/slide/image/3646/slide_workstation06_800.jpg"
 draft: 
 ---
 
@@ -16,27 +16,27 @@ Workspace collection for all the geeks, programmers and designers. These workspa
 
 ![](http://yakovfain.files.wordpress.com/2013/04/dsc_0012.jpg)
 
-![](http://dribbble.s3.amazonaws.com/users/223616/screenshots/779494/workspace.jpg)
+![](http://i0.wp.com/dribbble.s3.amazonaws.com/users/223616/screenshots/779494/workspace.jpg)
 
 ![]( http://static.businessinsider.com/image/4fdb94d9eab8eaa74900000c-1200/this-hacker-space-is-actually-the-top-floor-of-a-house-which-doubles-as-a-bike-storage-room.jpg )
 
-![](http://farm6.static.flickr.com/5179/5425809009_0c7d6e4c5e_b.jpg)
+![](http://i1.wp.com/farm6.static.flickr.com/5179/5425809009_0c7d6e4c5e_z.jpg)
 
-![](http://farm6.static.flickr.com/5128/5350205777_e1eb890faa_b.jpg)
+![](http://i0.wp.com/farm6.static.flickr.com/5128/5350205777_e1eb890faa_z.jpg)
 
-![](http://30.media.tumblr.com/tumblr_lrzt3qHMgx1qzvr49o1_500.jpg)
+![](http://i2.wp.com/30.media.tumblr.com/tumblr_lrzt3qHMgx1qzvr49o1_500.jpg)
 
 ![](http://ppcdn.500px.org/23981299/123b31cdbc26178b62fbab58d9cdfe3b192f042c/5.jpg)
 
 ![](http://www.webdesigndev.com/wp-content/uploads/2009/12/144.jpg)
 
-![](http://farm4.static.flickr.com/3329/5810920788_1f471253c3_b.jpg)
+![](http://i1.wp.com/farm4.static.flickr.com/3329/5810920788_1f471253c3_z.jpg)
 
-![](http://farm8.staticflickr.com/7156/6841172369_175c12778e_b.jpg)
+![](http://i0.wp.com/farm8.staticflickr.com/7156/6841172369_175c12778e_z.jpg)
 
 ![](http://yakovfain.files.wordpress.com/2013/04/dsc03412.jpg)
 
-![](http://farm9.staticflickr.com/8525/8685326024_91ef4d3ed3_b.jpg)
+![](http://i0.wp.com/farm9.staticflickr.com/8525/8685326024_91ef4d3ed3_z.jpg)
 
 ![](http://www.workstationsetups.com/wp-content/uploads/2009/12/lukewhitson1.jpg)
 
@@ -68,31 +68,31 @@ Workspace collection for all the geeks, programmers and designers. These workspa
 
 ![](http://31.media.tumblr.com/aad01e39d8699bc927f1f679c06c06f0/tumblr_mwxqjo78Or1t405dvo1_1280.jpg)
 
-![](http://farm6.staticflickr.com/5445/7049595573_05c853e53d_b.jpg)
+![](http://i2.wp.com/farm6.staticflickr.com/5445/7049595573_05c853e53d_z.jpg)
 
-![](http://farm8.staticflickr.com/7001/6448051857_b76c6f8b52_b.jpg)
+![](http://i0.wp.com/farm8.staticflickr.com/7001/6448051857_b76c6f8b52_z.jpg)
 
-![](http://farm8.staticflickr.com/7031/6590779747_156ffcf60f_b.jpg)
+![](http://i1.wp.com/farm8.staticflickr.com/7031/6590779747_156ffcf60f_z.jpg)
 
-![](http://farm3.static.flickr.com/2087/5828068618_afef24c619_b.jpg)
+![](http://i2.wp.com/farm3.static.flickr.com/2087/5828068618_afef24c619_z.jpg)
 
-![](http://farm6.static.flickr.com/5252/5526965168_192a14798c_b.jpg)
+![](http://i2.wp.com/farm6.static.flickr.com/5252/5526965168_192a14798c_z.jpg)
 
-![](http://farm3.static.flickr.com/2230/5806848236_35d7221885_b.jpg)
+![](http://i0.wp.com/farm3.static.flickr.com/2230/5806848236_35d7221885_z.jpg)
 
-![](http://farm4.static.flickr.com/3250/5816398534_dc10f886a5_b.jpg)
+![](http://i2.wp.com/farm4.static.flickr.com/3250/5816398534_dc10f886a5_z.jpg)
 
-![](http://farm3.static.flickr.com/2610/5795124371_f81d47c6ed_b.jpg)
+![](http://i2.wp.com/farm3.static.flickr.com/2610/5795124371_f81d47c6ed_z.jpg)
 
 ![](http://farm7.staticflickr.com/6186/6153401214_7eecffdb77_b.jpg)
 
-![](http://farm4.static.flickr.com/3094/5832437491_a8d1b4512d_b.jpg)
+![](http://i0.wp.com/farm4.static.flickr.com/3094/5832437491_a8d1b4512d_z.jpg)
 
-![](http://farm6.static.flickr.com/5279/5913481706_f146560731_b.jpg)
+![](http://i2.wp.com/farm6.static.flickr.com/5279/5913481706_f146560731_z.jpg)
 
 ![](http://asset-e.soup.io/asset/2423/9859_ec0a_960.jpeg)
 
-![](http://farm7.static.flickr.com/6123/6012432113_16106f43b6_b.jpg)
+![](http://i0.wp.com/farm7.static.flickr.com/6123/6012432113_16106f43b6_z.jpg)
 
 ![](http://farm7.static.flickr.com/6027/6012418414_31ab3c9416_b.jpg)
 

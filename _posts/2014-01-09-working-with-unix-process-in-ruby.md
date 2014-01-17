@@ -6,7 +6,7 @@ cover_image:
 excerpt: "NOTES of Working with Unix Process in Ruby, by Jesse Storimer"
 category: ""
 tags: [book, ruby, process, unix]
-thumbnail: http://rayhightower.com/images/working-w-unix-processes.jpg
+thumbnail: "http://rayhightower.com/images/working-w-unix-processes.jpg"
 draft: 
 ---
 
