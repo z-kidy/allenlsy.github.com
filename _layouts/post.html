@@ -27,16 +27,20 @@ layout: base
 
         <section class="article">
             {{ content }}
-            {% include _social.html %}
         </section>
-        {% if site.inc.disqus.shortname %}
-        <section>
+        <section class="article">
+          <hr>
+          <h4>Share this article</h4>
+          {% include _social.html %}
+        </section>
+        <section class="row">
+          <hr>
+          <div class="col-md-6">
             {% include _disqus.html %}
-        </section>
-        {% endif %}
-        <section>
-            <h3>中文评论区</h3>
+          </div>
+          <div class="col-md-6">
             {% include _duoshuo.html %}
+          </div>
         </section>
     </div>
 </article>

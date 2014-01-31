@@ -156,7 +156,11 @@
 
 <p>This code means, with a clear class, an element will have a block at the end of the element. If you apply <code>clear</code> to a <code>div</code>, then it will have a block at the end of the <code>div</code>. This <code>div</code> has content, clear both left and right, like in the first way. It will display as a block, which by default is <code>auto</code>. The block will not be visible, but it exists. The <code>height</code> is 0px, so it will not take up space. We don’t need to put a clear div using HTML at the end of the element. Code is clean. Yeah.</p>
 
-            
+        </section>
+        <section class="article">
+          <hr>
+          <h4>Share this article</h4>
+          
 <div class="social">
     <div>
         <a href="https://twitter.com/share" class="twitter-share-button"  data-text="CSS trick: float, overflow, clear" data-related="allenlsy">Tweet</a>
@@ -181,8 +185,9 @@
 </div>
 
         </section>
-        
-        <section>
+        <section class="row">
+          <hr>
+          <div class="col-md-6">
             <div id="disqus_thread"></div>
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -195,10 +200,8 @@
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-        </section>
-        
-        <section>
-            <h3>中文评论区</h3>
+          </div>
+          <div class="col-md-6">
             <div id="duoshuo_thread" class="ds-thread"></div>
 <!-- Duoshuo Comment BEGIN -->
 <script type="text/javascript">
@@ -214,6 +217,7 @@ var duoshuoQuery = {short_name:"allenlsy21"};
 </script>
 <!-- Duoshuo Comment END -->
 
+          </div>
         </section>
     </div>
 </article>
