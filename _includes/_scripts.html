@@ -33,3 +33,14 @@
   ga('create', '{{ site.inc.analytics.google.id }}', '{{ site.url }}');
   ga('send', 'pageview');
 </script>{% endif %}
+
+<script src="/galleria.js" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+  Galleria.loadTheme('/galleria/themes/{{ site.gallery_theme }}/galleria.{{ site.gallery_theme }}.js');
+  Galleria.run('#galleria', {
+    transition: 'fade',
+    easing: 'galleriaOut',
+    _hideDock: false
+  });
+</script>

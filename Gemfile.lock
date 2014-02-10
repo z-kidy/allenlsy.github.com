@@ -9,6 +9,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     RedCloth (4.2.9)
+    awesome_print (1.2.0)
     capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
@@ -99,6 +100,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print
   capistrano-rvm
   github-pages
   jekyll
