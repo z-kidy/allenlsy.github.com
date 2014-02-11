@@ -34,8 +34,8 @@
   ga('send', 'pageview');
 </script>{% endif %}
 
+{% if page.gallery %}
 <script src="/galleria.js" type="text/javascript" charset="utf-8"></script>
-
 <script type="text/javascript" charset="utf-8">
   Galleria.loadTheme('/galleria/themes/{{ site.gallery_theme }}/galleria.{{ site.gallery_theme }}.js');
   Galleria.run('#galleria', {
@@ -44,3 +44,4 @@
     _hideDock: false
   });
 </script>
+{% endif %}
