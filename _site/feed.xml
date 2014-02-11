@@ -6,9 +6,121 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
     <description></description>
     <language>en-us</language>
-    <pubDate>Wed, 12 Feb 2014 04:58:18 +0800</pubDate>
-    <lastBuildDate>Wed, 12 Feb 2014 04:58:18 +0800</lastBuildDate>
+    <pubDate>Wed, 12 Feb 2014 06:03:33 +0800</pubDate>
+    <lastBuildDate>Wed, 12 Feb 2014 06:03:33 +0800</lastBuildDate>
 
+    
+    
+    <item>
+      <title>Monthly January 2014</title>
+      <link>/monthly-january-2014</link>
+      <pubDate>Fri, 07 Feb 2014 00:00:00 +0800</pubDate>
+      <author></author>
+      <guid>/monthly-january-2014</guid>
+      <description>&lt;h3 id=&quot;recomemend-readings&quot;&gt;Recomemend Readings&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.blacktie.co/&quot;&gt;Free Bootstrap Themes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://5minutenpause.com/blog/2013/09/04/multiple-file-upload-with-jquery-rails-4-and-paperclip/&quot;&gt;Multiple file upload with jQuery, Rails 4 and Paperclip&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bestcbooks.com/recommended-cpp-books&quot;&gt;C++必读书籍推荐&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html&quot;&gt;A Note About Git Commit Messages - Tim Pope&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://css-tricks.com/css-content/&quot;&gt;CSS Content&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.uisdc.com/whats-cool-designers-week&quot;&gt;第41期设计圈最新干货大集合&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.programcreek.com/2013/04/what-can-you-learn-from-a-java-helloworld-program/&quot;&gt;What can we learn from Java HelloWorld?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://zhuanlan.zhihu.com/evilcos/19668712&quot;&gt;用户隐私早沦陷了&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_9f4af8bd01015hpl.html&quot;&gt;韩国造星骇人真相&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/historyasamirror/article/details/5778378&quot;&gt;IO - 同步，异步，阻塞，非阻塞 （亡羊补牢篇)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://zhuanlan.zhihu.com/WebNotes/19656148&quot;&gt;别给 12306 洗地了&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://money.163.com/13/0528/08/8VUT54PA00253G87_all.html&quot;&gt;中国互联网的地下世界：五毛党网络赌博都是现实&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://baixiaosheng.net/2522&quot;&gt;鬼脚七：淘宝搜索入门级介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.163.com/guaiguai_family/blog/static/20078414520140273552602/&quot;&gt;《淘宝技术这十年》读后感&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.aqee.net/how-to-hack-a-wordpress-site-using-sql-injection/&quot;&gt;实战演示黑客如何利用SQL注入漏洞攻破一个WordPress网站&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jy.smzdm.com/detail/9463&quot;&gt;这些年陪伴我的设备——咖啡篇 HARIO 手摇磨豆机 MSCS-2TB 、虹吸壶、奶泡器 CQT-45、illy Y-1 胶囊咖啡机&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://huazong.blog.caixin.com/archives/50558&quot;&gt;马克杯装腔指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;ruby-skills&quot;&gt;Ruby skills&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;How to do operator overriding in Ruby?&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Forwardable&lt;/code&gt; module in standard Ruby library&lt;/li&gt;
+  &lt;li&gt;Combine proc with threequals operator, using in &lt;code&gt;case..when&lt;/code&gt; clause&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;module_function&lt;/code&gt; in Ruby&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;reverse_merge&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;videos&quot;&gt;Videos&lt;/h3&gt;
+
+&lt;h4 id=&quot;ben-orenstein---write-code-faster-expert-level-vim-railsberry-2012httpswwwyoutubecomwatchvskdrywhh-8s&quot;&gt;1. &lt;a href=&quot;https://www.youtube.com/watch?v=SkdrYWhh-8s&quot;&gt;Ben Orenstein - Write code faster: expert-level vim (Railsberry 2012)&lt;/a&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Simplify saving file 	&lt;/li&gt;
+  &lt;li&gt;Using leader&lt;/li&gt;
+  &lt;li&gt;Grow your vimrc&lt;/li&gt;
+  &lt;li&gt;Use hjkl&lt;/li&gt;
+  &lt;li&gt;Navigate: command-t, vim-rails&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;more-git-and-github-secrets-with-zach-holmanhttpsvimeocom76197230&quot;&gt;2. 	&lt;a href=&quot;https://vimeo.com/76197230&quot;&gt;More Git and GitHub Secrets with Zach Holman&lt;/a&gt;&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://zachholman.com/talk/more-git-and-github-secrets/&quot;&gt;Here his blog&lt;/a&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;git merge master -s ours&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;git merge master -s recursive -X patience&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Second Order Diff&lt;/li&gt;
+  &lt;li&gt;Emoji diff, &lt;code&gt;git --no-pager diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;git diff --check&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;git stripspace&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;git merge --abort | --no-commit&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Proper message&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;y&lt;/code&gt; key: look for deleted file&lt;/li&gt;
+  &lt;li&gt;/allenlsy.keys&lt;/li&gt;
+  &lt;li&gt;Fetching pull request: &lt;code&gt;git fetch origin pull/12/head:pr&lt;/code&gt;, fetches Pull Request #12 into a branch named “pr”&lt;/li&gt;
+  &lt;li&gt;Top emoji on Github: :clap:, :+1:, :-1:, :sparkles:, :shipit:&lt;/li&gt;
+  &lt;li&gt;Page as a todo list&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;confident-rubyhttpswwwyoutubecomwatchvt8j0j2xjfgq&quot;&gt;3. &lt;a href=&quot;https://www.youtube.com/watch?v=T8J0j2xJFgQ&quot;&gt;Confident Ruby&lt;/a&gt;&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Duck typing: `object.respond_to? :quack&lt;/li&gt;
+  &lt;li&gt;3 Strategies to deal with uncertain input
+    &lt;ul&gt;
+      &lt;li&gt;Coerce&lt;/li&gt;
+      &lt;li&gt;Reject&lt;/li&gt;
+      &lt;li&gt;Ignore
+        &lt;ul&gt;
+          &lt;li&gt;Guard clause: reject statement at beginning of a method&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;Hash#fetch&lt;/code&gt;: &lt;code&gt;collection.fetch(key) { fallback_option }&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Confident Style: Iteration&lt;/li&gt;
+  &lt;li&gt;Bouncer method: for result checking, raise or do nothing
+    &lt;ul&gt;
+      &lt;li&gt;Inline error handleing&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;result &amp;lt;&amp;lt; begin; ... ; rescue Error::EPIPE; ...; end&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Why confident code?
+    &lt;ul&gt;
+      &lt;li&gt;Fewer paths == fewer bugs&lt;/li&gt;
+      &lt;li&gt;Easier to debug&lt;/li&gt;
+      &lt;li&gt;Self-documenting&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;computer-programming--a-short-interesting-filmhttpwwwyoutubecomwatchvowsyrnobsjs&quot;&gt;4. &lt;a href=&quot;http://www.youtube.com/watch?v=OWsyrnOBsJs&quot;&gt;Computer Programming | A short interesting film&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h4 id=&quot;nathan-marz-on-stormhttpwwwyoutubecomwatchvbdps8te0gyo&quot;&gt;5. &lt;a href=&quot;http://www.youtube.com/watch?v=bdps8tE0gYo&quot;&gt;Nathan Marz on Storm&lt;/a&gt;&lt;/h4&gt;
+
+&lt;h4 id=&quot;vertx-this-aint-your-dads-nodehttpwwwyoutubecomwatchv8clyuoa3h0&quot;&gt;6. &lt;a href=&quot;http://www.youtube.com/watch?v=8ClYUo_A3h0&quot;&gt;Vert.x: This ain’t your Dad’s Node.&lt;/a&gt;&lt;/h4&gt;
+</description>
+    </item>
+    
     
     
     <item>
@@ -995,68 +1107,6 @@ STDERR.reopen &quot;/dev/null&quot;, &quot;a&quot;
   &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stdout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-</description>
-    </item>
-    
-    
-    
-    <item>
-      <title>Monthly January 2014</title>
-      <link>/monthly-january-2014</link>
-      <pubDate>Tue, 07 Jan 2014 00:00:00 +0800</pubDate>
-      <author></author>
-      <guid>/monthly-january-2014</guid>
-      <description>&lt;h3 id=&quot;recomemend-readings&quot;&gt;Recomemend Readings&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.blacktie.co/&quot;&gt;Free Bootstrap Themes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://5minutenpause.com/blog/2013/09/04/multiple-file-upload-with-jquery-rails-4-and-paperclip/&quot;&gt;Multiple file upload with jQuery, Rails 4 and Paperclip&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://bestcbooks.com/recommended-cpp-books&quot;&gt;C++必读书籍推荐&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.quora.com/Linux/What-are-some-time-saving-tips-that-every-Linux-user-should-know#step=6&quot;&gt;What are some time-saving tips that every Linux user should know?&lt;/a&gt;, &lt;a href=&quot;http://blog.jobbole.com/54425/&quot;&gt;每个Linux用户都应该了解的命令行省时技巧&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;pgrep&lt;/code&gt;, &lt;code&gt;pkill&lt;/code&gt;, &lt;code&gt;xargs&lt;/code&gt;, &lt;code&gt;lsof&lt;/code&gt;, &lt;code&gt;*stat&lt;/code&gt;, &lt;code&gt;mtr&lt;/code&gt;, &lt;code&gt;siege&lt;/code&gt;…&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;emacs&quot;&gt;Emacs&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://batsov.com/articles/2011/11/30/the-ultimate-collection-of-emacs-resources/&quot;&gt;The Ultimate Collection of Emacs Resources&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;videos&quot;&gt;Videos&lt;/h3&gt;
-
-&lt;h5 id=&quot;ben-orenstein---write-code-faster-expert-level-vim-railsberry-2012httpswwwyoutubecomwatchvskdrywhh-8s&quot;&gt;1. &lt;a href=&quot;https://www.youtube.com/watch?v=SkdrYWhh-8s&quot;&gt;Ben Orenstein - Write code faster: expert-level vim (Railsberry 2012)&lt;/a&gt;&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Simplify saving file&lt;/li&gt;
-  &lt;li&gt;Using leader&lt;/li&gt;
-  &lt;li&gt;Grow your vimrc&lt;/li&gt;
-  &lt;li&gt;Use hjkl&lt;/li&gt;
-  &lt;li&gt;Navigate: command-t, vim-rails&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;more-git-and-github-secrets-with-zach-holmanhttpsvimeocom76197230&quot;&gt;2.  &lt;a href=&quot;https://vimeo.com/76197230&quot;&gt;More Git and GitHub Secrets with Zach Holman&lt;/a&gt;&lt;/h5&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://zachholman.com/talk/more-git-and-github-secrets/&quot;&gt;Here his blog&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;git merge master -s ours&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git merge master -s recursive -X patience&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Second Order Diff&lt;/li&gt;
-  &lt;li&gt;Emoji diff, &lt;code&gt;git --no-pager diff&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git diff --check&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git stripspace&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;git merge --abort | --no-commit&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Proper message&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;y&lt;/code&gt; key: look for deleted file&lt;/li&gt;
-  &lt;li&gt;/allenlsy.keys&lt;/li&gt;
-  &lt;li&gt;Fetching pull request: &lt;code&gt;git fetch origin pull/12/head:pr&lt;/code&gt;, fetches Pull Request #12 into a branch named “pr”&lt;/li&gt;
-  &lt;li&gt;Top emoji on Github: :clap:, :+1:, :-1:, :sparkles:, :shipit:&lt;/li&gt;
-  &lt;li&gt;Page as a todo list&lt;/li&gt;
-&lt;/ul&gt;
 
 </description>
     </item>
