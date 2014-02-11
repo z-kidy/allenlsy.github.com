@@ -11,6 +11,7 @@ module Jekyll
       # array of GalleryPage objects
       site.data['galleries'] = []
       gallery_dirs = Dir["#{site.source}/#{gallery_dir}/*/"].select { |e| File.directory? e }
+      gallery_dirs.reverse!
       gallery_dirs.each do |dir|
         generate_gallery_page(dir)
       end
