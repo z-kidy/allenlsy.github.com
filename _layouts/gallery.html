@@ -2,7 +2,8 @@
 layout: blank
 ---
 <div id="galleria">
-  {% for photo in page.photos %}
-    <img src="{{ photo }}" />
+  <span>gallery template</span>
+  {% for url in page.photo_urls %}
+    <img src="{{ url }}" />
   {% endfor %}
 </div>

@@ -8,32 +8,70 @@ module Jekyll
       self.gallery_dir = site.config['gallery_dir'] || 'galleries'
       self.gallery_layout = site.config['gallery_layout'] || 'gallery'
 
+      # array of GalleryPage objects
       site.data['galleries'] = []
-      galleries = Dir["#{site.source}/#{gallery_dir}/*/"].select { |e| File.directory? e }
-      galleries.each do |gallery|
-        generate_gallery_page(gallery)
+      gallery_dirs = Dir["#{site.source}/#{gallery_dir}/*/"].select { |e| File.directory? e }
+      gallery_dirs.each do |dir|
+        generate_gallery_page(dir)
       end
     end
 
     private
-    def generate_gallery_page(gallery)
-      gallery_name = File.basename gallery
-      photo_urls = Dir["#{gallery}*"].map { |e| URI.escape("/#{self.gallery_dir}/#{gallery_name}/#{File.basename e}") }
-      data = { 'layout' => gallery_layout, 'photos' => photo_urls }
-      site.pages << GalleryPage.new(site, site.source, gallery_dir, gallery_name, data)
-      site.data['galleries'] << { gallery_name => URI.escape("/#{self.gallery_dir}/#{gallery_name}.html") }
+    def generate_gallery_page(gallery_dir)
+      data = { 'layout' => gallery_layout }
+
+      page = GalleryPage.new(site, site.source, self.gallery_dir, gallery_dir, data)
+      site.pages << page
+
+      site.data['galleries'] << page
     end
 
   end
 
   class GalleryPage < Page
-    def initialize(site, base, dir, name, data={})
+    # Valid post name regex.
+    MATCHER = /^(\d+-\d+-\d+)-(.*)$/
+
+    attr_accessor :site, :url
+
+    def initialize(site, base, gen_dir, dir, data={})
       self.content = data.delete('content') || ''
       self.data = data
-      super(site, base, dir, "#{name}.html")
+
+      super(site, base, gen_dir, File.basename(dir) )
+
+      # url, photos
+      self.url = "/#{gen_dir}/#{self.slug}.html"
+      self.data['photo_urls'] = Dir["#{base}/#{gen_dir}/#{self.name}/*"].map { |e| URI.escape("/#{gen_dir}/#{self.name}/#{File.basename e}") }
     end
 
     def read_yaml(*)
+    end
+
+    # Extract information from the post filename.
+    #
+    # name - The String filename of the post file.
+    #
+    # Returns nothing.
+    def process(name)
+      m, date, name = *name.match(MATCHER)
+
+      self.data['date'] = Time.parse(date)
+      self.data['name'] = name
+      self.data['slug'] = name
+    rescue ArgumentError
+      raise FatalException.new("Gallery #{name} does not have a valid date.")
+    end
+
+    private
+    def self.humanize(lower_case_and_underscored_word)
+      result = lower_case_and_underscored_word.to_s.dup
+      inflections.humans.each { |(rule, replacement)| break if result.sub!(rule, replacement) }
+      result.gsub!(/_id$/, "")
+      result.tr!('_', ' ')
+      result.gsub(/([a-z\d]*)/) { |match|
+        "#{inflections.acronyms[match] || match.downcase}"
+      }.gsub(/^\w/) { $&.upcase }
     end
   end
 
