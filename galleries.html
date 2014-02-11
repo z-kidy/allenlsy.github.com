@@ -20,7 +20,7 @@ layout: base
         </div>
     </section>
 </div>
-
+<h1>{{ site.galleries }}</h1>
 <article class="container">
   <section class="index">
     <address>
@@ -30,30 +30,12 @@ layout: base
       </p>
     </address>
   </section>
-  {% for gallery_hash in site.data['galleries'] %}
-    {% for gallery in gallery_hash %}
+  {% for gallery in site.data['galleries'] %}
       <section class="index">
         <p>
-          <a href="{{ gallery[1] }}">{{ gallery[0] }}</a>
+          <a href="{{ gallery.url }}">{{ gallery.name }}</a>
+          <span>{{ gallery.date }}</span>
         </p>
       </section>
-    {% endfor %}
   {% endfor %}
-
-  {% for gallery_hash in site.data['galleries'] %}
-      <section class="index">
-        <div class="row">
-          {% for gallery in gallery_hash %}
-            <h2 class="title"><a href="{{ gallery[1] }}" rel="prefetch">{{ gallery[0] }}</a></h2>
-            {% if site.galleries contains gallery[0] %}
-              {% if site.galleries[ gallery[0] ].subtitle %}
-                <p class="subtitle">{{ site.galleries[ gallery[0] ].subtitle }}</p>
-              {% endif %}
-            {% endif %}
-          {% endfor %}
-        </div>
-        <hr>
-      </section>
-  {% endfor %}
-
 </article>
