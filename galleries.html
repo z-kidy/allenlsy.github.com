@@ -31,13 +31,14 @@ layout: base
   </section>
   {% for gallery in site.data['galleries'] %}
       <section class="index">
-        <h2>
+        <h2 class="title">
           <a href="{{ gallery.url }}">{{ gallery.name }}</a>
         </h2>
-        <p>{{ gallery.date }}</p>
+        <div class="meta">{{ gallery.date }}</div>
         {% if gallery.excerpt %}
         <p>{{ gallery.excerpt }}</p>
         {% endif %}
+        <hr>
       </section>
   {% endfor %}
 </article>

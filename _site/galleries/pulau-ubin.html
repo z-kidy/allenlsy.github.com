@@ -11,12 +11,15 @@
     <link rel="apple-touch-icon" href="/images/logo.jpg"/>
     <link href="/feed.xml" rel="alternate" type="application/rss+xml" title="Simple, Not Easy" />
     <meta name="title" content="Simple, Not Easy">
-    <link rel="canonical" href="/galleries/first_gallery.html">
+    <link rel="canonical" href="/galleries/pulau-ubin.html">
     
     <link rel="author" href="https://plus.google.com/118230970865161551961">
     <meta property="og:title" content="Simple, Not Easy"/>
-    <meta property="og:url" content="/galleries/first_gallery.html"/>
+    <meta property="og:url" content="/galleries/pulau-ubin.html"/>
     
+    
+    <meta property="og:description" content="Trip to Pulau Ubin on Chinese New Year"/>
+    <meta name="description" content="Trip to Pulau Ubin on Chinese New Year"/>
     
     <meta property="og:site_name" content="Simple, Not Easy">
     <link rel="stylesheet" href="/bt-responsive.css" type="text/css" media="screen" charset="utf-8">
@@ -26,9 +29,54 @@
 <body>
 
 <div id="galleria">
-  <span>gallery template</span>
-  
 </div>
+<script>
+  var data = [
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2346.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2349.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2351.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2363.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2381.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2385%20retouched.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2395%20retouched.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2414.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2435%20-%20blue.jpg'
+},
+  
+{
+  image: '/galleries/2014-02-01-Pulau%20Ubin/IMG_2440.jpg'
+},
+  
+
+  ];
+</script>
+
 
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -74,7 +122,12 @@
   Galleria.run('#galleria', {
     transition: 'fade',
     easing: 'galleriaOut',
-    _hideDock: false
+    _hideDock: false,
+    transitionSpeed:800,
+    imageCrop: 'landscape',
+    thumbnails: 'lazy',
+    dataSource: data
+
   });
 </script>
 
