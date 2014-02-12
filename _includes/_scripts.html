@@ -41,7 +41,12 @@
   Galleria.run('#galleria', {
     transition: 'fade',
     easing: 'galleriaOut',
-    _hideDock: false
+    _hideDock: false,
+    transitionSpeed:800,
+    imageCrop: 'landscape',
+    thumbnails: 'lazy',
+    dataSource: data
+
   });
 </script>
 {% endif %}

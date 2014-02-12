@@ -3,8 +3,15 @@ layout: blank
 gallery: true
 ---
 <div id="galleria">
-  <span>gallery template</span>
-  {% for url in page.photo_urls %}
-    <img src="{{ url }}" />
-  {% endfor %}
 </div>
+<script>
+  var data = [
+  {% for url in page.photo_urls %}
+{
+  image: '{{ url }}'
+},
+  {% endfor %}
+
+  ];
+</script>
+

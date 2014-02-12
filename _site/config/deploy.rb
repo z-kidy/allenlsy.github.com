@@ -45,12 +45,12 @@ namespace :deploy do
     end
   end
 
-  after :finished do
-    on roles(:blog) do
-      within "#{deploy_to}/current" do
-        execute "jekyll build"
-      end
-    end
-  end
+  # after :finished do
+  #   on roles(:blog) do
+  #     within "#{deploy_to}/current" do
+  #       execute "jekyll build"
+  #     end
+  #   end
+  # end
 
 end
