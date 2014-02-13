@@ -51,8 +51,9 @@ module Jekyll
       # url, photos
       self.url = "/#{gen_dir}/#{self.data['slug']}.html"
       self.data['url'] = URI.escape self.url
-      self.data['photo_urls'] = Dir["#{base}/#{gen_dir}/#{dir_name}/*"].map { |e| URI.escape("/#{gen_dir}/#{dir_name}/#{File.basename e}") }
-
+      photos = Dir["#{base}/#{gen_dir}/#{dir_name}/*"]
+      self.data['photo_urls'] = photos.map { |e| URI.escape("/#{gen_dir}/#{dir_name}/#{File.basename e}") }
+      self.data["photo_thumbnails"] = photos.map { |e| URI.escape("/gallery_thumbnails/#{dir_name}/#{File.basename e}") }
       if site.config[CONFIG_GALLERIES_ATTR]
         attr = site.config[CONFIG_GALLERIES_ATTR].find { |e| e['title'] == self.name}
         self.data['excerpt'] = attr['excerpt'] if attr
