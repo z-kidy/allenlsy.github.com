@@ -27,6 +27,8 @@ set :default_run_options, {
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
+after "deploy:finished", "deploy:galleries"
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -56,15 +58,5 @@ namespace :deploy do
       end
     end
   end
-
-  after :finished, :galleries
-
-  # after :finished do
-  #   on roles(:blog) do
-  #     within "#{deploy_to}/current" do
-  #       execute "jekyll build"
-  #     end
-  #   end
-  # end
 
 end
