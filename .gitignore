@@ -1,5 +1,4 @@
 .DS_Store
 *.swo
-_site/galleries/
-_site/gallery_thumbnails/
+_site/
 

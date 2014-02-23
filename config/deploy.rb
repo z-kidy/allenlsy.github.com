@@ -27,7 +27,7 @@ set :default_run_options, {
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
-after "deploy:finished", "deploy:galleries"
+after "deploy:finished", "deploy:jekyll_build"
 
 namespace :deploy do
   desc 'Restart application'
@@ -38,23 +38,12 @@ namespace :deploy do
     end
   end
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
-  desc 'Rsync galleries'
-  task :galleries do
-    run_locally do
-      within './' do
-        roles(:blog).each do |host|
-          execute "rsync -vr --exclude='.DS_Store' galleries #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/_site"
-          execute "rsync -vr --exclude='.DS_Store' gallery_thumbnails #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/_site/"
-        end
+  desc 'build jekyll '
+  task :jekyll_build do
+    on roles(:blog) do |host|
+      within "#{ferch(:deploy_to)/current}" do
+        execute 'bundle'
+        execute 'jekyll build'
       end
     end
   end
