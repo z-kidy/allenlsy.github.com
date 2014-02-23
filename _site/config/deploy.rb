@@ -50,7 +50,7 @@ namespace :deploy do
     run_locally do
       within './' do
         roles(:blog).each do |host|
-          execute "rsync -vr --exclude='.DS_Store' tags.html #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/"
+          execute "rsync -vr --exclude='.DS_Store' galleries #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/_site"
           execute "rsync -vr --exclude='.DS_Store' gallery_thumbnails #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/_site/"
         end
       end

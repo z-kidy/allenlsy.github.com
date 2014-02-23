@@ -1,7 +1,5 @@
 .DS_Store
 *.swo
-galleries/
-gallery_thumbnails/
 _site/galleries/
 _site/gallery_thumbnails/
 
