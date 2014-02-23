@@ -6,7 +6,7 @@ set :repo_url, 'git@github.com:allenlsy/allenlsy.github.com.git'
 set :deploy_to, "/home/allenlsy/allenlsy.github.com"
 set :scm, :git
 
-# role :blog, '162.217.248.104'
+# server '162.217.248.104'
 set :user, 'allenlsy'
 
 set :default_run_options, {
@@ -44,6 +44,20 @@ namespace :deploy do
       # end
     end
   end
+
+  desc 'Rsync galleries'
+  task :galleries do
+    run_locally do
+      within './' do
+        roles(:blog).each do |host|
+          execute "rsync -vr --exclude='.DS_Store' tags.html #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/"
+          execute "rsync -vr --exclude='.DS_Store' gallery_thumbnails #{fetch(:user)}@#{host}:#{fetch(:deploy_to)}/current/_site/"
+        end
+      end
+    end
+  end
+
+  after :finished, :galleries
 
   # after :finished do
   #   on roles(:blog) do
