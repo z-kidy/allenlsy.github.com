@@ -9,9 +9,26 @@ set :scm, :git
 # server '162.217.248.104'
 set :user, 'allenlsy'
 
-set :default_run_options, {
-  pty: true
-}
+set :pty, true
+
+set :bundle_roles, :blog
+set :bundle_gemfile, -> { release_path.join('Gemfile') }
+set :bundle_dir, -> { shared_path.join('bundle') }
+set :bundle_flags, '--deployment --quiet'
+set :bundle_without, %w{development test}.join(' ')
+set :bundle_binstubs, -> { shared_path.join('bin') }
+set :bundle_bins, %w{gem rake ruby}
+
+set :stages, %w(production staging)
+set :default_stage, 'production'
+
+# set :rvm_bin_path, "/usr/local/rvm/bin"
+set :rvm_roles, [:blog]
+set :rvm_type, :user
+set :rvm_ruby_version, 'ruby-1.9.3-p448'
+set :rvm_path, "~/.rvm"
+set :rvm_bin_path, "#{fetch(:rvm_path)}/bin"
+set :default_env, { RVM_BIN_PATH: "~/.rvm/bin" }
 
 # set :ssh_options, {
 #   forward_agent: true
@@ -41,9 +58,10 @@ namespace :deploy do
   desc 'build jekyll '
   task :jekyll_build do
     on roles(:blog) do |host|
-      within "#{ferch(:deploy_to)/current}" do
-        execute 'bundle'
-        execute 'jekyll build'
+      # execute "cd #{fetch(:deploy_to)}/current && bundle && jekyll build"
+      within "#{fetch(:deploy_to)}/current" do
+        execute :bundle, :install
+        execute :bundle, :exec, :jekyll, :build
       end
     end
   end
