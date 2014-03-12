@@ -3,14 +3,13 @@ layout: blank
 gallery: true
 ---
 <div id="galleria">
-  {{ page.photo_urls.length }}
 </div>
 <script>
   var data = [
-  {% for url in page.photo_urls %}
+  {% for photo in page.photos %}
 {
-  image: '{{ url }}',
-  thumbnail: '{{ page.photo_thumbnails[forloop.index0] }}'
+  image: "{{ photo.url }}",
+  thumb: "{{ photo.thumbnail_url }}"
 },
   {% endfor %}
 

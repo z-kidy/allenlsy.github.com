@@ -49,7 +49,7 @@ GEM
     jekyll-assets (0.7.4)
       jekyll (~> 1.0)
       sprockets (~> 2.10)
-    jekyll-galleries (0.7.1)
+    jekyll-galleries (0.8.0)
     json (1.8.1)
     kramdown (1.2.0)
     liquid (2.5.4)
@@ -76,6 +76,7 @@ GEM
       ffi (>= 0.5.0)
     rdiscount (2.1.7)
     redcarpet (2.3.0)
+    rmagick (2.13.2)
     ruby-nuggets (0.9.6)
     safe_yaml (0.9.7)
     sass (3.2.12)
@@ -107,9 +108,10 @@ DEPENDENCIES
   github-pages
   jekyll
   jekyll-assets
-  jekyll-galleries
+  jekyll-galleries (~> 0.8.0)
   jekyll-tagging!
   maruku
   rake
+  rmagick
   sass
   uglifier

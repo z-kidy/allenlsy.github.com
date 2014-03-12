@@ -149,7 +149,7 @@ links:
   - title: Casts
     url: http://cast.allenlsy.com
   - title: Galleries
-    url: /galleries.html
+    url: /galleries
 
 tag_page_layout: tag_page
 tag_page_dir: tags
@@ -159,6 +159,8 @@ gallery_theme: fullscreen
 gallery_dir: galleries
 gallery_layout: gallery
 
+thumbnails_dir: gallery_thumbnails
+
 galleries:
-  - title: Pulau Ubin
+  - name: Pulau Ubin
     excerpt: Trip to Pulau Ubin on Chinese New Year
