@@ -44,7 +44,6 @@ set :default_env, { RVM_BIN_PATH: "~/.rvm/bin" }
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
 
-after "deploy:finished", "deploy:jekyll_build"
 
 namespace :deploy do
   desc 'Restart application'
@@ -65,5 +64,7 @@ namespace :deploy do
       end
     end
   end
-
 end
+
+after "deploy:finished", "deploy:jekyll_build"
+

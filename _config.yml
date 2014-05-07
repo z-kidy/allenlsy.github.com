@@ -162,5 +162,16 @@ gallery_layout: gallery
 thumbnails_dir: gallery_thumbnails
 
 galleries:
-  - name: Pulau Ubin
+  - name: Sunrise Changi Beach
+    excerpt: I went to Changi beach with a group of friends at 5:30am that morning, and wait for the sunrise. We were lucky that day. That is also my first time going out shooting with a group.
+    thumbnail: IMG_2635.jpg
+  - name: Pulau Ubin, 2014 Febrary
     excerpt: Trip to Pulau Ubin on Chinese New Year
+    thumbnail: IMG_2435 - blue.jpg
+  - name: Shaanxi Trip
+    excerpt: I went back to China on May 1st, for my vacation. Shaanxi is the hometown of my wife. We went together, and saw the mountains and clouds on the highway
+    thumbnail: MG_7878.jpg
+  - name: Chinatown, 2014 April
+    thumbnail: 13810115895_20ab3d2889_o.jpg
+  - name: Arab Street, 2014 April
+    thumbnail: 13921567052_b2716e13ed_o.jpg
