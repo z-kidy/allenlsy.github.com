@@ -25,7 +25,7 @@ set :default_stage, 'production'
 # set :rvm_bin_path, "/usr/local/rvm/bin"
 set :rvm_roles, [:blog]
 set :rvm_type, :user
-set :rvm_ruby_version, 'ruby-1.9.3-p448'
+set :rvm_ruby_version, 'ruby-1.9.3-p547'
 set :rvm_path, "~/.rvm"
 set :rvm_bin_path, "#{fetch(:rvm_path)}/bin"
 set :default_env, { RVM_BIN_PATH: "~/.rvm/bin" }
