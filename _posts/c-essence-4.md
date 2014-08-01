@@ -1,3 +1,5 @@
+C Essence Pointer
+
 ## 1. Pointer Review
 
 `int *p` makes compiler confused where `p` points to. We should always initialise with `int *p = NULL;`.
