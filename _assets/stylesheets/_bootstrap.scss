@@ -66,8 +66,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family: "Source Code Pro", "Monaco", monospace, serif;
-  font-size: 1em;
+  font-family: "Monaco", monospace, serif;
+  font-size: 0.8em;
 }
 pre {
   white-space: pre-wrap;
@@ -585,11 +585,11 @@ pre {
 }
 code {
   padding: 2px 4px;
-  font-size: 90%;
+  font-size: 0.8em;
   color: #c7254e;
-  background-color: #E7F2F7;
+  background-color: #B8FFBD;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 pre {
   display: block;

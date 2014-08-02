@@ -81,8 +81,8 @@ code,
 kbd,
 pre,
 samp {
-  font-family: "Source Code Pro", Monaco, monospace, serif;
-  font-size: 1em;
+  font-family: Monaco, monospace, serif;
+  font-size: 0.8em;
 }
 pre {
   white-space: pre-wrap;
