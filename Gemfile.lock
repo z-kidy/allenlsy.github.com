@@ -138,6 +138,7 @@ GEM
     rdiscount (2.1.7)
     redcarpet (3.1.2)
     rmagick (2.13.3)
+    rouge (1.6.1)
     ruby-nuggets (1.0.0)
       nuggets (= 1.0.0)
     safe_yaml (1.0.3)
@@ -183,5 +184,6 @@ DEPENDENCIES
   maruku
   rake
   rmagick
+  rouge
   sass
   uglifier

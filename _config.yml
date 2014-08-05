@@ -35,7 +35,7 @@ inc:
     google:
       # eg. 'UA-123-12'
       id: 'UA-24647338-1'
-
+    
   # Google Fonts
   google_font: 'Open+Sans:400,700,800|Oswald|PT+Mono|Ubuntu+Mono'
 
@@ -64,7 +64,7 @@ timezone:    Asia/Singapore
 future:      false
 show_drafts: nil
 limit_posts: 0
-pygments:    true
+highlighter: rouge
 
 relative_permalinks: true
 
@@ -72,7 +72,7 @@ permalink:     pretty
 paginate_path: 'page:num'
 paginate: 10
 
-markdown:      kramdown
+markdown:      redcarpet
 markdown_ext:  markdown,mkd,mkdn,md
 textile_ext:   textile
 
@@ -96,7 +96,7 @@ rdiscount:
 
 # Don't use this: table not supported
 redcarpet:
-  extensions: []
+  extensions: [ "with_toc_data", "tables", "prettify" ]
 
 kramdown:
   auto_ids: true
