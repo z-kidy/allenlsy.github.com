@@ -17,7 +17,7 @@ draft:
 ## Reference of Ruby Process related methods
 
 Ruby Library Method | Unix System Method | Description
-- | - | -
+--- | --- | ---
 `Process.pid` | `getpid` | get calling process identification
 `Process.ppid` | `getppid` | get parent process identification
 `IO#fileno` | | get file descriptor number 

@@ -8,18 +8,18 @@ tags: [java]
 ![1](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [30. Use enums instead of `int` constants](#i30)
-* [31. Use instance fields instead of ordinals](#i31)
-* [32. Use `EnumSet` instead of bit fields](#i32)
-* [33. Use `EnumMap` instead of ordinal indexing](#i33)
-* [34. Emulate extensible enums with interfaces](#i34)
-* [35. Prefer annotation to naming patterns(naming convention)](#i35)
-* [36. Consistenly use the `Override` annotation](#i36)
-* [37. Use marker interfaces to define types](#i37)
+* [30. Use enums instead of `int` constants](#30.-use-enums-instead-of-int-constants)
+* [31. Use instance fields instead of ordinals](#31.-use-instance-fields-instead-of-ordinals)
+* [32. Use `EnumSet` instead of bit fields](#32.-use-enumset-instead-of-bit-fields)
+* [33. Use `EnumMap` instead of ordinal indexing](#33.-use-enummap-instead-of-ordinal-indexing)
+* [34. Emulate extensible enums with interfaces](#34.-emulate-extensible-enums-with-interfaces)
+* [35. Prefer annotation to naming patterns(naming convention)](#id="35.-prefer-annotation-to-naming-patterns(naming-convention)")
+* [36. Consistenly use the `Override` annotation](#36.-consistenly-use-the-override-annotation)
+* [37. Use marker interfaces to define types](#37.-use-marker-interfaces-to-define-types)
 
 * * *
 
-## 30. Use enums instead of `int` constants {#i30}
+## 30. Use enums instead of `int` constants 
 
 {% highlight java %}
 public enum Apple { FUJI, PIPPIN, GRANNY_SMITH };
@@ -170,7 +170,7 @@ enum PayrollDay {
 
 `PayrollDay` has certain `PayType`, `PayType` has a method `pay()`, each `PayType` has its own `overtimePay()`.
 
-## 31. Use instance fields instead of ordinals {#i31}
+## 31. Use instance fields instead of ordinals 
 
 Never derive a value associated with an enum from its ordinal; store it in an instance field instead.
 
@@ -184,7 +184,7 @@ public enum Ensemble {
 }
 {% endhighlight %}
 
-## 32. Use `EnumSet` instead of bit fields {#i32}
+## 32. Use `EnumSet` instead of bit fields 
 
 When using bit fields:
 
@@ -214,7 +214,7 @@ public class Text {
 text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC) );
 {% endhighlight %}
 
-## 33. Use `EnumMap` instead of ordinal indexing {#i33}
+## 33. Use `EnumMap` instead of ordinal indexing 
 
 DON'T USE `ordinal()` in enum.
 
@@ -260,7 +260,7 @@ for (Herb h : garden)
 
 {% endhighlight %}
 
-## 34. Emulate extensible enums with interfaces {#i34}
+## 34. Emulate extensible enums with interfaces 
 
 Sometimes we want to make enum like class, have inheritance. Take the `Operation` enum in [#30](#i30) as an example.
 
@@ -321,7 +321,7 @@ This will output `^` and `%` operation result.
 
 We use interface and implement the interface with enum to extends enum.
 
-## 35. Prefer annotation to naming patterns(naming convention) {#i35}
+## 35. Prefer annotation to naming patterns(naming convention) 
 
 Naming convention in Java has several disadvantages:
 
@@ -379,11 +379,11 @@ public class RunTests {
 
 This program checked `isAnnotationPresent(Test.class)`, to perform certain job.
 
-## 36. Consistenly use the `Override` annotation {#i36}
+## 36. Consistenly use the `Override` annotation 
 
 Avoid making mistakes.
 
-## 37. Use marker interfaces to define types {#i37}
+## 37. Use marker interfaces to define types 
 
 __Marker interface__ is the interface like `Serializable`.
 

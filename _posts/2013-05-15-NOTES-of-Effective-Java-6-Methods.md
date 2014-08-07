@@ -8,17 +8,17 @@ tags: [java]
 ![1](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [38. Parameter validation](#i38)
-* [39. Make defensive copies when needed](#i39)
-* [40. Design method signatures carefully](#i40)
-* [41. Use overloading judiciously](#i41)
-* [42. Use varargs judiciously](#i42)
-* [43. Return empty arrays or collections, not nulls](#i43)
-* [44. Write doc comments for all exposed API elements](#i44)
+* [38. Parameter validation](#38.-parameter-validation)
+* [39. Make defensive copies when needed](#39.-make-defensive-copies-when-needed)
+* [40. Design method signatures carefully](#40.-design-method-signatures-carefully)
+* [41. Use overloading judiciously](#41.-use-overloading-judiciously)
+* [42. Use varargs judiciously](#42.-use-varargs-judiciously)
+* [43. Return empty arrays or collections, not nulls](#43.-return-empty-arrays-or-collections,-not-nulls)
+* [44. Write doc comments for all exposed API elements](#44.-write-doc-comments-for-all-exposed-api-elements)
 
 * * *
 
-## 38. Parameter validation {#i38}
+## 38. Parameter validation 
 
 If parameter is not valid, a method should throw exceptions, other than continuing the method and return wrong result. Common exceptions are `IllegalArgumentException`, `IndexOutOfBoundsException`, `NullPointerException`.
 
@@ -40,7 +40,7 @@ If the validation is costly, then validation can be performed implicitly in the 
 
 If there is exception during computation and the program throws another type of exception due to invalid parameter, we should use __exception translation__.
 
-## 39. Make defensive copies when needed {#i39}
+## 39. Make defensive copies when needed 
 
 You must program defensively, with the assumption that clients of your class will do their best to destroy its invariants.
 
@@ -116,14 +116,14 @@ Use immutable objects as components of your objects,
 
 If the class trust the caller of the class will not modify the internals, then no defensive copy is allowed. But it must be documented that the caller cannot modify the return value or parameter. 
 
-## 40. Design method signatures carefully {#i40}
+## 40. Design method signatures carefully 
 
 * Choose method names carefully
 * Don't go overboard in providing convenience methods. Too many methods makes a class complex.
 * Avoid long parameter list
 * Prefer two-element enum types to `boolean` parameters
 
-## 41. Use overloading judiciously {#i41}
+## 41. Use overloading judiciously 
 
 #### Example: check the type of `Collection`:
 
@@ -188,7 +188,7 @@ public static Test {
 
 The output is `[-2, 0, 2]`. `remove(int)` in `List` will remove the element at given position. To remove first appearing element, use `remove(E)`, which should be `remove((Integer) i)` here.
 
-## 42. Use varargs judiciously {#i42}
+## 42. Use varargs judiciously 
 
 For a method `void func(int... args)`, if user has no input, it will fail at runtime but not compile time. One way to solve the problem is to change it to `void func(int firstArg, int... remainingArgs)`.
 
@@ -199,9 +199,9 @@ System.out.println(Arrays.toString(ary));
 // System.out.println(Arrays.asList(ary)); WILL NOT HAVE EXPECT OUTPUT
 {% endhighlight %}
 
-## 43. Return empty arrays or collections, not nulls {#i43}
+## 43. Return empty arrays or collections, not nulls 
 
-## 44. Write doc comments for all exposed API elements {#i44}
+## 44. Write doc comments for all exposed API elements 
 
 Java doc uses specially formated documentation comment to generate API doc.
 

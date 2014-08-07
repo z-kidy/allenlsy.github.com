@@ -77,7 +77,7 @@ In `int main(int argc, char *argv[])`, `argv` is a pointer to pointer, not an ar
 
 Here is a picture shows what is `argv`:
 
-![](/images/blog/cessence/pic61.png)
+![](/images/blog/cessense/pic61.png)
 
 ## 4. Pointer to an array & multi-dimention array
 
@@ -151,9 +151,9 @@ F *e(void);
 
 Use function pointer, it is more flexible to call functions that has the same return type and same arguments.
 
-## 6. Incomplete type & cComplex declaration
+## 6. Incomplete type & Complex declaration
 
-![]()
+![](/images/blog/cessense/pic62.png)
 
 There are 3 types in C language: 
 

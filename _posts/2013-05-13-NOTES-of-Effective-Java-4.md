@@ -9,18 +9,18 @@ tags: [java]
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [23. Don't use raw types in new code](#i23)
-* [24. Eliminate unchecked warnings](#i24)
-* [25. Prefer `List` to `Array`](#i25)
-* [26. Favor generic types](#i26)
-* [27. Favor generic method](#i27)
-* [28. Use bounded wildcards to increase API flexibility](#i28)
-* [29. Consider typesafe heterogeneous containers](#i29)
+* [23. Don't use raw types in new code](#23.-don't-use-raw-types-in-new-code)
+* [24. Eliminate unchecked warnings](#24.-eliminate-unchecked-warnings)
+* [25. Prefer `List` to `Array`](#25.-prefer-list-to-array)
+* [26. Favor generic types](#26.-favor-generic-types)
+* [27. Favor generic method](#27.-favor-generic-method)
+* [28. Use bounded wildcards to increase API flexibility](#28.-use-bounded-wildcards-to-increase-api-flexibility)
+* [29. Consider typesafe heterogeneous containers](#29.-consider-typesafe-heterogeneous-containers)
 
 * * *
 
 
-## 23. Don't use raw types in new code {#i23}
+## 23. Don't use raw types in new code 
 
 __Raw type__ generics is the type without the parameterized type. For example, `List` is the raw type of `List<E>`.
 
@@ -96,7 +96,7 @@ __Bounded wildcard type__: `List<? extends Number>`
 
 __Generic method__: `static <E> List<E> asList(E[] a)`
 
-## 24. Eliminate unchecked warnings {#i24}
+## 24. Eliminate unchecked warnings 
 
 Eliminate every unchecked warnings that you can.
 
@@ -122,7 +122,7 @@ public < T > T[] toArray(T[] a) {
 
 When using `@SuppressWarnings("unchecked")` annotation, you must comment why it is correct and safe.
 
-## 25. Prefer `List` to `Array` {#i25}
+## 25. Prefer `List` to `Array` 
 
 Array is __covariant__, which means if `Sub` is a subclass of `Super`, then `Sub[]` is a subclass of `Super[]`. 
 
@@ -190,7 +190,7 @@ static <E> E reduce(List<E> list, Function<E> f, E initVal) {
 }
 {% endhighlight %}
 
-## 26. Favor generic types {#i26}
+## 26. Favor generic types 
 
 We are programming a Stack class, `public class Stack<E>`. 
 
@@ -249,7 +249,7 @@ public class Stack {
 
 {% endhighlight %}
 
-## 27. Favor generic method {#i27}
+## 27. Favor generic method 
 
 #### Example of generic method 
 
@@ -352,7 +352,7 @@ public static <T extends Comparable<T>> T max(List<T> list) {
 
 By doing so we ensure that type `T` is able to compare with the same type object.
 
-## 28. Use bounded wildcards to increase API flexibility {#i28}
+## 28. Use bounded wildcards to increase API flexibility 
 
 We have a piece of code:
 
@@ -437,7 +437,7 @@ public static <T extends Comparable< ? super T > > T max(List< ? extends T > lis
 
 But it has a compilation error. It says `list` is not a `List<T>`. We need to replace the iterator with `Iterator< ? extends T > i= list.iterator()`.
 
-## 29. Consider typesafe heterogeneous containers {#i29}
+## 29. Consider typesafe heterogeneous containers 
 
 In Java 1.5, `Class` type becomes `Class<T>`. `String.class` returns a value of type `Class<String>`.
 

@@ -9,17 +9,17 @@ thumbnail: "http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [1. Use static factory method instead of constructor](#i1)
-* [2. Consider a builder when faced with many constructor parameters](#i2)
-* [3. Enforce the singleton property with a private constructor or an enum type](#i3)
-* [4. Enforce noninstantiability with a private constructor](#i4)
-* [5. Avoid creating unnecessary objects](#i5)
-* [6. Eliminate obsolete object references](#i6)
-* [7. Avoid using Finalizers](#i7)
+* [1. Use static factory method instead of constructor](#1.-use-static-factory-method-instead-of-constructor)
+* [2. Consider a builder when faced with many constructor parameters](#2.-consider-a-builder-when-faced-with-many-constructor-parameters)
+* [3. Enforce the singleton property with a private constructor or an enum type](#3.-enforce-the-singleton--property-with-a-private-constructor-or-an-enum-type)
+* [4. Enforce noninstantiability with a private constructor](#4.-enforce-noninstantiability-with-a-private-constructor)
+* [5. Avoid creating unnecessary objects](#5.-avoid-creating-unnecessary-objects)
+* [6. Eliminate obsolete object references](#6.-eliminate-obsolete-object-references)
+* [7. Avoid using Finalizers](#7.-avoid-using-finalizers)
 
 * * *
 
-## 1. Use static factory method instead of constructor {#i1}
+## 1. Use static factory method instead of constructor
 
 Class should provide a public __static factory method__. It is a static method returing an instance.
 
@@ -59,7 +59,7 @@ and one optional component:
 
 Take __JDBC__ as an example, `Connection` is the service interface, `DriverManager.registerDriver` is the provider registration API, `DriverManager.getConnection` is the service access API, and `Driver` is the service provider interface.
 
-## 2. Consider a builder when faced with many constructor parameters {#i2}
+## 2. Consider a builder when faced with many constructor parameters
 
 > Don't write telescoping constructor pattern, because it is hard to write client code when there are many parameters, and harder still to read it
 
@@ -149,7 +149,7 @@ Tree buildTree(Builder< ? extends Node > nodeBuilder) {
 {% endhighlight %}
 
 
-## 3. Enforce the singleton property with a private constructor or an enum type {#i3}
+## 3. Enforce the singleton property with a private constructor or an enum type
 
 To make a singleton class that is implemented using either of the previous approaches serializable, it is not sufficient merely to add `implements Serializable` to its declaration. To maintain the singleton guarantee, you have to declare all instance fields `transient` and provide a `readResolve` method. Otherwise, each time a serialized instance is deserialized, a new instance will be created, leading to spurious `Elvis` sightings. To prevent this, add this `readResolve` method to the `Elvis` class:
 
@@ -174,9 +174,9 @@ public enum Elvis {
 
 It provides the serialization machinery for free, and provides an ironclad guarantee against multiple instantiation, even in the face of sophisticated serialization or reflection attacks. Now it is the best way to implement a singleton.
 
-## 4. Enforce noninstantiability with a private constructor {#i4}
+## 4. Enforce noninstantiability with a private constructor
 
-## 5. Avoid creating unnecessary objects {#i5}
+## 5. Avoid creating unnecessary objects
 
 Try to use static factory method on immutable class, or mutable variables that known will not be changed.
 
@@ -251,7 +251,7 @@ This is program is slow. We should change `Long` to `long`.
 
 The princeple is to reuse those objects that cost a lot to create as many times as possible.
 
-## 6. Eliminate obsolete object references {#i6}
+## 6. Eliminate obsolete object references
 
 If a stack grows and then shrinks, the objects that were popped off the stack will not be garbage collected, even if the program using the stack has no more references to them. This is because the stack maintains _obsolete references_ to these objects. An obsolete reference is simply a reference that will never be dereferenced again. If an object references is unintentionally retained, not only is that object excluded from garbage collection, but so too are any objects referenced by that object, and so on.
 
@@ -277,7 +277,7 @@ Storage Pool contains elements array. Array space is _allocated_, but elements i
 
 __Another source of memory leak is listeners and callbacks.__ Listeners need to be deregistered when not used any more.. The best way to ensure that callbacks are garbage collected promptly is to store only _weak references_ to them, for example, by storing them only as keys in a `WeakHashMap`.
 
-## 7. Avoid using Finalizers {#i7}
+## 7. Avoid using Finalizers
 
 Using finalizer will lead to unstatble, low performance, and portability problems. 
 

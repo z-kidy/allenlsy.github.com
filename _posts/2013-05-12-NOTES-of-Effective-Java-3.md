@@ -9,20 +9,20 @@ tags: [java]
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [13. Minimize the accessibility of classes and members](#i13)
-* [14. In public classes, use accessor methods, not public fields](#i14)
-* [15. Minimize mutability](#i15)
-* [16. Favor composition over inheritance](#i16)
-* [17. Design and document for inheritance or else prohibit it](#i17)
-* [18. Interface is better than Abstract class](#i18)
-* [19. Interface for defining type only](#i19)
-* [20. Prefer class hierarchies to tagged classes](#i20)
-* [21. Function object as strategies](#i21)
-* [22. Favor static member classes over nonstatic](#i22)
+* [13. Minimize the accessibility of classes and members](#13.-minimize-the-accessibility-of-classes-and-members)
+* [14. In public classes, use accessor methods, not public fields](#14.-in-public-classes,-use-accessor-methods,-not-public-fields)
+* [15. Minimize mutability](#15.-minimize-mutability)
+* [16. Favor composition over inheritance](#16.-favor-composition-over-inheritance)
+* [17. Design and document for inheritance or else prohibit it](#17.-design-and-document-for-inheritance-or-else-prohibit-it)
+* [18. Interface is better than Abstract class](#18.-interface-is-better-than-abstract-class)
+* [19. Interface for defining type only](#19.-interface-for-defining-type-only)
+* [20. Prefer class hierarchies to tagged classes](#20.-prefer-class-hierarchies-to-tagged-classes)
+* [21. Function object as strategies](#21.-function-object-as-strategies)
+* [22. Favor static member classes over nonstatic](#22.-favor-static-member-classes-over-nonstatic)
 
 * * *
 
-## 13. Minimize the accessibility of classes and members {#i13}
+## 13. Minimize the accessibility of classes and members 
 
 Four accessibilities in Java:
 
@@ -44,13 +44,13 @@ private static final Thing[] PRIVATE_VALUES = { .. };
 public static final List< Thing > VALUES = Collections.unmodifiableList(Arrays.asList(PRIVATE_VALUES));
 {% endhighlight %}
 
-## 14. In public classes, use accessor methods, not public fields {#i14}
+## 14. In public classes, use accessor methods, not public fields 
 
 The reason to do it is __flexibility__: easy to change to way to get and set the value, without affecting other parts of the code
 
 However, if a class is package-private or is a private nested class, there is nothing inherently wrong with exposing its data fields.
 
-## 15. Minimize mutability {#i15}
+## 15. Minimize mutability 
 
 Some advices to make things immutable:
 
@@ -90,17 +90,17 @@ public class Complex {
 }
 {% endhighlight %}
 
-## 16. Favor composition over inheritance {#i16}
+## 16. Favor composition over inheritance 
 
 __Unlike method invocation, inheritance violates encapsulation.__ If superclass changes implementation, subclass will be affected.
 
 If every A object has a B object inside, the class A is called __wrapper class__. This is the __Decorator design pattern__. This is not __delegation__, unless wrapper passes itself to the wrapped object.
 
-## 17. Design and document for inheritance or else prohibit it {#i17}
+## 17. Design and document for inheritance or else prohibit it 
 
 If design for inheritance, the class must document its _self-use_ of overridable methods. For every public or protected methods, the documentation must indicate which overridable methods the method or constructor invokes
 
-## 18. Interface is better than Abstract class {#i18}
+## 18. Interface is better than Abstract class 
 
 Abstract class limits a class more than interface.
 
@@ -156,7 +156,7 @@ Skeleton implementation is designed for inheritance. The methods that don't have
 
 Once a interface is published and widely adopted, it is almost impossible to change it.
 
-## 19. Interface for defining type only {#i19}
+## 19. Interface for defining type only 
 
 __Constant interface__: contains no methods, only static final fields. It is for defining constants. IT IS NOT A GOOD WAY TO USE INTERFACE. An example is `java.io.ObjectStreamConstants`. It is a bad example from Java API.
 
@@ -172,13 +172,13 @@ public class PhysicalConstants {
 }
 {% endhighlight %}
 
-## 20. Prefer class hierarchies to tagged classes {#i20}
+## 20. Prefer class hierarchies to tagged classes 
 
 __Tagged class__: many seperated implementation dumped into one class. Tagged class is always too long, low performance.
 
 Subclass is better than tagged class. Tagged class is a simulation of class hierarchies.
 
-## 21. Function object as strategies {#i21}
+## 21. Function object as strategies 
 
 This is __Strategy design pattern__.
 
@@ -207,7 +207,7 @@ public interface Comparator<T> {
 
 It is also recommended to have a static strategy factory class, the concrete strategy implementation classes are inside the factory class, and they all implement the strategy interface.
 
-## 22. Favor static member classes over nonstatic {#i22}
+## 22. Favor static member classes over nonstatic 
 
 __Nested class__ is internal class, for serving the enclosing class. There are four types of nested class: __static member class__, __nonstatic member class__, __anonymouse class__ and __local class__.
 

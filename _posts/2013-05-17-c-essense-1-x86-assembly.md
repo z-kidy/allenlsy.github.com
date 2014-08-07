@@ -9,15 +9,15 @@ tags: [c]
 > The source code was tested and passed in [CentOS 6.4 vagrant box](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130309.box)
 > Github repository: [http://github.com/allenlsy/c_essence](http://github.com/allenlsy/c_essence)
 	
-* [1. Simple assembly program](#i1)
-* [2. Second assembly program](#i2)
-* [3. ELF file](#i3)
-	* [3.1 Target file](#i3-1)
-	* [3.2. Executable file](#i3-2)
+* [1. Simple assembly program](#1.-simple-assembly-program)
+* [2. Second assembly program](#2.-second-assembly-program)
+* [3. ELF file](#3.-elf-file)
+	* [3.1 Target file](#3.1-target-file)
+	* [3.2 Executable file](#3.2-executable-file)
 
 * * *
 
-## 1. Simple assembly program {#i1}
+## 1. Simple assembly program
 
 Suppose we have an assembly program `hello.s`, and we need to compile and link it.
 
@@ -66,7 +66,7 @@ __Linking__ is a process to combine multiple target file into an executable file
 
 In shell, `$?` command is used to get the return value of last command. Let's run `hello`. Then we see the exit code `4`.
 
-## 2. Second assembly program {#i2}
+## 2. Second assembly program 
 
 {% highlight asm %}
 # max.s
@@ -130,7 +130,7 @@ echo $?
 
 Analyse the program yourself.
 
-## 3. ELF file {#i3}
+## 3. ELF file 
 
 __ELF__ is an open standard for all the executable file in UNIX. It has three types:
 
@@ -138,7 +138,7 @@ __ELF__ is an open standard for all the executable file in UNIX. It has three ty
 * Executable
 * Shared Object
 
-### 3.1 Target file {#i3-1}
+### 3.1 Target file
 
 ![](/images/blog/cessense/pic1.png)
 
@@ -346,7 +346,7 @@ We can also see the whole file by using `hexdump -C max.o`. `-C` means Canonical
 	  26:	b8 01 00 00 00       	mov    $0x1,%eax
 	  2b:	cd 80                	int    $0x80
 
-### 3.2 Executable file {#i3-2}
+### 3.2 Executable file
 
 Previously `max.o` is the target file. `max` is the executable file.
 

@@ -11,42 +11,42 @@ thumbnail: "http://johntopley.com/images/posts/2010/12/02/metaprogramming_ruby.j
 
 ![](http://johntopley.com/images/posts/2010/12/02/metaprogramming_ruby.jpg)
 
-> * [1. Object Model](#object-model)
->	* [What is inside a class](#what-is-inside-a-class)
->	* [What happens when calling a method](#calling-a-method)
-> * [2. Methods](#methods)
->	* [Dynamic dispathc](#dynamic-dispatching)
->	* [Dynamic define](#dynamic-define)
->	* [`method_missing`](#method-missing)
->	* [Dynamic proxy](#dynamic-proxy)
->	* [Override `respond_to?`](#respond-to)
->	* [Recursive `method_missing` problem](#recursive-method-missing)
->	* [Blank Slate](#blank-slate)
-> * [3. Blocks](#blocks)
->	* [Closure](#closure)
->	* [Scope](#scope)
->	* [`instance_eval`](#instance-eval)
->	* [Callable object: `proc`, `lambda`, `block`](#callable-object)
->	* [Example: Create a DSL](#dsl)
-> * [4. Class definitions](#class-definitions)
->	* [`class_eval`](#class-eval)
->	* [Singleton methods](#singleton-methods)
->	* [Class macro](#class-macro)
->	* [Eigenclass](#eigenclass)
+> * [1. Object Model](#1.-object-model)
+>	  * [What is inside a class](#what-is-inside-a-class)
+>	  * [What happens when calling a method](#what-happens-when-calling-a-method)
+> * [2. Methods](#2.-methods)
+>	  * [Dynamic dispatch](#dynamic-dispatch)
+>	  * [Dynamic define](#dynamic-define)
+>	  * [`method_missing`](#method_missing)
+>	  * [Dynamic proxy](#dynamic-proxy)
+>	  * [Override `respond_to?`](#override-respond_to?)
+>	  * [Recursive `method_missing` problem](#recursive-method_missing-problem)
+>	  * [Blank Slate](#blank-slate)
+> * [3. Blocks](#3.-blocks)
+>	  * [Closure](#closure)
+>	  * [Scope](#scope)
+>	  * [`instance_eval`](#instance_eval)
+>	  * [Callable object](#callable-object)
+>	  * [Example: Create a DSL](#example:-create-a-dsl)
+> * [4. Class definitions](#4.-class-definitions)
+>	  * [`class_eval`](#class_eval)
+>	  * [Singleton methods](#singleton-methods)
+>	  * [Class macro](#class-macro)
+>	  * [Eigenclass](#eigenclass)
 >		* [Class Extension](#class-extension)
->		* [Object extension](#object-extension)
->	* [Alias, aounrd alias](#alias)
-> * [5. Code that writes code](#code-that-writes-code)
->	* [`Kernel#eval`](#eval)
->	* [`Binding` class](#binding)
->	* [`here` document](#here)
->	* [Security issue](#security)
->	* [Hook method](#hook-method)
->	* [Class extension mixins](#class-extension-mixins)
+>		* [Object Extension](#object-extension)
+>	  * [Alias](#alias)
+> * [5. Code that writes code](#5.-code-that-writes-code)
+> 	* [`Kernel#eval`](#kernel#eval)
+>	  * [`Binding` class](#binding-class)
+>	  * [`here` document](#here-document)
+>	  * [Security issue](#security-issue)
+>	  * [Hook method](#hook-method)
+>	  * [Class extension mixins](#class-extension-mixins)
 
 * * *
 
-# 1. Object Model {#object-model}
+# 1. Object Model
 
 Methods used for metaprogramming:
 
@@ -58,7 +58,7 @@ Example:
 
 	[].methods.grep /^re/ # list all the methods of Array starts with `re`
 
-### What is inside a class {#what-is-inside-a-class}
+### What is inside a class
 
 * `.class()`
 * `.instance_variables()`
@@ -91,7 +91,7 @@ end
 M.constants # => [:C, :Y]
 {% endhighlight %}
 
-### What happens when calling a method {#calling-a-method}
+### What happens when calling a method
 
 1. Look for the method: in the __ancestors chain__, look for the method
 2. Execute, with current `self` as scope
@@ -194,11 +194,11 @@ The reason to print `Printable#print` is that, `print` is send to `self` implici
 
 ![](/images/blog/12-26-printable.jpg)
 
-# 2. Methods {#methods}
+# 2. Methods
 
 > What's the difference between _static language_ and _dynamic language_?
 
-### Dynamic dispatch (Dynamic calling) {#dynamic-dispatching}
+### Dynamic dispatch
 
 `.` to call a method, is actually calling `send` method. `obj.my_method(3)` = `obj.send(:my_method, 3)`
 
@@ -209,7 +209,7 @@ method_names = public_instance_methods(true)
 tests = method_names.delete_if {|method_name| methdo_name !~ /^test./}
 {% endhighlight %}
 
-### Dynamic define {#dynamic-define}
+### Dynamic define
 
 `Module#define_method()` can define a method
 
@@ -226,7 +226,7 @@ obj.my_method(2) # => 6
 
 `.methods.grep(regex)`
 
-### `method_missing` {#method-missing}
+### `method_missing`
 
 When a method is not found, Ruby will send this method as a symbol to `missiong_method`, like `nick.send :method_missing, :the_not_found_method_symbol`
 
@@ -261,7 +261,7 @@ class MyOpenStruct
 end
 {% endhighlight %}
 
-### Dynamic Proxy {#dynamic-proxy}
+### Dynamic Proxy
 
 #### `DelegateClass`
 
@@ -295,7 +295,7 @@ If `get_#{name}_info` is not defined, then send to `super` and raise error.
 
 else generate `info` and `price` and output `result`
 
-### Override `respond_to?` {#respond-to}
+### Override `respond_to?`
 
 It sometimes lies. If a method defined in `method_missing`, then `respond_to?` will return wrong answer, which is a `false`
 
@@ -309,7 +309,7 @@ end
 
 Called when constant is missing.
 
-### _RECURSIVE `method_missing` PROBLEM_ {#recursive-method-missing}
+### Recursive `method_missing` Problem
 
 Undefined variable in `method_missing` will call `method_missing` again.
 
@@ -330,7 +330,7 @@ end
 
 Solution is to add `number = ` before the loop.
 
-### Blank Slate {#blank-slate}
+### Blank Slate
 
 __Best practise__: To avoid superclass has already defined the ghost method you defined in `method_missing`, remove the inherited ghost method, to avoid name conflict.
 
@@ -350,7 +350,7 @@ class Computer
 end
 {% endhighlight %}
 
-# 3. Blocks {#blocks}
+# 3. Blocks
 
 > Think about: How to use `yield`?
 
@@ -375,13 +375,13 @@ a_method { "Here is a block" } # => "Here is a block"
 
 ![](/images/blog/12-26-binding.jpg)
 
-### Closure {#closure}
+### Closure
 
 Block is a complete program, can be executed immediately.
 
 `Kernel#local_variables` can track local variables
 
-### Scope {#scope}
+### Scope
 
 `Class.new` is an alternative to `class`
 
@@ -453,7 +453,7 @@ counter
 
 #### To transpass scope gate, use method call instead of `class`, `module` and `def` keywords
 
-### `instance_eval` {#instance-eval}
+### `instance_eval`
 
 Things passed into `instance_eval` is __context probe__.
 
@@ -473,7 +473,7 @@ C.new.instance_exec(3) {|arg| (@x + @y) * arg }
 
 A place to just run block, does not affect to current environment.
 
-### Callable object {#callable-object}
+### Callable object
 
 #### `Proc` object
 
@@ -569,7 +569,7 @@ m.call
 
 Method can be binded to an object and run. But `lambda` is a closure. It does not require to be binded.
 
-### Example: Create a DSL {#dsl}
+### Example: Create a DSL
 
 {% highlight ruby %}
 def event(name, &block)
@@ -658,9 +658,9 @@ end
 
 The starting `lambda` defines all the DSL methods. THe point is, the DSL methods are sharing local variables `events` and `setups`.
 
-# 4 Class definitions {#class-definitions}
+# 4. Class definitions
 
-### `class_eval` {#class-eval}
+### `class_eval`
 
 Run a block within current class
 
@@ -681,7 +681,7 @@ add_method_to String
 When defining class, `self` means current `Class` object
 You can use variable outside of scope
 
-### Singleton methods {#singleton-methods}
+### Singleton methods
 
 Method effective on single object.
 
@@ -704,7 +704,7 @@ Another way to define singleton method (class method)
 def Myclass.my_class_method; end
 {% endhighlight %}
 
-### Class macro {#class-macro}
+### Class macro
 
 An example: `attr_accessor`, `attr_reader`. These are class macros.
 
@@ -728,7 +728,7 @@ deprecate :GetTitle, :title
 deprecate :title2, :subtitle
 {% endhighlight %}
 
-### Eigenclass {#eigenclass}
+### Eigenclass
 
 A hidden class on the ancestors chain.
 
@@ -785,7 +785,7 @@ end
 MyClass.c = "It works"
 {% endhighlight %}
 
-#### Class Extension {#class-extension}
+#### Class Extension
 
 {% highlight ruby %}
 module MyModule
@@ -815,7 +815,7 @@ end
 MyClass.my_method # NoMethodwError!
 {% endhighlight %}
 
-#### Object Extension {#object-extension}
+#### Object Extension
 
 {% highlight ruby %}
 module MyModule
@@ -849,7 +849,7 @@ MyClass.my_method # => "hello"
 
 {% endhighlight %}
 
-### Alias {#alias}
+### Alias 
 
 {% highlight ruby %}
 def my_method; 'my_method()'; end
@@ -900,11 +900,11 @@ class Fixnum
 end
 {% endhighlight %}
 
-# 5. Code that writes code {#code-that-writes-code}
+# 5. Code that writes code
 
 The meaning of `meta` is to code using code.
 
-### `Kernel#eval` {#eval}
+### `Kernel#eval` 
 
 It uses string to eval:
 
@@ -928,7 +928,7 @@ map.each do |old, new|
 end
 {% endhighlight %}
 
-### `Binding` class {#binding}
+### `Binding` class 
 
 `Kernel#binding` object represents a variable scope.
 
@@ -953,7 +953,7 @@ A pre-defined constant `TOPLEVEL_BINDING`
 
 Binding is a cleaner scope.
 
-### `here` document {#here}
+### `here` document 
 
 For define multiple lines string
 
@@ -965,7 +965,7 @@ END
 p s
 {% endhighlight %}
 
-### Security issue {#security}
+### Security issue 
 
 To prevent `eval` problem, use dynamic dispatch to replace `eval`
 
@@ -1021,7 +1021,7 @@ end
 * `class_eval` does not accept variable is class name. Should use `eval` instead.
 * `class_eval` does not accept `def` method with variable. Use `define_method()` instead.
 
-### Hook method {#hook-method}
+### Hook method
 
 The method being called when event triggered, like `Module#included`, `Class#inherited`
 
@@ -1052,7 +1052,7 @@ class C
 end
 {% endhighlight %}
 
-### Class extension mixins {#class-extension-mixins}
+### Class extension mixins
 
 __Class extension__ with __Hook method__ technique.
 

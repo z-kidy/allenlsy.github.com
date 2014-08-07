@@ -10,20 +10,20 @@ tags: [c]
 > The source code was tested and passed in [CentOS 6.4 vagrant box](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130309.box)
 > Github repository: [http://github.com/allenlsy/c_essence](http://github.com/allenlsy/c_essence)
 
-* [1. Link multiple target file](#i1)
-* [2. Definition and Declaration](#i2)
-	* [2.1 `extern` and `static` keyword](#i2_1)
-	* [2.2 Header file](#i2_2)
-* [3. Static library](#i3)
-* [4. Shared library](#i4)
-	* [4.1 Without `-fPIC` option](#i4_1)
-	* [4.2 With `-fPIC` option](#i4_2)
-	* [4.3 Dynamic linking](#i4_3)
-	* [4.4 Shared library naming convention](#i4_4)
+* [1. Link multiple target file](#1.-link-multiple-target-file)
+* [2. Definition and Declaration](#2.-definition-and-declaration)
+	* [2.1 `extern` and `static` keyword](#2.1-extern-and-static-keyword)
+	* [2.2 Header file](#2.2-header-file)
+* [3. Static library](#3.-static-library)
+* [4. Shared library](#4.-shared-library)
+	* [4.1 Without `-fPIC` option](#4.1-without--fpic-option)
+	* [4.2 With `-fPIC` option](#4.2-with--fpic-option)
+	* [4.3 Dynamic linking](#4.3-dynamic-linking)
+	* [4.4 Shared library naming convention](#4.4-shared-library-naming-convention)
 
 * * *
 
-## 1. Link multiple target file {#i1}
+## 1. Link multiple target file 
 
 We use a stack program as an example.
 
@@ -72,9 +72,9 @@ Compile them together. `gcc main.c stack.c -o main`
 
 Use `nm` to check the label table.
 
-## 2. Definition and Declaration {#i2}
+## 2. Definition and Declaration 
 
-### 2.1 `extern` and `static` keyword {#i2_1}
+### 2.1 `extern` and `static` keyword 
 
 During the compilation, the order of `main.c` and `stack.c` matters. 
 
@@ -175,7 +175,7 @@ int is_empty(void)
 }
 {% endhighlight %}
 
-### 2.2 Header file {#i2_2}
+### 2.2 Header file 
 
 Header file is used for recursively including module. Let's make a header file for stack.
 
@@ -240,7 +240,7 @@ __Header guard__ protects including headers repeatedly. The main reason is that 
 
 > An important concept __Previous linkage__ of a label: the same type of linkage as last time.
 
-## 3. Static library {#i3}
+## 3. Static library 
 
 `libc` is a static library.
 
@@ -336,11 +336,11 @@ Compiler looks for library in the order of shared library and static library.
 
 __Shared library__ will not be linked by linker. Linker just assign the dynamic linker for it and tells the require shared library file name. Static library will be compile and linked into the executable.
 
-## 4. Shared library {#i4}
+## 4. Shared library 
 
 The files to composite a shared library are different than normal target files. It must use option `-fPIC` to compile them.
 
-### 4.1 Without `-fPIC` option {#i4_1}
+### 4.1 Without `-fPIC` option 
 
 We can check the difference in the compiled `push.o` file.
 
@@ -423,7 +423,7 @@ Let's link them to a executable file and then disassemble it.
 
 All the 0x0 address are replaced with absolute addresses. This is __Relocation__.
 
-### 4.2 With `-fPIC` option {#i4_2}
+### 4.2 With `-fPIC` option 
 
     $ gcc -c -g -fPIC stack/stack.c stack/push.c stack/pop.c stack/is_empty.c
     $ objdump -dS push.o
@@ -553,7 +553,7 @@ To summarise, __the best way to solve the problem__, is the second way described
 
 Another way is to add `libstack.so` to system library. Usually `/usr/lib`.
 
-### 4.3 Dynamic linking {#i4_3}
+### 4.3 Dynamic linking 
 
 Let's look into `main` to see how it call `push()` from the shared library.
 
@@ -646,7 +646,7 @@ To see where it is allocated during runtime, we use `gdb`.
 
 Use `si` to go into the assembly code. At last it does into the dynamic linker `/lib64/ld-linux-x86-64.so.2`. This dynamic linker will find `push()`, and after that the program can cal `push()`.
 
-### 4.4 Shared library naming convention {#i4_4}
+### 4.4 Shared library naming convention 
 
 The name consists of real name, soname and linker name. __Soname__ is a symbolic link name, contains only primary version number. Library files with the same soname must have the same interface. `libcap.so.1.10` and `libcap.so.1.11` have the same interface. It provides convenience for upgrading. `libc-2.8.90.so` is special. The primary version number is 6, not `2` or `2.8`.
 

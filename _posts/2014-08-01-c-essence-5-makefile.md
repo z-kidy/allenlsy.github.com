@@ -8,15 +8,15 @@ tags: [c]
 
 ---
 
-* [1. Basic Rule](#i1)
-* [2. Implicit rule & Pattern rule](#i2)
-* [3. Variables](#i3)
-* [4. Header file dependencies](#i4)
-* [5 `make` command options](#i5)
+* [1. Basic Rule](#1.-basic-rule)
+* [2. Implicit rule & Pattern rule](#2.-implicit-rule-&-pattern-rule)
+* [3. Variables](#3.-variables)
+* [4. Header file dependencies](#4.-header-file-dependencies)
+* [5. `make` command options](#5.-make-command-options)
 
 * * *
 
-## 1. Basic Rule {#i1}
+## 1. Basic Rule
 
 Suppose we have a project, structure is like this: 
 
@@ -108,7 +108,8 @@ There is a list of special built-in target, like `.PHONY`. Check this link about
 
 The name of makefile is not required to be `Makefile`, but it is recommended. The order of looking for makefile is `GNUmakefile` -> `makefile` -> `Makefile`.
 
-## 2. Implicit rule & Pattern rule {#i2}
+## 2. Implicit rule & Pattern rule
+
 
 One rule can be written in multiple sub-rules, but only one rule should have the commands.
 
@@ -212,7 +213,7 @@ It becomes:
 	target2: prerequisite1 prerequisite2 
 		command prerequisite1 -o target2
 
-## 3. Variables {#i3}
+## 3. Variables
 
 In makefile, variable declaration can be put behind calling.
 
@@ -316,11 +317,11 @@ $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)` | link `.cc` files, which are cpp files.
 `COMPILE.cc` | `$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c` | compile cc files
 `RM` | `rm -f` | remove command
 
-## 4. Header file dependencies {#i4}
+## 4. Header file dependencies
 
 Our makefile looks like this now:
 
-```make
+```
 all: main
 main: main.o stack.o maze.o gcc $^ -o $@
 main.o: main.h stack.h maze.h
@@ -367,7 +368,7 @@ include $(sources:.c=.d)
 
 You don't have `.d` files for now, so `make` tries the pattern rule `%.d: %.c`. The four lines below, uses only one make process to run it. `set -e` means, in current process, if any of the command returns non-zero, the process terminates. `rm -f $@` removes previous generated `.d` file. `$$` is the process id. We use `sed` tool to generate `.d` makefiles.
 
-## 5. `make` command options {#i5}
+## 5. `make` command options
 
 * `-n` print the compiled command, but not execute it.
 * `-C` is used change directory and run a makefile there.

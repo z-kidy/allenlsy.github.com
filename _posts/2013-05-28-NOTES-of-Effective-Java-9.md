@@ -9,20 +9,20 @@ tags: [java]
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [66. Synchronize access to shared mutable data](#i66)
-* [67. Avoid excessive synchronization](#i67)
-* [68. Prefer executors and tasks to threads](#i68)
-* [69. Prefer concurrency utilities to wait and notify](#i69)
-* [70. Document thread safety](#i70)
-* [71. Use lazy initialization judiciously](#i71)
-* [72. Don't depend on the thread scheduler](#i72)
-* [73. Avoid thread groups](#i73)
+* [66. Synchronize access to shared mutable data](#66.-synchronize-access-to-shared-mutable-data)
+* [67. Avoid excessive synchronization](#67.-avoid-excessive-synchronization)
+* [68. Prefer executors and tasks to threads](#68.-prefer-executors-and-tasks-to-threads)
+* [69. Prefer concurrency utilities to wait and notify](#69.-prefer-concurrency-utilities-to-wait-and-notify)
+* [70. Document thread safety](#70.-document-thread-safety)
+* [71. Use lazy initialization judiciously](#71.-use-lazy-initialization-judiciously)
+* [72. Don't depend on the thread scheduler](#72.-don't-depend-on-the-thread-scheduler)
+* [73. Avoid thread groups](#73.-avoid-thread-groups)
 
 * * *
 
 > `synchronized` keyword makes sure that at the same time, there is only thread accessing all the synchronized methods in the object.
 
-## 66. Synchronize access to shared mutable data {#i66}
+## 66. Synchronize access to shared mutable data 
 
 The way to stop a thread interrupting another thread, the thread should poll a boolean field, which initialized with `false`, but the second thread can set it to `true`.
 
@@ -135,7 +135,7 @@ Another way is to use Java API `java.util.concurrent.atomic.AtomicLong`. It is w
 > __Limit variable data in a single thread. Some one calls your program may put it in a multiple threading environment.__
 
 
-## 67. Avoid excessive synchronization {#i67}
+## 67. Avoid excessive synchronization 
 
 This example uses composite-over-inheritance design to create an observer class.
 
@@ -326,7 +326,7 @@ private void notifyElementAdded(E element) {
 }
 {% endhighlight %}
 
-## 68. Prefer executors and tasks to threads {#i68}
+## 68. Prefer executors and tasks to threads 
 
 __Executor__ is an interface-based task executor. To use it:
 
@@ -349,7 +349,7 @@ Previously, thread is both the working unit and the working mechanism. Now we ne
 
 Please refer to _Java Concurrency in Practice_ for more details on Executor Framework.
 
-## 69. Prefer concurrency utilities to wait and notify {#i69}
+## 69. Prefer concurrency utilities to wait and notify 
 
 From Java 1.5, `java.util.concurrent` has three kinds of tools: Executor Framework, Concurrent Collection and Synchronizer.
 
@@ -420,7 +420,7 @@ public static long time(Executor executor, int concurrency, final Runnable actio
 
 __Use `System.nanoTime` instead of `System.currentTimeMills`__
 
-## 70. Document thread safety {#i70}
+## 70. Document thread safety 
 
 A method documented with `@synchronized` does not mean that it is completely thread-safe.
 
@@ -450,7 +450,7 @@ public void foo() {
 
 Private lock object can only be applied to unconditional thread-safe. Because in conditional thread-safe method, you must document which lock the user has to gain.
 
-## 71. Use lazy initialization judiciously {#i71}
+## 71. Use lazy initialization judiciously 
 
 Lazy initialization is an optimization technique. 
 
@@ -487,7 +487,7 @@ static FieldType getField() { return FieldHolder.field; }
 
 When `getField()` get called for the first time, it accesses `FieldHolder.field`, which makes `FieldHolder` class initialized. Later `getField()` will return the created object. The point is we don't need to add `synchronized` before `getField()`, and the code is safe.
 
-## 72. Don't depend on the thread scheduler {#i72}
+## 72. Don't depend on the thread scheduler 
 
 Any program that replies on the thread scheduler for correctness or performance is likely to be nonportable.
 
@@ -497,7 +497,7 @@ Don't make thread in a __busy-wait__ state, repeating checking the state of a sh
 
 Don't use `Thread.yield` to gain more CPU time for a thread. This is nonportable. You should redesign the application and decrease the number of concurrent threads. `Thread.yield` should only be used in testing.
 
-## 73. Avoid thread groups {#i73}
+## 73. Avoid thread groups 
 
 The __thread group__ that Java provided is very insecure.
 

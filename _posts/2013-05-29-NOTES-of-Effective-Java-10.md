@@ -10,15 +10,15 @@ tags: [java]
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [74. implement Serializable judiciously](#i74)
-* [75. Consider using a custom serialized form](#i75)
-* [76. Write `readObject` methods defensively](#i76)
-* [77. For instance control, prefer enum types to `readResolve`](#i77)
-* [78. Consider serialization proxies instead of serialized instances](#i78)
+* [74. implement Serializable judiciously](#74.-implement-serializable-judiciously)
+* [75. Consider using a custom serialized form](#75.-consider-using-a-custom-serialized-form)
+* [76. Write `readObject` methods defensively](#76.-write-readobject-methods-defensively)
+* [77. For instance control, prefer enum types to `readResolve`](#77.-for-instance-control,-prefer-enum-types-to-readresolve)
+* [78. Consider serialization proxies instead of serialized instances](#78.-consider-serialization-proxies-instead-of-serialized-instances)
 
 * * *
 
-## 74. implement Serializable judiciously {#i74}
+## 74. implement Serializable judiciously 
 
 Once a `Serializable` interface is published, it decreases the flexibility to change a class's implementation. You have to support serialization forever.
 
@@ -48,7 +48,7 @@ __If you want to have a nonserializable parent class, and a serializable subclas
 
 Anyway, you have to cautiously make a decision whether subclass is serializable.
 
-## 75. Consider using a custom serialized form {#i75}
+## 75. Consider using a custom serialized form 
 
 __The default serialized form is likely to be appropriate if an object's physical representation is identical to its logical content.__ For example, some classes that contain only property fields.
 
@@ -128,7 +128,7 @@ If you are using the default serialization form, when deserializing, all the tra
 
 All of our effort here is to resolve the __serialization compatibility__ problem.
 
-## 76. Write `readObject` methods defensively {#i76}
+## 76. Write `readObject` methods defensively 
 
 `readObject` method is another public constructor. It must validate the parameters before deserialization, and also do defensive copying. Otherwise, attacker will create an illegal object from it.
 
@@ -277,7 +277,7 @@ There are some rules for producing a more robust `readObject` method:
 * If an entire object graph must be validated after it is deserialized, use the `ObjectInputValidation` interface.
 * Do not invoke any overrideable methods in the class, directly or indirectly.
 
-## 77. For instance control, prefer enum types to `readResolve` {#i77}
+## 77. For instance control, prefer enum types to `readResolve` 
 
 If we deserialize a Singleton instance, it will no longer be a Singleton, since deserialization creates another one.
 
@@ -353,7 +353,7 @@ Which means the deserialized object is actually the original one. Please compare
 
 `readResolve` will return the original INSTANCE. If the object has reference field, they all should declared as `transient`. 
 
-## 78. Consider serialization proxies instead of serialized instances {#i78}
+## 78. Consider serialization proxies instead of serialized instances 
 
 __Serialization Proxy Pattern__ means, provide a private nested static class for a serializable class. This class is __serialization proxy__, it has a single constructor, and parameter is its enclosing class object. 
 

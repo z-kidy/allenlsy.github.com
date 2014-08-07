@@ -10,13 +10,13 @@ tags: [c]
 > The source code was tested and passed in [CentOS 6.4 vagrant box](http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.4-x86_64-v20130309.box)
 > Github repository: [http://github.com/allenlsy/c_essence](http://github.com/allenlsy/c_essence)
 
-* [1. `main()` and startup routine](#i1)
-* [2. Storage layout of variables](#i2)
-* [3. C inlines assembly](#i3)
+* <a href="#1.-main()-and-startup-routine">1. `main()` and startup routine</a>
+* [2. Storage layout of variables](#2.-storage-layout-of-variables)
+* [3. C inlines assembly](#3.-c-inlines-assembly)
 
 * * *
 
-## 1. `main()` and startup routine {#i1}
+## 1. `main()` and startup routine 
 
 The command `gcc main.c -o main`, it actually can be done in three separate steps:
 
@@ -129,7 +129,7 @@ Startup routine calls `main()`(actually should be `int main(int argc, char *argv
 
 `exit()` is defined in `stdlib.h` header file.
 
-## 2. Storage layout of variables {#i2}
+## 2. Storage layout of variables
 
 {% highlight cpp %}
 // variable.c
@@ -264,7 +264,7 @@ There are several kinds of variables's __Storage Duration(lifetime)__:
 | __Automatic Storage Duration__ | when enter a block, allocated on stack | when exit the block |
 | __Allocated Storage Duration__ | using `malloc` | using `free` |
 
-## 3. C inlines assembly {#i3}
+## 3. C inlines assembly
 
 To inline assembly, use `__asm__("assembly code")`
 

@@ -9,15 +9,16 @@ tags: [java]
 ![](http://www.crazysmoove.com/memjug/javabooks-slides/images/Effective_Java.jpg)
 <br />
 
-* [8. Obey the general contract when overriding `equals()`](#i8)
-* [9. Always override `hashCode` when you override `equals`](#i9)
-* [10. Always Override `toString()`](#i10)
-* [11. Override `clone` judiciously](#i11)
-* [12. Comparable interface](#i12)
+* <a href="#8.-obey-the-general-contract-when-overriding-equals()">8. Obey the general contract when overriding `equals()`</a>
+
+* <a href="#9.-always-override-hashcode-when-you-override-equals">9. Always override `hashCode` when you override `equals`</a>
+* <a href="#10.-always-override-tostring()">10. Always Override `toString()`</a>
+* [11. Override `clone` judiciously](#11.-override-clone-judiciously)
+* [12. Comparable interface](#12.-comparable-interface)
 
 * * *
 
-## 8. Obey the general contract when overriding `equals()` {#i8}
+## 8. Obey the general contract when overriding `equals()`
 
 `equals()` should implement __equivalence relation__:
 
@@ -79,7 +80,7 @@ public class ColorPoint {
 }
 {% endhighlight %}
 
-## 9. Always override `hashCode` when you override `equals` {#i9}
+## 9. Always override `hashCode` when you override `equals`
 
 Two distinct instances may be logically equal according to a class's `equals` method, but to Object's `hashCode` method, they're just two objects with nothing much in common. Therefore Object's `hashCode` method returns two seemingly random numbers instead of two equals numbers as required by the contract.
 
@@ -181,9 +182,9 @@ public int hashCode() {
 
 Don't be tempted to exclude significant parts of an object from the hash code computation to improve performance.
 
-## 10. Always Override `toString()` {#i10}
+## 10. Always Override `toString()`
 
-## 11. Override `clone` judiciously {#i11}
+## 11. Override `clone` judiciously
 
 The `Cloneable` interface was intended as a `mixin interface` for objects to advertise that they permit cloning.
 
@@ -286,7 +287,7 @@ Entry deepCopy()
 
 To sum up, better not extends `Cloneable`. Copy Constructor is more appropriate and flexible.
 
-## 12. Comparable interface {#i12}
+## 12. Comparable interface
 
 Like `equals()`, there are some rules that `compareTo()` must follow. In the following description, the notation `sgn(expression)` designates the sign function in math.
 

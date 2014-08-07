@@ -8,18 +8,18 @@ tags: [c]
 
 ---
 
-* [1. Preprocessing steps](#i1)
-* [2. Macro definition](#i2)
-	* [2.1 Function-like Macro](#i2_1)
-	* [2.2 Inline function](#i2_2)
-	* [2.3 `#`, `##` operator](#i2_2)
-	* [2.4 Macro expansion](#i2_2)
-* [3. Conditional preprocessing](#i3)
-* [4. Other thing about preprocessing](#i4)
+* [1. Preprocessing steps](#1.-preprocessing-steps)
+* [2. Macro definition](#2.-macro-definition)
+	* [2.1 Function-like Macro](#2.1-function-like-macro)
+	* [2.2 Inline function](#2.2-inline-function)
+	* [2.3 `#`, `##` operator](#2.3-#,-##-operator)
+	* [2.4 Macro expansion](#2.4-macro-expansion)
+* [3. Conditional preprocessing](#3.-conditional-preprocessing)
+* [4. Other thing about preprocessing](#4.-other-thing-about-preprocessing)
 
 * * *
 
-## 1. Preprocessing steps {#i1}
+## 1. Preprocessing steps
 
 This is how C compiler doing pre-processing
 
@@ -45,9 +45,9 @@ After parsing, program becomes: `printf`, `(`, endline, TAB key, `"hello, world"
 
 8. remove empty string, and pass tokens to C parser
 
-## 2. Macro definition {#i2}
+## 2. Macro definition 
 
-### 2.1 Function-like Macro {#i2_1}
+### 2.1 Function-like Macro 
 
 * __Object-like macro__: eg: `#define N 20`, `#define STR "hello, world"`
 * __Function-link macro__: eg: `#define MAX(A, b) ((a)>(b)?(a):(b))`
@@ -111,7 +111,7 @@ But these two are different:
 
 You can use `#undef` to cancel a definition.
 
-### 2.2 Inline function {#i2_2}
+### 2.2 Inline function 
 
 `inline` keyword tells compiler
 
@@ -192,7 +192,7 @@ $ objdump -dS a.out
 
 `MAX()` function is inlined in `max()`
 
-### 2.3 `#`, `##` operator {#i2_3}
+### 2.3 `#`, `##` operator 
 
 In macro definition, `#` operator is used to create string.
 
@@ -243,7 +243,7 @@ After preprocessing:
 ￼￼￼￼￼printf("The first, second, and third items."); ((x>y)?printf("x>y"): printf("x is %d but y is %d", x, y));
 {% endhighlight %}
 
-### 2.4 Macro expansion {#i2_4}
+### 2.4 Macro expansion 
 
 An example: 
 
@@ -256,7 +256,7 @@ An example:
 3. all the `#` and `##` operator are processes, now substitue `sub_z` to 26, thus `x` = 26
 4. it becomes `printf("n" "sub_z" "=%d, or %d\n",nsub_z,alt[26])`
 
-## 3. Conditional preprocessing {#i3}
+## 3. Conditional preprocessing 
 
 __Header Guard__: 
 
@@ -282,7 +282,7 @@ Linux system config is in `include/linux/config.h`
 
 If `y` has a value, then replace it. Else `y` is `0`, then the whole macro is `#if 0 || 0 || 2<3`, which is `#if 1`, which is true.
 
-## 4. Other thing about preprocessing {#i4}
+## 4. Other thing about preprocessing 
 
 `#pragma` is followed by compiler-defined macro.
 
