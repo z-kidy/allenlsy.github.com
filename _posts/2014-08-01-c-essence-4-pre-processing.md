@@ -1,7 +1,7 @@
 ---
 layout: post
 title: C Essense (4) - Preprocessing
-excerpt:
+excerpt: C language pre-processing steps, macro syntax
 cover_image: cppcafe.jpg
 thumbnail: /images/blog/c-programmers-thumb.jpg
 tags: [c]
@@ -29,7 +29,7 @@ This is how C compiler doing pre-processing
 4. Tokenization
 5. Parsing. Replace macro with source and repeat step 1-4 if macro appears.
 6. escape char constants, eg. `\n` -> `0x0a`
-7. concatenate consequtive strings. 
+7. concatenate consequtive strings.
 
 __Example:__
 
@@ -38,24 +38,24 @@ __Example:__
 
 	printf(
 		STR);
-		
+
 After tokenization, program becomes: `printf`, `(`, endline, TAB key, `STR`, `)`, `;`, endline.
 
 After parsing, program becomes: `printf`, `(`, endline, TAB key, `"hello, world"`, `)`, `;`, endline.
 
 8. remove empty string, and pass tokens to C parser
 
-## 2. Macro definition 
+## 2. Macro definition
 
-### 2.1 Function-like Macro 
+### 2.1 Function-like Macro
 
 * __Object-like macro__: eg: `#define N 20`, `#define STR "hello, world"`
 * __Function-link macro__: eg: `#define MAX(A, b) ((a)>(b)?(a):(b))`
 
 When using a real `max(a,b)` function, all the function call will be compiled to instructions that passes arguments to that function, where macros will be compiled to execution instructions. Thus, normally, code using function-like macro will be compiled to bigger object file.
 
-__NOTICE:__ 
- 
+__NOTICE:__
+
 1. the `()` surrounding parameters cannot be ignored.
 2. Calculate argument value first, then call function-like macro. `MAX(++a, ++b)` will become `((++a)>(++b)?(++a):(++b))`, which leads to wrong result.
 3. functino-like macro normally leads to low performance. But it does not require stack allocation and argument passing.
@@ -79,7 +79,7 @@ if (n > 0)
 	device_init_wakeup(d,v);
 {% endhighlight %}
 
-After expansion, the second line is not included in `if` block. 
+After expansion, the second line is not included in `if` block.
 
 Can we use `{ .. }`?
 {% highlight c %}
@@ -87,7 +87,7 @@ Can we use `{ .. }`?
 
 if (n > 0)
 	device_init_wakeup(d,v);
-{% endhighlight %}	 	        
+{% endhighlight %}
 The problem is the `;` at the end of `device_init_wakeup(d,v);`. Without `;`, it does not look like function call. With `;`, the syntax is wrong. It becomes `{ .. };`.
 
 Using `do { ... } while (0)` is a good solution.#### Duplicate macro definition
@@ -99,7 +99,7 @@ Duplicated macro definition must be exactly the same.
 #define OBJ_LIKE (1 - 1)
 #define OBJ_LIKE (1/* comment */-/* comment */ 1)/*
 comment */
-{% endhighlight %}	
+{% endhighlight %}
 Comments will be removed.
 
 But these two are different:
@@ -111,7 +111,7 @@ But these two are different:
 
 You can use `#undef` to cancel a definition.
 
-### 2.2 Inline function 
+### 2.2 Inline function
 
 `inline` keyword tells compiler
 
@@ -136,7 +136,7 @@ int main() {
 {% highlight sh %}
 $ gcc main.c -g
 $ objdump -dS a.out
-{% endhighlight %}			int max(int n)
+{% endhighlight %}	int max(int n)
 	{
 	  4004ca:	55                   	push   %rbp
 	  4004cb:	48 89 e5             	mov    %rsp,%rbp
@@ -164,7 +164,7 @@ $ objdump -dS a.out
 {% highlight sh %}
 $ gcc main.c -g -O
 $ objdump -dS a.out
-{% endhighlight %}		int max(int n)
+{% endhighlight %}	int max(int n)
 	{
 	  4004bc:	53                   	push   %rbx
 	  4004bd:	89 fb                	mov    %edi,%ebx
@@ -182,7 +182,7 @@ $ objdump -dS a.out
 	  4004db:	39 d0                	cmp    %edx,%eax
 	  4004dd:	0f 4c c2             	cmovl  %edx,%eax
 	int a[] = { 9 , 3 , 5 , 2 , 1 , 0 , 8 , 7 , 6 , 4 };
-	
+
 	int max(int n)
 	{
 	    return n == 0 ? a[0] : MAX(a[n], max(n-1));
@@ -192,7 +192,7 @@ $ objdump -dS a.out
 
 `MAX()` function is inlined in `max()`
 
-### 2.3 `#`, `##` operator 
+### 2.3 `#`, `##` operator
 
 In macro definition, `#` operator is used to create string.
 
@@ -207,7 +207,7 @@ After compilation, `STR(hello 	world)` becomes `"hello world"`. Redundant spaces
 #define STR(s) #sfputs(STR(strncmp("ab\"c\0d", "abc", '\4"')		== 0) STR(: @\n), s);
 {% endhighlight %}
 
-The compiled program is `fputs("strncmp(\"ab\\\"c\\0d\", \"abc\", '\\4\"') == 0" ": @\n", s);`. 
+The compiled program is `fputs("strncmp(\"ab\\\"c\\0d\", \"abc\", '\\4\"') == 0" ": @\n", s);`.
 
 __NOTICE__:
 
@@ -237,15 +237,15 @@ The value of this is `##`, because the `##` in the middle concat two `#`s. The s
 showlist(The first, second, and third items.); report(x>y, "x is %d but y is %d", x, y);
 {% endhighlight %}
 
-After preprocessing: 
+After preprocessing:
 
 {% highlight c %}
 ￼￼￼￼￼printf("The first, second, and third items."); ((x>y)?printf("x>y"): printf("x is %d but y is %d", x, y));
 {% endhighlight %}
 
-### 2.4 Macro expansion 
+### 2.4 Macro expansion
 
-An example: 
+An example:
 
 {% highlight c %}
 #define sh(x) printf("n" #x "=%d, or %d\n",n##x,alt[x]) #define sub_z 26sh(sub_z)
@@ -256,9 +256,9 @@ An example:
 3. all the `#` and `##` operator are processes, now substitue `sub_z` to 26, thus `x` = 26
 4. it becomes `printf("n" "sub_z" "=%d, or %d\n",nsub_z,alt[26])`
 
-## 3. Conditional preprocessing 
+## 3. Conditional preprocessing
 
-__Header Guard__: 
+__Header Guard__:
 
 {% highlight c %}
 #ifndef HEADER_FILENAME#define HEADER_FILENAME/* body of header */#endif
@@ -282,7 +282,7 @@ Linux system config is in `include/linux/config.h`
 
 If `y` has a value, then replace it. Else `y` is `0`, then the whole macro is `#if 0 || 0 || 2<3`, which is `#if 1`, which is true.
 
-## 4. Other thing about preprocessing 
+## 4. Other thing about preprocessing
 
 `#pragma` is followed by compiler-defined macro.
 

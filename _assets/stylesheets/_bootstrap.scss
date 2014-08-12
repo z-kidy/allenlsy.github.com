@@ -66,7 +66,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: "Monaco", monospace, serif;
+  font-family: "Source Code Pro", "Monaco", monospace, serif;
   font-size: 0.8em;
 }
 pre {
@@ -512,10 +512,10 @@ dd {
   .dl-horizontal dd:after {
     content: " ";
     /* 1 */
-  
+
     display: table;
     /* 2 */
-  
+
   }
   .dl-horizontal dd:after {
     clear: both;
@@ -581,13 +581,13 @@ address {
 }
 code,
 pre {
-  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+  font-family: "Source Code Pro", Monaco, Menlo, Consolas, "Courier New", monospace;
 }
 code {
   padding: 2px 4px;
   font-size: 0.8em;
   color: #c7254e;
-  background-color: #B8FFBD;
+  background-color: #FAFFBE;
   white-space: nowrap;
   border-radius: 5px;
 }
@@ -2969,4 +2969,3 @@ table {
     margin-left: 0%;
   }
 }
-

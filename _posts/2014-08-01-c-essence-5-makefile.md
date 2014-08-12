@@ -18,7 +18,7 @@ tags: [c]
 
 ## 1. Basic Rule
 
-Suppose we have a project, structure is like this: 
+Suppose we have a project, structure is like this:
 
 	.
 	├── main.c
@@ -27,7 +27,7 @@ Suppose we have a project, structure is like this:
 	├── maze.h
 	├── stach.h
 	└── stack.c
-	
+
 `stack` is our self-implemented stack, and `maze` is a maze game.
 
 To compile them together, I can run `gcc main.c stack.c maze.c -o main`.
@@ -55,13 +55,13 @@ __To avoid typo__, we can create a `Makefile`:
 {% highlight make %}
 main: main.o stack.o maze.o
 	gcc main.o stack.o maze.o -o main
-	
-main.o: main.c main.h stack.h maze.h 
+
+main.o: main.c main.h stack.h maze.h
 	gcc -c main.c
-	
-stack.o: stack.c stack.h main.h 
+
+stack.o: stack.c stack.h main.h
 	gcc -c stack.c
-	
+
 maze.o: maze.c maze.h main.h
 	gcc -c maze.c
 {% endhighlight %}
@@ -69,9 +69,9 @@ maze.o: maze.c maze.h main.h
 
 The format of `makefile` rule is:
 
-	target ... : prerequisites ... 
+	target ... : prerequisites ...
 		command1
-		command2 
+		command2
 		...
 
 The first rule in `makefile` is the default rule.
@@ -115,12 +115,12 @@ One rule can be written in multiple sub-rules, but only one rule should have the
 
 {% highlight make %}
 main.o: main.h stack.h maze.h
-	
+
 main.o: main.c
 	gcc -c main.c
 {% endhighlight %}
 
-		
+
 Example in first section can be written as:
 
 {% highlight make %}
@@ -166,7 +166,7 @@ clean:
 .PHONY: clean
 {% endhighlight %}
 
-When we run `make`: 
+When we run `make`:
 
 	$ make
 	cc -c -o main.o main.c
@@ -196,7 +196,7 @@ COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 
 `CC` is a makefile variable. `CC=cc` is the declaration, and `$(CC)` gets its value. `cc` points to the C compiler. It could be `gcc` or `clang` depends on your system. `CFLAGS`, `CPPFLAGS`, `TARGET_ARCH` here are all empty. `COMPILE.c` command becomes `cc -c`.
 
-`$@` fetches the target in the rule, and `$<` fetches the first prerequisites. 
+`$@` fetches the target in the rule, and `$<` fetches the first prerequisites.
 
 `%.o: %.c` is a pattern rule. `main.o` matches this `%.o` pattern, so `%`=`main`. Thus it will run `cc -c -o main.o main.c`.
 
@@ -208,9 +208,9 @@ For multiple target rule:
 
 It becomes:
 
-	target1: prerequisite1 prerequisite2 
+	target1: prerequisite1 prerequisite2
 		command prerequisite1 -o target1
-	target2: prerequisite1 prerequisite2 
+	target2: prerequisite1 prerequisite2
 		command prerequisite1 -o target2
 
 ## 3. Variables
@@ -221,7 +221,7 @@ In makefile, variable declaration can be put behind calling.
 main.o: main.c
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
 CC = gcc
-CFLAGS = -O -g 
+CFLAGS = -O -g
 CPPFLAGS = -Iinclude
 {% endhighlight %}
 
@@ -235,12 +235,12 @@ When declaration is behind calling, it is easy to write calling cycle, like this
 	A = $(B)
 	B = $(A)
 
-* * * 
+* * *
 
 An example:
 
 {% highlight make %}
-foo = $(bar) 
+foo = $(bar)
 bar = Huh?
 all:
 	@echo $(foo)
@@ -275,19 +275,19 @@ Other special variables:
 can be writter as:
 
 {% highlight make %}
-main: main.o stack.o maze.o 
+main: main.o stack.o maze.o
 	gcc $^ -o $@
 {% endhighlight %}
 
 * * *
 
 {% highlight make %}
-libsome.a: foo.o bar.o lose.o win.o 
+libsome.a: foo.o bar.o lose.o win.o
 		ar r libsome.a $?
        ranlib libsome.a
 {% endhighlight %}
 
-This is for build library file. `ar` is a archive tool. 
+This is for build library file. `ar` is a archive tool.
 
 * * *
 
@@ -298,7 +298,7 @@ Variable Name | Default value | Description
 `AR` | `ar` | archive tool
 `ARFLAGS`|
 `AS` | `as` | assembly compiler
-`ASFLAGS`| 
+`ASFLAGS`|
 `CC`|
 `CFLAGS` |
 `CXX` | `g++` | C++ compiler name
@@ -309,7 +309,7 @@ Variable Name | Default value | Description
 `LDFLAGS` |
 `TARGET_ARCH` | | target platform options
 `OUTPUT_OPTION` | `-o $@` |
-`LINK.o` | `$(CC) $(LDFLAGS) $(TARGET_ARCH)` | link `.o` files. 
+`LINK.o` | `$(CC) $(LDFLAGS) $(TARGET_ARCH)` | link `.o` files.
 `LINK.c` | `$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)`| link `.c` files
 `LINK.cc` | `(CXX) $(CXXFLAGS)
 $(CPPFLAGS) $(LDFLAGS) $(TARGET_ARCH)` | link `.cc` files, which are cpp files.
@@ -356,12 +356,12 @@ include $(sources:.c=.d)
 %.d: %.c
 	set -e; rm -f $@; \
 	$(CC) -MM $(CPPFLAGS) $< > $@.$$$$; \
-	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \ 
+	sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
 	rm -f $@.$$$$
 {% endhighlight %}
 
 `$(sources:.c=.d)` is a substitution syntax, which means substitute all the `.c` to `.d` in `sources`. `include $(sources:.c=.d)` becomes:
-	
+
     include main.d stack.d maze.d
 
 `include` means read other makefiles.
@@ -372,6 +372,3 @@ You don't have `.d` files for now, so `make` tries the pattern rule `%.d: %.c`. 
 
 * `-n` print the compiled command, but not execute it.
 * `-C` is used change directory and run a makefile there.
-		
-
-
