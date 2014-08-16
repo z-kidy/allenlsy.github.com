@@ -155,7 +155,7 @@ Use function pointer, it is more flexible to call functions that has the same re
 
 ![](/images/blog/cessense/pic62.png)
 
-There are 3 types in C language: 
+There are 3 types in C language:
 
 * Function type
 * Object struct type
@@ -164,8 +164,8 @@ There are 3 types in C language:
 __Incomplete type__ is a type that has not been defined completely yet. Compiler does not know the size of the type.
 
 ```c
-struct s; 
-union u; 
+struct s;
+union u;
 char str[];
 ```
 

@@ -1,9 +1,13 @@
+keywords:     "ruby, ruby on rails, java, programming, web, c language, android, code, linux"
+description:  "This blog is about skills in ruby, ruby on rails, java, programming, web, c language, android, code, linux"
+
 inc:
   # Blog Information
   title:        "Simple, Not Easy"
   subtitle:     "allenlsy.com"
   cover_image:  blog-cover.jpg
   logo:         logo.jpg
+
 
   # Company information
   company:      allenlsy
@@ -35,7 +39,7 @@ inc:
     google:
       # eg. 'UA-123-12'
       id: 'UA-24647338-1'
-    
+
   # Google Fonts
   google_font: 'Open+Sans:400,700,800|Oswald|PT+Mono|Ubuntu+Mono'
 
@@ -147,8 +151,8 @@ links:
     url: /about.html
   - title: Tags
     url: /tags.html
-  - title: Casts
-    url: http://cast.allenlsy.com
+  # - title: Casts
+  #   url: http://cast.allenlsy.com
   - title: Galleries
     url: /galleries
 
