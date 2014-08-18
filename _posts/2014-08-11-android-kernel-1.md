@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Android Kernel - (1) Basic
+title: Android Kernel (1) - Basic
 excerpt: Android architecture, Android makefile, module compilation, JNI, JNIEnv. Source code of Android Log
 cover_image:
 thumbnail: http://1.bp.blogspot.com/-2ITmm39w1m4/Uzc92ue4MwI/AAAAAAAAAV8/Abo1UZXRiPk/s400/df-dalvik.jpg

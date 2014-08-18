@@ -80,7 +80,7 @@ Bison is a modern version of YACC(Yet Another Compiler Compiler), because it com
 
 Bison compiles a grammar to parser. Here is how a YACC grammar ruule is defined:
 
-    
+
 
 
 
@@ -96,7 +96,7 @@ Parsing `x + y * z` should not produce the same result as `(x + y) * z`. There s
 
 Here is the operator precedence table for Awesome:
 
-    
+
     code here on p21
 
 The higher the precedence, the sonner the operator will be parsed. If several operators having the same precedence are competing to be parsed , declare with the `left` and `right` keyword before the token.
@@ -116,7 +116,7 @@ We generate the parser with: `racc -o parser.rb grammer.y`. This will create a `
 
 ### Runtime Model
 
-Runtime model is how we represent its objects, its methods, its types, its structure in memory. 
+Runtime model is how we represent its objects, its methods, its types, its structure in memory.
 
 When desigining runtime, three factors you will want to consider:
 
@@ -222,5 +222,3 @@ interpreter on p41
 ```
 
 # Compilation
-
-
